@@ -18,14 +18,15 @@ import Modal from "@/components/ui/modal";
 import { useLoginModal } from "@/hooks/useLoginModal";
 import { useRegisterModal } from "@/hooks/useRegisterModal";
 import { useCallback, useEffect, useState } from "react";
+import { signIn } from "next-auth/react";
 /* import { signIn } from "next-auth/react"; */
 
 interface LoginModalProps {
-  /* refetch: () => void; */ // Assuming refetch is a function that doesn't take any arguments and returns void
+  refetch?: () => void; // Assuming refetch is a function that doesn't take any arguments and returns void
 }
 
 const formSchema = z.object({
-  username: z.string().min(2,{
+  username: z.string().min(2, {
     message: "Please enter a valid username",
   }),
   password: z
@@ -42,8 +43,8 @@ const formSchema = z.object({
     ),
 });
 
- const LoginModal: React.FC<LoginModalProps> = ({ }) => {
-  
+const LoginModal: React.FC<LoginModalProps> = ({ refetch }) => {
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -62,10 +63,11 @@ const formSchema = z.object({
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       setisLoading(true);
-     /*  await signIn("credentials", values); */
+      await signIn("credentials", values);
+      console.log(values)
       toast.success("Login Successfull");
-      /* refetch(); */
-    } catch (error) {
+     
+    } catch (error:any) {
       toast.error("Something went wrong");
     } finally {
       setisLoading(false);

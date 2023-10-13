@@ -24,8 +24,8 @@ export const ModalProvider = () => {
         
         <>
             
-                <LoginModal />
-                <RegisterModal />
+                <LoginModal   />
+                <RegisterModal  />
           
         </>
     )

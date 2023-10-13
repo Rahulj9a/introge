@@ -18,16 +18,24 @@ import Modal from "@/components/ui/modal";
 import { useLoginModal } from "@/hooks/useLoginModal";
 import { useRegisterModal } from "@/hooks/useRegisterModal";
 import { useCallback, useEffect, useState } from "react";
-/* import { signIn } from "next-auth/react"; */
+import { signIn } from "next-auth/react";
+import axios from "axios"
+ 
 
-interface LoginModalProps {
-  /* refetch: () => void; */ // Assuming refetch is a function that doesn't take any arguments and returns void
+interface RegisterModalProps {
+  refetch?: () => void; // Assuming refetch is a function that doesn't take any arguments and returns void
 }
 
 const formSchema = z.object({
   email: z.string().email({
     message: "Please enter a valid email address.",
   }),
+ username: z.string().min(3,{
+  message:"Username must be atleast 3 character long"
+ }),
+ name: z.string().min(3,{
+  message:"Name must be atleast 3 character long"
+ }),
   password: z
     .string()
     .min(8, {
@@ -42,12 +50,14 @@ const formSchema = z.object({
     ),
 });
 
-const LoginModal: React.FC<LoginModalProps> = ({ }) => {
+const RegisterModal: React.FC<RegisterModalProps> = ({refetch}) => {
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: "",
+      username:"",
+      name:"",
       password: "",
     },
   });
@@ -62,9 +72,11 @@ const LoginModal: React.FC<LoginModalProps> = ({ }) => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       setisLoading(true);
-      /*  await signIn("credentials", values); */
+      await axios.post('/api/register', values)
+
+      await signIn("credentials", values);
       toast.success("Register Successfull");
-      /* refetch(); */
+      
     } catch (error) {
       toast.error("Something went wrong");
     } finally {
@@ -94,6 +106,42 @@ const LoginModal: React.FC<LoginModalProps> = ({ }) => {
                         disabled={isLoading}
                         placeholder="Your Email"
                         type="email"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="username"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Username</FormLabel>
+                    <FormControl>
+                      <Input
+                        disabled={isLoading}
+                        placeholder="Your Unique Username"
+                        type="text"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Name</FormLabel>
+                    <FormControl>
+                      <Input
+                        disabled={isLoading}
+                        placeholder="Your Name"
+                        type="text"
                         {...field}
                       />
                     </FormControl>
@@ -143,4 +191,4 @@ const LoginModal: React.FC<LoginModalProps> = ({ }) => {
   );
 };
 
-export default LoginModal
+export default RegisterModal
