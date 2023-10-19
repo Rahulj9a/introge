@@ -6,6 +6,9 @@ import { Button } from '../ui/button'
 import UserAvatar from '../userAvatar'
 import { useLoginModal } from '@/hooks/useLoginModal'
 import { useRegisterModal } from '@/hooks/useRegisterModal'
+import { signOut } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
+ 
 
 
 
@@ -22,7 +25,7 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ( {currentUser }) => {
    
      
-    
+    const router = useRouter()
 
     const loginModal = useLoginModal()
     const registerModal = useRegisterModal()
@@ -38,13 +41,14 @@ const Navbar: React.FC<NavbarProps> = ( {currentUser }) => {
             </div>
             <div className='flex items-center'>
 
-                {currentUser ? <div>
+                {currentUser ? <div onClick={()=>signOut()}>
 
                      <UserAvatar username={currentUser.username}  userPic={currentUser?.profilepic} />
                 </div> :
                     <div className='flex space-x-4'>
-                        <Button variant='outline' onClick={() => loginModal.onOpen()}>Login</Button>
-                        <Button variant='outline' onClick={() => registerModal.onOpen()}>Register</Button>
+                        <Button variant='outline' onClick={() => router.push("/sign-in")}>Login</Button>
+                        <Button variant='outline' onClick={() => router.push("/sign-up")}>Register</Button>
+                        <Button variant='outline' onClick={()=> router.push("/sign-out")}>Logout</Button>
                     </div>}
 
             </div>
