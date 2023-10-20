@@ -1,34 +1,39 @@
 'use client'
 
 import React from 'react'
-import { Button } from '../ui/button'
+import { Button } from '@/components/ui/button'
 
-import UserAvatar from '../userAvatar'
+
 import { useLoginModal } from '@/hooks/useLoginModal'
 import { useRegisterModal } from '@/hooks/useRegisterModal'
+
+ 
+
+import { useRouter } from 'next/navigation'
+import HeaderUserAvatar from './headerUserAvatar'
 
 
 
 
 interface NavbarProps {
-    currentUser?:{
-        id:string
-        name:string
-        username:string
-        profilepic:string
+    currentUser?: {
+        id: string
+        name: string
+        username: string
+        profilepic: string
     }
 }
 
-const Navbar: React.FC<NavbarProps> = ( {currentUser }) => {
-   
-     
-    
+const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
 
+
+
+    const router = useRouter()
     const loginModal = useLoginModal()
     const registerModal = useRegisterModal()
-     
 
-  
+
+
 
 
     return (
@@ -38,10 +43,10 @@ const Navbar: React.FC<NavbarProps> = ( {currentUser }) => {
             </div>
             <div className='flex items-center'>
 
-                {currentUser ? <div>
+                {currentUser ?
+                     <HeaderUserAvatar currentUser={currentUser}/>
 
-                     <UserAvatar username={currentUser.username}  userPic={currentUser?.profilepic} />
-                </div> :
+                    :
                     <div className='flex space-x-4'>
                         <Button variant='outline' onClick={() => loginModal.onOpen()}>Login</Button>
                         <Button variant='outline' onClick={() => registerModal.onOpen()}>Register</Button>

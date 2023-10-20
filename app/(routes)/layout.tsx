@@ -14,7 +14,7 @@ const layout: React.FC<LayoutProps> = async({ children }) => {
      
     return (
         <div>
-            {/* <Navbar currentUser={currentUser as any}/> */}
+            <Navbar currentUser={currentUser as any}/>
             {children}
         </div>
     )
