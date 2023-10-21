@@ -4,8 +4,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import prisma from "@/lib/prismadb";
 import bcrypt from "bcrypt";
 import { Session } from "inspector";
-
- 
+import { NextResponse } from "next/server";
 
 const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -26,9 +25,7 @@ const authOptions: NextAuthOptions = {
           where: {
             username: credentials.username,
           },
-           
-     }
-         );
+        });
         if (!user || !user?.hashedPassword) {
           throw new Error("Invalid credentials");
         }
@@ -40,26 +37,22 @@ const authOptions: NextAuthOptions = {
         if (!isCorrectPassword) {
           throw new Error("Invlaid credentials");
         }
-        
 
-        return user
+         
+          return user
+         
       },
     }),
   ],
- 
-
 
   debug: process.env.NODE_ENV === "development",
   session: {
     strategy: "jwt",
-     
   },
   jwt: {
     secret: process.env.NEXTAUTH_JWT_SECRET,
-    
   },
   secret: process.env.NEXT_PUBLIC_SECRET,
-  
 };
 
 export { authOptions };

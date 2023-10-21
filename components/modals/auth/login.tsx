@@ -19,6 +19,8 @@ import { useLoginModal } from "@/hooks/useLoginModal";
 import { useRegisterModal } from "@/hooks/useRegisterModal";
 import { useCallback, useEffect, useState } from "react";
 import { signIn } from "next-auth/react";
+ 
+import { useRouter } from "next/navigation";
 /* import { signIn } from "next-auth/react"; */
 
 interface LoginModalProps {
@@ -44,7 +46,7 @@ const formSchema = z.object({
 });
 
 const LoginModal: React.FC<LoginModalProps> = ({ refetch }) => {
-
+const router = useRouter()
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -63,14 +65,19 @@ const LoginModal: React.FC<LoginModalProps> = ({ refetch }) => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       setisLoading(true);
-      await signIn("credentials", values);
-      console.log(values)
-      toast.success("Login Successfull");
-     
-    } catch (error:any) {
-      toast.error("Something went wrong");
+      const user = await signIn("credentials", values);
+      
+        toast.success("Login Successfull");
+
+
+       
+
+    } catch (error: any) {
+       
+      toast.error(error.message);
     } finally {
       setisLoading(false);
+      router.push("/")
     }
   };
 
