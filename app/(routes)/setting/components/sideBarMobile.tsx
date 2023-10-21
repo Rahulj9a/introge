@@ -15,7 +15,7 @@ const MobileSidebar  = ( ) => {
         return null
     }
     return (
-        <div>
+         
             <Sheet>
                 <SheetTrigger>
                     <Button className="md:hidden absolute left-1 -top-12" variant="outline" size="icon">
@@ -26,7 +26,7 @@ const MobileSidebar  = ( ) => {
                      <SideBar/>
                 </SheetContent>
             </Sheet>
-        </div>
+        
     );
 };
 

@@ -23,7 +23,8 @@ const EditProfilePage: React.FC<EditProfilePageProps> =  async( ) => {
   return (
     <div className='md:px-8 px-4 py-4'>
       <div className='flex items-center justify-start '>
-         <ProfileForm initialData={currentUser as any}/>
+         
+         <ProfileForm  initialData={currentUser as any}/>
       </div>
     </div>
   )

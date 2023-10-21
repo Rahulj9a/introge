@@ -32,10 +32,10 @@ const ProfileImage: React.FC<ProfileImageProps> = ({
         },
         [onChange, base64],
     );
-    const removeImage = ()=>{
+    const removeImage = () => {
         setBase64(undefined);
-         onChange(undefined)
-    } 
+        onChange(undefined)
+    }
 
     const handleDrop = useCallback(
         (files: any) => {
@@ -60,51 +60,55 @@ const ProfileImage: React.FC<ProfileImageProps> = ({
         },
     });
     return (
-        <div className="relative w-44 h-44 rounded-full border-[1px]">
+        <div className="relative w-48 h-48 rounded-full">
+            
 
-            <div className="p-1 absolute bottom-1 right-1 rounded-full z-20 cursor-pointer bg-opacity-70">
-                <TooltipProvider>
-                    <Tooltip>
-                        <TooltipTrigger>
-                            <div {...getRootProps({className:"w-fit h-fit"})}>
-                                <input {...getInputProps()} />
-                                <Pencil className=" w-6 h-6" />
-                            </div>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                            <p>Edit Image</p>
-                        </TooltipContent>
-                    </Tooltip>
-                </TooltipProvider>
-               
-            </div>
-            <div className="p-1 absolute right-0 top-0 rounded-full z-20 cursor-pointer bg-white bg-opacity-70">
-            <TooltipProvider>
-                    <Tooltip>
-                        <TooltipTrigger className="rounded-full ">
-                             
-                                <Trash className=" w-6 h-6 " onClick={()=>removeImage()}/>
-                           
-                        </TooltipTrigger>
-                        <TooltipContent>
-                            <p>Remove Image</p>
-                        </TooltipContent>
-                    </Tooltip>
-                </TooltipProvider>
-            </div>
-            {base64 ? (
-                <Image
-                    style={{
-                        objectFit: "cover",
-                        borderRadius: "100%",
-                    }}
-                    fill
-                    src={base64}
-                    alt="User"
-                />
-            ) : (
-                <UserCircle2 className="text-gray-500 w-full h-full" />
-            )}
+
+                <div className="p-2 w-8 h-8 absolute bottom-1 bg-white flex items-center justify-center right-1 shadow-sm shadow-black rounded-full z-20 cursor-pointer bg-opacity-70">
+                    <TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger>
+                                <div {...getRootProps({ className: "" })}>
+                                    <input {...getInputProps()} />
+                                    <Pencil className=" w-6 h-6" />
+                                </div>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                                <p>Edit Image</p>
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
+
+                </div>
+                <div className="p-1 absolute w-8 h-8 shadow-sm shadow-black right-1 top-1 rounded-full z-20 cursor-pointer bg-white bg-opacity-70">
+                    <TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger className="rounded-full ">
+
+                                <Trash className=" w-6 h-6 " onClick={() => removeImage()} />
+
+                            </TooltipTrigger>
+                            <TooltipContent>
+                                <p>Remove Image</p>
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
+                </div>
+                {base64 ? (
+                    <Image
+                        className="shadow-lg shadow-black "
+                        style={{
+                            objectFit: "cover",
+                            borderRadius: "100%",
+                        }}
+                        fill
+                        src={base64}
+                        alt="User"
+                    />
+                ) : (
+                    <UserCircle2 className="text-gray-500 w-full h-full" />
+                )}
+            
         </div>
     );
 };

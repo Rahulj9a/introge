@@ -22,6 +22,8 @@ import axios from "axios";
 import { useParams, useRouter } from "next/navigation";
 import ProfileImage from "./profileImage";
 import { Textarea } from "@/components/ui/textarea";
+import { cn } from "@/lib/utils";
+import { Separator } from "@radix-ui/react-dropdown-menu";
 
 const formSchema = z.object({
     name: z.string().min(3, {
@@ -30,7 +32,7 @@ const formSchema = z.object({
     profilepic: z.string(),
     bio: z.string().min(5, {
         message: "Bio should not have less than 5 letters",
-    }), 
+    }),
     username: z.string(),
     email: z.string(),
 });
@@ -38,140 +40,129 @@ const formSchema = z.object({
 type ProfileFormValues = z.infer<typeof formSchema>;
 
 interface ProfileFormProps {
+    className?: string;
     initialData: {
+        id: string;
         name?: string;
         email: string;
         profilepic?: string | undefined;
-        bio?: string;
-        username: string
+        bio: string | undefined;
+        username: string;
     };
 }
 
-const ProfileForm: React.FC<ProfileFormProps> = ({ initialData }) => {
+const ProfileForm: React.FC<ProfileFormProps> = ({
+    className,
+    initialData,
+}) => {
     const params = useParams();
 
     const router = useRouter();
     const [open, setOpen] = useState(false);
     const [loading, setloading] = useState(false);
+    const [profilepic, setProfilepic] = useState(
+        initialData?.profilepic || undefined
+    );
 
     const form = useForm<ProfileFormValues>({
         resolver: zodResolver(formSchema),
         defaultValues: initialData || {
-            email: '',
+            email: "",
             username: "",
             name: "",
-            profilepic: "",
+
             bio: "",
         },
     });
 
-    const onSubmit = async (data: ProfileFormValues) => { };
+    const onSubmit = async (data: ProfileFormValues) => {
+        try {
+            setloading(true);
+            await axios.patch(`/api/${initialData.username}/editprofile`, {
+                ...data,
+                profilepic,
+            });
+            router.refresh();
+            toast.success("Profile Updated");
+        } catch (error: any) {
+            toast.error("Something went wrong");
+        } finally {
+            setloading(false);
+        }
+    };
 
     return (
-        <>
-            <Form {...form}>
-                <form
-                    onSubmit={form.handleSubmit(onSubmit)}
-                    className="space-y-8 w-full"
-                >
-                    <div className="grid grid-cols-3 gap-6 items-center ">
-                        <FormField
-                        
-                            control={form.control}
-                            name="profilepic"
-                            render={({ field }) => (
-                                <FormItem className="flex items-center justify-center">
-                                    <FormControl>
-                                        <ProfileImage
-                                        
-                                            value={field.value ? field.value : undefined}
-                                            disabled={loading}
-                                            onChange={(url) => field.onChange(url)}
-                                        />
-                                    </FormControl>
-                                     
-                                </FormItem>
-                            )}
-                        />
-                        <div className="col-span-2">
-                            <FormField
-                                control={form.control}
-                                name="email"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Email</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                disabled={true}
-                                                placeholder="Your Email"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                            <FormField
-                                control={form.control}
-                                name="username"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Username</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                disabled={true}
-                                                placeholder="Username"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                            <FormField
-                                control={form.control}
-                                name="name"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Name</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                disabled={loading}
-                                                placeholder="Your name"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                        </div>
-                    </div>
-                    <div className="w-full">
-                        <FormField
-                            control={form.control}
-                            name="bio"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Bio</FormLabel>
-                                    <FormControl>
-                                        <Textarea
-                                            disabled={loading}
-                                            placeholder="Tell us something about yourself"
-                                            {...field}
-                                        />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
+        <div className={cn("w-full", className)}>
+            <div className="grid md:grid-cols-3">
+                <div className="col-span-1 py-2">
+                    <div className="flex items-center justify-center py-2">
+                        <ProfileImage
+                            value={profilepic ? profilepic : undefined}
+                            disabled={loading}
+                            onChange={(url) => setProfilepic(url)}
                         />
                     </div>
-                    <Button disabled={loading} className="ml-auto" type="submit">
-                        Save Changes
-                    </Button>
-                </form>
-            </Form>
-        </>
+                    <div className="flex flex-col items-center justify-center gap-y-2 py-2 font-semibold text-lg text-gray-600">
+                        <p className="py-2">{initialData.email}</p>
+                        <p className="py-2">@{initialData.username}</p>
+                    </div>
+                </div>
+
+                <div className="md:col-span-2">
+                    <Form {...form}>
+                        <form
+                            onSubmit={form.handleSubmit(onSubmit)}
+                            className="space-y-8 w-full"
+                        >
+                            <div className="w-full px-2 flex flex-col gap-6 items-center ">
+                                <FormField
+                                    control={form.control}
+                                    name="name"
+                                    render={({ field }) => (
+                                        <FormItem className="w-full">
+                                            <FormLabel>Name</FormLabel>
+                                            <FormControl>
+                                                <Input
+                                                    disabled={loading}
+                                                    placeholder="Your name"
+                                                    {...field}
+                                                />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+
+
+
+                                <FormField
+                                    control={form.control}
+                                    name="bio"
+                                    render={({ field }) => (
+                                        <FormItem className="w-full">
+                                            <FormLabel>Bio</FormLabel>
+                                            <FormControl>
+                                                <Textarea
+                                                minLength={100}
+                                                    disabled={loading}
+                                                    placeholder="Tell us something about yourself"
+                                                    {...field}
+                                                />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                                <Button disabled={loading} className="ml-auto" type="submit">
+                                    Save Changes
+                                </Button>
+                            </div>
+
+                        </form>
+                    </Form>
+                </div>
+            </div>
+        </div>
     );
 };
 
