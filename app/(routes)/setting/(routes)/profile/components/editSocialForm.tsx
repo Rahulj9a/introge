@@ -79,6 +79,7 @@ const SocialForm: React.FC<ProfileFormProps> = ({
         try {
             setloading(true);
             await axios.post(`/api/${username}/editsocials`, data);
+            form.reset()
             router.refresh();
             toast.success("Social Updated");
         } catch (error: any) {

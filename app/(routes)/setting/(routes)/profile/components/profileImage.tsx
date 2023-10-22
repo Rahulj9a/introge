@@ -14,7 +14,7 @@ import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
 interface ProfileImageProps {
-    onChange: (base64?: string) => void;
+    onChange: (base64?: string|null) => void;
 
     value?: string | null
     disabled: boolean;
@@ -34,7 +34,7 @@ const ProfileImage: React.FC<ProfileImageProps> = ({
     );
     const removeImage = () => {
         setBase64(undefined);
-        onChange(undefined)
+        onChange(null)
     }
 
     const handleDrop = useCallback(

@@ -24,12 +24,13 @@ import ProfileImage from "./profileImage";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import { Separator } from "@radix-ui/react-dropdown-menu";
+import { profile } from "console";
 
 const formSchema = z.object({
     name: z.string().min(3, {
         message: "Name should have more than 3 letters",
     }),
-    profilepic: z.string(),
+    profilepic: z.any(),
     bio: z.string().min(5, {
         message: "Bio should not have less than 5 letters",
     }),
@@ -47,7 +48,7 @@ interface ProfileFormProps {
         id: string;
         name?: string;
         email: string;
-        profilepic?: string | undefined;
+        profilepic?: string | null
         bio: string | undefined;
         username: string;
         socials:Social[]
@@ -64,7 +65,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
     
     const [loading, setloading] = useState(false);
     const [profilepic, setProfilepic] = useState(
-        initialData?.profilepic || undefined
+        initialData?.profilepic
     );
 
     const form = useForm<ProfileFormValues>({
@@ -72,6 +73,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
         defaultValues: initialData || {
             email: "",
             username: "",
+            
             name: "",
             bio: "",
             socials:[]
@@ -80,6 +82,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
     
 
     const onSubmit = async (data: ProfileFormValues) => {
+        console.log(profilepic)
         try {
             setloading(true);
             await axios.patch(`/api/${initialData.username}/editprofile`, {
@@ -103,9 +106,9 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
                     <div className=" h-full">
                         <div className="flex items-center justify-center py-2">
                             <ProfileImage
-                                value={profilepic ? profilepic : undefined}
+                                value={profilepic ? profilepic : null}
                                 disabled={loading}
-                                onChange={(url) => setProfilepic(url)}
+                                onChange={(value) => setProfilepic(value)}
                             />
                         </div>
                         <div className="flex flex-col items-center justify-center gap-y-2 py-2 font-semibold text-lg text-gray-600">
