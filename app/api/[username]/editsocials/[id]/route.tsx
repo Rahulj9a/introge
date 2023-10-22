@@ -2,16 +2,17 @@ import { serverAuth } from "@/lib/serverAuth";
 import  prisma from "@/lib/prismadb";
 import { NextResponse } from "next/server";
 
-export async function POST(req:Request, {params}:{params:{ username:string }}){
+export async function DELETE(req:Request, {params}:{params:{ username:string, id:string }}){
     try{
+        
         const {currentUser} = await serverAuth()
         if(!currentUser){
             return new NextResponse("Unauthenticated", {status:401})
         }
-        const body = await req.json()
-        
-        const {userId, platform, platformUsername, url} = await body
-        
+        const id = params.id
+        if(!id){
+            return new NextResponse("Social not defined", {status:401})
+        } 
         const username = params.username
         if(!username){
             return new NextResponse("Username is required")
@@ -19,22 +20,19 @@ export async function POST(req:Request, {params}:{params:{ username:string }}){
         if(currentUser.username!== username){
             return new NextResponse("Permission not granted",{status:401})
         }
-        const social = await prisma.social.create({
-            data:{
-                userid:userId,
-                platform:platform,
-                username:platformUsername,
-                url:url
+        const social = await prisma.social.deleteMany({
+            where:{
+                id
             }
         })
 
-        if(social){
+        
             return new NextResponse( social as any,{status:200})
-        }
+         
         
 
     }catch(error:any){
-        console.log("[Social_Push]", error)
+        console.log("[Social_Delete]", error)
         return new NextResponse('internal error',{status:500})
     }
 }

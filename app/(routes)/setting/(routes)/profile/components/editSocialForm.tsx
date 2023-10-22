@@ -8,6 +8,12 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from "@/components/ui/tooltip";
+import {
     Form,
     FormControl,
     FormField,
@@ -44,7 +50,7 @@ interface ProfileFormProps {
     className?: string;
     initialData?: Social[];
     userid: string;
-    username:string
+    username: string
 }
 
 const SocialForm: React.FC<ProfileFormProps> = ({
@@ -61,7 +67,7 @@ const SocialForm: React.FC<ProfileFormProps> = ({
     const form = useForm<ProfileFormValues>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            userId:userid,
+            userId: userid,
             platform: "",
             platformUsername: "",
             url: "",
@@ -72,7 +78,7 @@ const SocialForm: React.FC<ProfileFormProps> = ({
         console.log(data)
         try {
             setloading(true);
-            await axios.post(`/api/${username}/editsocials`,data);
+            await axios.post(`/api/${username}/editsocials`, data);
             router.refresh();
             toast.success("Social Updated");
         } catch (error: any) {
@@ -81,12 +87,12 @@ const SocialForm: React.FC<ProfileFormProps> = ({
             setloading(false);
         }
     };
-    const onDelete = async (id: string) => {
+    const onDelete = async (id: string, platform:string) => {
         try {
             setloading(true);
             await axios.delete(`/api/${username}/editsocials/${id}`);
             router.refresh();
-            toast.success("Social deleted")
+            toast.success(`${platform} unlinked`)
         } catch (error) {
             toast.error("Something went wrong");
         } finally {
@@ -100,19 +106,31 @@ const SocialForm: React.FC<ProfileFormProps> = ({
             <h1 className="font-bold text-xl pb-8">Socials</h1>
 
             {initialData && initialData?.length > 0 ? initialData.map((social) => (
-                <div className="flex" key={social.url}>
-                    <p>
-                        {social.platform}
-                    </p>
-                    <p>
-                        {social.username}
-                    </p>
-                    <p>
-                        {social.url}
-                    </p>
-                    <Button type='button' size="icon" variant="destructive" /* onClick={() => onDelete(url)} */>
-                        <Trash className="h-4 w-4" />
-                    </Button>
+                <div className="grid-cols-12 gap-2 grid " key={social.url}>
+
+                    <Input className="md:col-span-3 col-span-10" disabled={true} value={social.platform} />
+                    <div className="md:col-span-1  flex items-center justify-center">
+                        <TooltipProvider >
+                            <Tooltip>
+                                <TooltipTrigger>
+                                    <Button type='button' className="rounded-md" size="icon" variant="destructive" onClick={() => onDelete(social.id, social.platform)}>
+                                        <Trash className="h-4 w-4" />
+                                    </Button>
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                    <p>Unlink {social.platform}</p>
+                                </TooltipContent>
+                            </Tooltip>
+                        </TooltipProvider>
+                    </div>
+
+                    {social.username ? <Input className="md:col-span-3 col-span-11" disabled={true} value={social?.username} />
+
+                        : null}
+                    <Input className="md:col-span-5 col-span-12 " disabled={true} value={social.url} />
+
+
+
 
                 </div>
             ))
