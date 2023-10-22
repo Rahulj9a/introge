@@ -2,7 +2,7 @@
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
 
-import { User } from "@prisma/client";
+import { Social, User } from "@prisma/client";
 import { Trash } from "lucide-react";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -37,7 +37,9 @@ const formSchema = z.object({
     email: z.string(),
 });
 
+
 type ProfileFormValues = z.infer<typeof formSchema>;
+
 
 interface ProfileFormProps {
     className?: string;
@@ -48,6 +50,7 @@ interface ProfileFormProps {
         profilepic?: string | undefined;
         bio: string | undefined;
         username: string;
+        socials:Social[]
     };
 }
 
@@ -55,10 +58,10 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
     className,
     initialData,
 }) => {
-    const params = useParams();
+     
 
     const router = useRouter();
-    const [open, setOpen] = useState(false);
+    
     const [loading, setloading] = useState(false);
     const [profilepic, setProfilepic] = useState(
         initialData?.profilepic || undefined
@@ -70,10 +73,11 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
             email: "",
             username: "",
             name: "",
-
             bio: "",
+            socials:[]
         },
     });
+    
 
     const onSubmit = async (data: ProfileFormValues) => {
         try {
@@ -91,24 +95,27 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
         }
     };
 
+
     return (
-        <div className={cn("w-full", className)}>
+        <div className={cn("w-full p-1", className)}>
             <div className="grid md:grid-cols-3">
-                <div className="col-span-1 py-2">
-                    <div className="flex items-center justify-center py-2">
-                        <ProfileImage
-                            value={profilepic ? profilepic : undefined}
-                            disabled={loading}
-                            onChange={(url) => setProfilepic(url)}
-                        />
-                    </div>
-                    <div className="flex flex-col items-center justify-center gap-y-2 py-2 font-semibold text-lg text-gray-600">
-                        <p className="py-2">{initialData.email}</p>
-                        <p className="py-2">@{initialData.username}</p>
+                <div className="col-span-1 py-2 flex  justify-center">
+                    <div className=" h-full">
+                        <div className="flex items-center justify-center py-2">
+                            <ProfileImage
+                                value={profilepic ? profilepic : undefined}
+                                disabled={loading}
+                                onChange={(url) => setProfilepic(url)}
+                            />
+                        </div>
+                        <div className="flex flex-col items-center justify-center gap-y-2 py-2 font-semibold text-lg text-gray-600">
+                            <p className="py-2">{initialData.email}</p>
+                            <p className="py-2">@{initialData.username}</p>
+                        </div>
                     </div>
                 </div>
 
-                <div className="md:col-span-2">
+                <div className="md:col-span-2 ">
                     <Form {...form}>
                         <form
                             onSubmit={form.handleSubmit(onSubmit)}
@@ -143,7 +150,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
                                             <FormLabel>Bio</FormLabel>
                                             <FormControl>
                                                 <Textarea
-                                                minLength={100}
+                                                    className="min-h-[120px]"
                                                     disabled={loading}
                                                     placeholder="Tell us something about yourself"
                                                     {...field}
@@ -154,12 +161,13 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
                                     )}
                                 />
                                 <Button disabled={loading} className="ml-auto" type="submit">
-                                    Save Changes
+                                    Save Profile Changes
                                 </Button>
                             </div>
 
                         </form>
                     </Form>
+
                 </div>
             </div>
         </div>
