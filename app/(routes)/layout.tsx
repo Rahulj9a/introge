@@ -6,7 +6,7 @@ interface LayoutProps {
     children: React.ReactNode;
 }
 
-const layout: React.FC<LayoutProps> = async ({ children }) => {
+const Layout: React.FC<LayoutProps> = async ({ children }) => {
     let { currentUser } = await serverAuth();
 
     return (
@@ -17,4 +17,4 @@ const layout: React.FC<LayoutProps> = async ({ children }) => {
     );
 };
 
-export default layout;
+export default Layout;

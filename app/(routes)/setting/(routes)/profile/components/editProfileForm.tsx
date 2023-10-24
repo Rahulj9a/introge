@@ -24,22 +24,28 @@ import ProfileImage from "./profileImage";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import { Separator } from "@radix-ui/react-dropdown-menu";
-import { profile } from "console";
+
+import { ExsitingLabelscard } from "./existingSocialscard";
 
 const formSchema = z.object({
     name: z.string().min(3, {
         message: "Name should have more than 3 letters",
     }),
     profilepic: z.any(),
-    bio: z.string().min(5, {
-        message: "Bio should not have less than 5 letters",
-    }),
+    bio: z
+        .string()
+        .min(5, {
+            message: "Bio should not have less than 5 letters",
+        })
+        .max(300, {
+            message: "Bio should not be more that 300 letters",
+        }),
     username: z.string(),
     email: z.string(),
 });
 
-
 type ProfileFormValues = z.infer<typeof formSchema>;
+
 
 
 interface ProfileFormProps {
@@ -48,10 +54,11 @@ interface ProfileFormProps {
         id: string;
         name?: string;
         email: string;
-        profilepic?: string | null
+        profilepic?: string | null;
         bio: string | undefined;
         username: string;
-        socials:Social[]
+        socials: Social[];
+        labels: string[];
     };
 }
 
@@ -59,35 +66,33 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
     className,
     initialData,
 }) => {
-     
-
     const router = useRouter();
-    
+
     const [loading, setloading] = useState(false);
-    const [profilepic, setProfilepic] = useState(
-        initialData?.profilepic
-    );
+    const [profilepic, setProfilepic] = useState(initialData?.profilepic);
+    const [providedLabels, setProvidedLabels] = useState(["Frontend", "Backend", "Javascript", "Python", "Web"])
+    const [labels, setLabels] = useState([...initialData.labels] || []);
 
     const form = useForm<ProfileFormValues>({
         resolver: zodResolver(formSchema),
         defaultValues: initialData || {
             email: "",
             username: "",
-            
+
             name: "",
             bio: "",
-            socials:[]
+            socials: [],
         },
     });
-    
 
     const onSubmit = async (data: ProfileFormValues) => {
-        console.log(profilepic)
+
         try {
             setloading(true);
             await axios.patch(`/api/${initialData.username}/editprofile`, {
                 ...data,
                 profilepic,
+                labels
             });
             router.refresh();
             toast.success("Profile Updated");
@@ -97,7 +102,6 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
             setloading(false);
         }
     };
-
 
     return (
         <div className={cn("w-full p-1", className)}>
@@ -143,8 +147,6 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
                                     )}
                                 />
 
-
-
                                 <FormField
                                     control={form.control}
                                     name="bio"
@@ -163,14 +165,53 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
                                         </FormItem>
                                     )}
                                 />
-                                <Button disabled={loading} className="ml-auto" type="submit">
+
+                                <div className="w-full">
+                                    <h3 className="font-semibold text-sm py-2">Labels</h3>
+                                    {labels.length > 0 ? (<div className="max-h-[100px] flex gap-2 flex-wrap w-full overflow-y-scroll">
+                                        {labels.map((label) => (
+                                            <ExsitingLabelscard
+                                                value={label}
+                                                exist={true}
+                                                disabled={loading}
+                                                onClick={(value) => {
+
+                                                    setLabels([
+                                                        ...labels.filter((label) => label !== value),
+                                                    ])
+
+                                                }
+
+                                                }
+                                            />
+                                        ))}
+                                    </div>) : null}
+                                    <hr />
+                                    <div className="py-2 max-h-[100px] w-full overflow-y-scroll flex gap-2 flex-wrap">
+
+                                        {[...providedLabels].filter(label => ![...labels].includes(label)).map((label) => (
+                                            <ExsitingLabelscard
+                                                value={label}
+                                                exist={false}
+                                                disabled={loading}
+                                                onClick={(value) => {
+                                                    setLabels([
+                                                        ...labels, value
+                                                    ]);
+
+                                                }
+                                                }
+                                            />
+                                        ))}
+                                    </div>
+                                </div>
+
+                                <Button disabled={loading} className="ml-auto">
                                     Save Profile Changes
                                 </Button>
                             </div>
-
                         </form>
                     </Form>
-
                 </div>
             </div>
         </div>

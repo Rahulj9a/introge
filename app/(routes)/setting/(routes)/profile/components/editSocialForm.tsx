@@ -2,8 +2,11 @@
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
 
-import { Social, User } from "@prisma/client";
-import { Trash } from "lucide-react";
+import { Social} from "@prisma/client";
+import { Facebook, Github, Instagram, Linkedin,   Twitter,  Youtube } from "lucide-react";
+import {AiOutlineReddit, AiOutlineWhatsApp} from "react-icons/ai"
+ 
+import {BsSnapchat, BsMedium} from 'react-icons/bs'
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -29,7 +32,68 @@ import { useParams, useRouter } from "next/navigation";
 import ProfileImage from "./profileImage";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
-import { Separator } from "@radix-ui/react-dropdown-menu";
+
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
+import { platform } from "os";
+import { ExistingSocialscard } from "./existingSocialscard";
+
+const socialPlatforms = [
+    {
+        label:"Github",
+        icon:Github,
+        color:"text-black"
+    },
+    {
+        label: "Instagram",
+        icon: Instagram,
+        color: "text-pink-800",
+    },
+    {
+        label: "Twitter",
+        icon: Twitter,
+        color: "text-sky-700",
+    },
+    {
+        label: "Youtube",
+        icon: Youtube,
+        color: "text-red-800",
+    },{
+        label:"Linkedin",
+        icon:Linkedin,
+        color:"text-sky-900"
+    },
+    {
+        label:"Facebook",
+        icon:Facebook,
+        color:"text-blue-800"
+    },
+    {
+        label:"Reddit",
+        icon:AiOutlineReddit,
+        color:"text-orange-700"
+    },
+    {
+        label:"Whatsapp",
+        icon:AiOutlineWhatsApp,
+        color:"text-green-600"
+    },
+    {
+        label:"Snapchat",
+        icon:BsSnapchat,
+        color:"text-yellow-400"
+    },
+    {
+        label:"Medium",
+        icon:BsMedium,
+        color:"text-black"
+    },
+];
 
 const formSchema = z.object({
     userId: z.string(),
@@ -50,19 +114,18 @@ interface ProfileFormProps {
     className?: string;
     initialData?: Social[];
     userid: string;
-    username: string
+    username: string;
 }
 
 const SocialForm: React.FC<ProfileFormProps> = ({
     className,
     initialData,
     userid,
-    username
+    username,
 }) => {
     const router = useRouter();
 
     const [loading, setloading] = useState(false);
-
 
     const form = useForm<ProfileFormValues>({
         resolver: zodResolver(formSchema),
@@ -73,13 +136,23 @@ const SocialForm: React.FC<ProfileFormProps> = ({
             url: "",
         },
     });
+    const platformFinder = ({ social }: { social: { platform: string } }) => {
+        const platform = socialPlatforms.find(
+            (platform) => platform.label === social.platform
+        );
+        return platform ? (
+            <div>{<platform.icon className={`w-6 h-6 ${platform?.color}`} />}</div>
+        ) : (
+            ""
+        );
+    };
 
     const onSubmit = async (data: ProfileFormValues) => {
-        console.log(data)
+        console.log(data);
         try {
             setloading(true);
             await axios.post(`/api/${username}/editsocials`, data);
-            form.reset()
+            form.reset();
             router.refresh();
             toast.success("Social Updated");
         } catch (error: any) {
@@ -88,60 +161,38 @@ const SocialForm: React.FC<ProfileFormProps> = ({
             setloading(false);
         }
     };
-    const onDelete = async (id: string, platform:string) => {
+    const onDelete = async (id: string) => {
         try {
             setloading(true);
             await axios.delete(`/api/${username}/editsocials/${id}`);
             router.refresh();
-            toast.success(`${platform} unlinked`)
+            toast.success(`Social unlinked`);
         } catch (error) {
             toast.error("Something went wrong");
         } finally {
-            setloading(false)
+            setloading(false);
         }
-    }
+    };
 
     return (
-        <div className={cn("w-full   p-1", className)}>
+        <div className={cn("w-full p-1", className)}>
+            <h1 className="font-bold text-xl py-2">Socials</h1>
 
-            <h1 className="font-bold text-xl pb-8">Socials</h1>
+            {initialData && initialData?.length > 0 ? (
+                <div className=" py-4 grid grid-cols-1 md:grid-cols-2 gap-2 lg:gird-cols-3 xl:grid-cols-4">
 
-            {initialData && initialData?.length > 0 ? initialData.map((social) => (
-                <div className="grid-cols-12 gap-2 grid " key={social.url}>
-
-                    <Input className="md:col-span-3 col-span-10" disabled={true} value={social.platform} />
-                    <div className="md:col-span-1  flex items-center justify-center">
-                        <TooltipProvider >
-                            <Tooltip>
-                                <TooltipTrigger>
-                                    <Button type='button' className="rounded-md" size="icon" variant="destructive" onClick={() => onDelete(social.id, social.platform)}>
-                                        <Trash className="h-4 w-4" />
-                                    </Button>
-                                </TooltipTrigger>
-                                <TooltipContent>
-                                    <p>Unlink {social.platform}</p>
-                                </TooltipContent>
-                            </Tooltip>
-                        </TooltipProvider>
-                    </div>
-
-                    {social.username ? <Input className="md:col-span-3 col-span-11" disabled={true} value={social?.username} />
-
-                        : null}
-                    <Input className="md:col-span-5 col-span-12 " disabled={true} value={social.url} />
-
-
-
-
+                    {initialData.map((social) => (
+                        <div className="rounded-full border-[1px] grid " key={social.url}>
+                            <ExistingSocialscard onDelete={(id)=>onDelete(id)} social={social} platformIcon={platformFinder({social})}/>
+                        </div>
+                    ))}
                 </div>
-            ))
-                : null
-            }
+            ) : null}
 
-            <Form {...form} >
+            <Form  {...form}>
                 <form
                     onSubmit={form.handleSubmit(onSubmit)}
-                    className="space-y-8 w-full"
+                    className="space-y-8 w-full py-2"
                 >
                     <div className="w-full p-2 md:flex-row flex-col flex gap-4 md:gap-6 items-center md:border-none border-[1px]">
                         <FormField
@@ -149,24 +200,47 @@ const SocialForm: React.FC<ProfileFormProps> = ({
                             name="platform"
                             render={({ field }) => (
                                 <FormItem className="w-full">
-                                    <FormLabel>Platform</FormLabel>
-                                    <FormControl>
-                                        <Input
-                                            disabled={loading}
-                                            placeholder="Platform Name"
-                                            {...field}
-                                        />
-                                    </FormControl>
+                                    <Select
+                                        disabled={loading}
+                                        onValueChange={field.onChange}
+                                        value={field.value}
+                                        defaultValue={field.value}
+                                    >
+                                        <FormControl>
+                                            <SelectTrigger>
+                                                <SelectValue
+                                                    defaultValue={field.value}
+                                                    placeholder="Select a Platform"
+                                                />
+                                            </SelectTrigger>
+                                        </FormControl>
+                                        <SelectContent style={{}}  className="h-96 overflow-y-scroll">
+                                            {socialPlatforms.map((platform) => (
+                                                <SelectItem
+                                                    key={platform.label}
+                                                    className="w-full h-10 cursor-pointer my-1"
+                                                    value={platform.label}
+                                                >
+                                                    <p className="flex items-center gap-4">
+                                                        <platform.icon
+                                                            className={cn("h-5 w-5 ", platform.color)}
+                                                        />
+                                                        <span>{platform.label}</span>
+                                                    </p>
+                                                </SelectItem>
+                                            ))}
+                                        </SelectContent>
+                                    </Select>
                                     <FormMessage />
                                 </FormItem>
                             )}
                         />
+
                         <FormField
                             control={form.control}
                             name="platformUsername"
                             render={({ field }) => (
                                 <FormItem className="w-full">
-                                    <FormLabel>Platform Username</FormLabel>
                                     <FormControl>
                                         <Input
                                             disabled={loading}
@@ -184,11 +258,10 @@ const SocialForm: React.FC<ProfileFormProps> = ({
                             name="url"
                             render={({ field }) => (
                                 <FormItem className="w-full">
-                                    <FormLabel>Profile URL</FormLabel>
                                     <FormControl>
                                         <Input
                                             disabled={loading}
-                                            placeholder="https://twitter.com/rahulj9a"
+                                            placeholder="https://twitter.com/username"
                                             {...field}
                                         />
                                     </FormControl>
@@ -196,7 +269,6 @@ const SocialForm: React.FC<ProfileFormProps> = ({
                                 </FormItem>
                             )}
                         />
-
                     </div>
                     <Button disabled={loading} className="ml-auto" type="submit">
                         Save Social Changes
@@ -204,7 +276,6 @@ const SocialForm: React.FC<ProfileFormProps> = ({
                 </form>
             </Form>
         </div>
-
     );
 };
 

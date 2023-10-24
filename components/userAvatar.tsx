@@ -15,14 +15,14 @@ interface UserAvatarProps {
 const UserAvatar: React.FC<UserAvatarProps> = ({ className, userPic, username, name }) => {
     
     return (
-        <div className={cn("flex rounded-full items-center space-x-2 border-2 p-1 cursor-pointer", className)}>
+        <div className={cn("flex rounded-full gap-4 items-center space-x-2 border-2 p-1 cursor-pointer", className)}>
             <Avatar className="h-9 w-9">
                  <AvatarImage src={userPic} alt={username}></AvatarImage> 
                 <AvatarFallback>{username?.[0].toUpperCase()}</AvatarFallback>
             </Avatar>
             {name ? <div className='pr-1'>
-                <p className='text-base text-slate-900'>{name}</p>
-                <p className='text-xs text-gray-600 '>{username}</p>
+                <p className='text-base text-slate-900 font-serif'>{name}</p>
+                <p className='text-xs text-gray-600 font-mono'>@{username}</p>
             </div>
                 : ""}
         </div>

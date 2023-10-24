@@ -10,7 +10,7 @@ interface LayoutProps {
   children: React.ReactNode;
 }
 
-const layout: React.FC<LayoutProps> = async ({ children }) => {
+const Layout: React.FC<LayoutProps> = async ({ children }) => {
   
   return (
     <div>
@@ -21,4 +21,4 @@ const layout: React.FC<LayoutProps> = async ({ children }) => {
   );
 };
 
-export default layout;
+export default Layout;
