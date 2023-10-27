@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 import { Edit } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const SideBar = () => {
+const SideBarNav = () => {
     const routes = [
         {
             label: "Edit Profile",
@@ -28,19 +28,9 @@ const SideBar = () => {
     return (
 
 
-        <div className="space-y-4  flex flex-col h-full bg-mid text-darkest">
+        <nav className="space-y-4  flex flex-col h-full w-full pt-10 bg-mid text-darkest">
             <div className="px-3 py-2 flex-1">
-                <div className="relative w-1/2 h-auto mr-4  pl-3 mb-4 ">
-                    {/* <Link href="/home">
-                        <Image
-                            alt="Logo"
-                            src="/logo.png"
-                            className="w-full h-auto"
-                            width={500}
-                            height={500}
-                        />
-                    </Link> */}
-                </div>
+                 
                 <div className="space-y-1">
                     {routes.map((route) => (
                         <Link
@@ -59,9 +49,9 @@ const SideBar = () => {
                     ))}
                 </div>
             </div>
-        </div>
+        </nav>
     );
 
 };
 
-export default SideBar;
+export default SideBarNav;

@@ -1,11 +1,11 @@
 import { ModalProvider } from '@/providers/authModalProviders'
 import './globals.css'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Noto_Serif } from 'next/font/google'
 import { NextAuthProvider } from '@/providers/nextAuthProvider'
 import { ToasterProvider } from '@/providers/toastProvider'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter =  Noto_Serif({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Create Next App',

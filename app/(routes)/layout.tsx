@@ -10,9 +10,9 @@ const Layout: React.FC<LayoutProps> = async ({ children }) => {
     let { currentUser } = await serverAuth();
 
     return (
-        <div>
+        <div >
             <Navbar currentUser={currentUser as any} />
-            <div className="pt-14">{children}</div>
+            <div >{children}</div>
         </div>
     );
 };

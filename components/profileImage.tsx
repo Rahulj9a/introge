@@ -15,13 +15,13 @@ import { useDropzone } from "react-dropzone";
 
 interface ProfileImageProps {
     onChange: (base64?: string|null) => void;
-
+    editable:boolean 
     value?: string | null
     disabled: boolean;
 }
 const ProfileImage: React.FC<ProfileImageProps> = ({
     onChange,
-
+    editable = false,
     value,
     disabled,
 }) => {
@@ -63,8 +63,8 @@ const ProfileImage: React.FC<ProfileImageProps> = ({
         <div className="relative w-48 h-48 rounded-full">
             
 
-
-                <div className="p-2 w-8 h-8 absolute bottom-1 bg-white flex items-center justify-center right-1 shadow-sm shadow-black rounded-full z-20 cursor-pointer bg-opacity-70">
+            
+                <div className={`${editable?"block":"hidden"} p-2 w-8 h-8 absolute bottom-1 bg-white flex items-center justify-center right-1 shadow-sm shadow-black rounded-full z-20 cursor-pointer bg-opacity-70`}>
                     <TooltipProvider>
                         <Tooltip>
                             <TooltipTrigger>
@@ -80,7 +80,7 @@ const ProfileImage: React.FC<ProfileImageProps> = ({
                     </TooltipProvider>
 
                 </div>
-                <div className="p-1 absolute w-8 h-8 shadow-sm shadow-black right-1 top-1 rounded-full z-20 cursor-pointer bg-white bg-opacity-70">
+                <div className={`p-1 absolute w-8 h-8 shadow-sm shadow-black right-1 top-1 rounded-full z-20 cursor-pointer bg-white bg-opacity-70 ${editable?"block":"hidden"}`}>
                     <TooltipProvider>
                         <Tooltip>
                             <TooltipTrigger className="rounded-full ">

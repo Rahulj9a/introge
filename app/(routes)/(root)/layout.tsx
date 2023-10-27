@@ -13,7 +13,7 @@ const layout: React.FC<LayoutProps> = async({ children }) => {
      
      
     return (
-        <div>
+        <div className='pt-14'>
             {/* <Navbar currentUser={currentUser as any}/> */}
             {children}
         </div>

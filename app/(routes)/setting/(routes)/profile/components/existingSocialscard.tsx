@@ -33,16 +33,9 @@ export const ExistingSocialscard: React.FC<ExistingSocialscardProps> = ({ social
     }
     return (
         <Link className="flex gap-4 items-center justify-around" href={social.url} target='_blank'>
-            <TooltipProvider>
-                <Tooltip>
-                    <TooltipTrigger>
-                        {platformIcon}
-                    </TooltipTrigger>
-                    <TooltipContent>
-                        <p className="text-xs font-thin ">{social.platform}</p>
-                    </TooltipContent>
-                </Tooltip>
-            </TooltipProvider>
+
+            {platformIcon}
+
 
             <div>
                 <TooltipProvider>

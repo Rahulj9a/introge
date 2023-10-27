@@ -3,34 +3,24 @@ import * as z from "zod";
 import { Button } from "@/components/ui/button";
 
 import { Social} from "@prisma/client";
-import { Facebook, Github, Instagram, Linkedin,   Twitter,  Youtube } from "lucide-react";
-import {AiOutlineReddit, AiOutlineWhatsApp} from "react-icons/ai"
- 
-import {BsSnapchat, BsMedium} from 'react-icons/bs'
+
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-    Tooltip,
-    TooltipContent,
-    TooltipProvider,
-    TooltipTrigger,
-} from "@/components/ui/tooltip";
+ 
 import {
     Form,
     FormControl,
     FormField,
     FormItem,
-    FormLabel,
+    
     FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { toast } from "react-hot-toast";
 
 import axios from "axios";
-import { useParams, useRouter } from "next/navigation";
-import ProfileImage from "./profileImage";
-import { Textarea } from "@/components/ui/textarea";
+import {   useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 
 import {
@@ -42,58 +32,9 @@ import {
 } from "@/components/ui/select";
 import { platform } from "os";
 import { ExistingSocialscard } from "./existingSocialscard";
+ 
+import platformFinder, { socialPlatforms } from "@/components/socialPlatformList";
 
-const socialPlatforms = [
-    {
-        label:"Github",
-        icon:Github,
-        color:"text-black"
-    },
-    {
-        label: "Instagram",
-        icon: Instagram,
-        color: "text-pink-800",
-    },
-    {
-        label: "Twitter",
-        icon: Twitter,
-        color: "text-sky-700",
-    },
-    {
-        label: "Youtube",
-        icon: Youtube,
-        color: "text-red-800",
-    },{
-        label:"Linkedin",
-        icon:Linkedin,
-        color:"text-sky-900"
-    },
-    {
-        label:"Facebook",
-        icon:Facebook,
-        color:"text-blue-800"
-    },
-    {
-        label:"Reddit",
-        icon:AiOutlineReddit,
-        color:"text-orange-700"
-    },
-    {
-        label:"Whatsapp",
-        icon:AiOutlineWhatsApp,
-        color:"text-green-600"
-    },
-    {
-        label:"Snapchat",
-        icon:BsSnapchat,
-        color:"text-yellow-400"
-    },
-    {
-        label:"Medium",
-        icon:BsMedium,
-        color:"text-black"
-    },
-];
 
 const formSchema = z.object({
     userId: z.string(),
@@ -136,16 +77,7 @@ const SocialForm: React.FC<ProfileFormProps> = ({
             url: "",
         },
     });
-    const platformFinder = ({ social }: { social: { platform: string } }) => {
-        const platform = socialPlatforms.find(
-            (platform) => platform.label === social.platform
-        );
-        return platform ? (
-            <div>{<platform.icon className={`w-6 h-6 ${platform?.color}`} />}</div>
-        ) : (
-            ""
-        );
-    };
+     
 
     const onSubmit = async (data: ProfileFormValues) => {
         console.log(data);

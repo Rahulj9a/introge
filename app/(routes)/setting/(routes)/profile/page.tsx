@@ -3,7 +3,7 @@
  
 import { User } from '@prisma/client'
 import React, { useState } from 'react'
-import ProfileImage from './components/profileImage'
+import ProfileImage from '../../../../../components/profileImage'
 import ProfileForm from './components/editProfileForm'
 import { redirect } from 'next/navigation'
 import { serverAuth } from '@/lib/serverAuth'

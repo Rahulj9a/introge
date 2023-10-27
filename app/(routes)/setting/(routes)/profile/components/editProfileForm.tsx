@@ -2,8 +2,8 @@
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
 
-import { Social, User } from "@prisma/client";
-import { Trash } from "lucide-react";
+import { Social } from "@prisma/client";
+ 
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -19,11 +19,11 @@ import { Input } from "@/components/ui/input";
 import { toast } from "react-hot-toast";
 
 import axios from "axios";
-import { useParams, useRouter } from "next/navigation";
-import ProfileImage from "./profileImage";
+import {   useRouter } from "next/navigation";
+import ProfileImage from "@/components/profileImage";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
-import { Separator } from "@radix-ui/react-dropdown-menu";
+ 
 
 import { ExsitingLabelscard } from "./existingSocialscard";
 
@@ -110,6 +110,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
                     <div className=" h-full">
                         <div className="flex items-center justify-center py-2">
                             <ProfileImage
+                                editable={true}
                                 value={profilepic ? profilepic : null}
                                 disabled={loading}
                                 onChange={(value) => setProfilepic(value)}

@@ -26,7 +26,7 @@ const HeaderUserAvatar: React.FC<HeaderUserAvatarProps> = ({ currentUser }) => {
 
             <DropdownMenuContent className='w-56 mt-2 mr-2 '>
                 <DropdownMenuGroup>
-                    <DropdownMenuItem className='cursor-pointer' onClick={() => signOut()}>
+                    <DropdownMenuItem className='cursor-pointer' onClick={() => router.push(`/${currentUser.username}`)}>
                         <UserAvatar className='w-full border-none' username={currentUser.username} userPic={currentUser.profilepic} name={currentUser.name}/>
 
                     </DropdownMenuItem>
