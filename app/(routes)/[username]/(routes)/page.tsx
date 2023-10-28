@@ -5,6 +5,8 @@ import Link from "next/link";
 
 import PlatformFinder from "@/components/socialPlatformList";
 import { cn } from "@/lib/utils";
+import { BsThreeDots } from "react-icons/bs";
+
 
 
 interface ProfilePageProps {
@@ -39,9 +41,9 @@ const ProfilePage: React.FC<ProfilePageProps> = async ({ params }) => {
           />
         </div> : null}
         <div className={cn(" px-2 flex flex-col md:pr-10 items-center justify-center", user.profilepic ? "col-span-2" : "col-span-3")}>
-          <div className=" text-center items-center flex flex-col h-full py-3 justify-between w-5/6 ">
+          <div className=" text-center items-center flex flex-col h-full py-3 justify-around w-5/6 ">
 
-            <p className="text-sm my-5 ">Hey I am</p>
+            <p className="text-sm my-1 ">Hey I am</p>
 
 
             <p className="text-6xl my-5  text-light">
@@ -51,15 +53,17 @@ const ProfilePage: React.FC<ProfilePageProps> = async ({ params }) => {
               </Link>
             </p>
 
-            <p className="  my-3  flex justify-center items-center  w-5/6 max-h-[100px]">
+            <p className="  my-2  flex justify-center items-center  w-5/6 max-h-[100px]">
               {user.bio}
             </p>
-            {user.labels.length > 0 ? <div className="my-3 flex items-center justify-center gap-2 flex-wrap max-h-[100px]">
-              {user.labels.map(label => <div key={label} className="py-2 px-3 rounded-3xl bg-mid text-darkest">{label}</div>)}
+
+            {user.labels.length > 0 ? <div className="my-3 flex items-center justify-center gap-2 flex-wrap  max-h-[100px]">
+              {[...user.labels].slice(0,4).map(label => <div key={label} className="py-2 px-3 rounded-3xl bg-mid text-darkest text-xs md:text-sm">{label}</div>)}
+              {user.labels.length>5?<BsThreeDots />:null}
             </div> : null}
 
             <div className="my-3 px-3 md:px-6">
-              <div className="  max-w-fit gap-3 md:gap-7 flex flex-wrap ">
+              <div className="  max-w-fit gap-3 md:gap-7 flex flex-wrap items-center justify-center">
                 {user.socials.length > 0 ? user.socials.map(social => <Link href={social.url} target="_blank" className="rounded-full bg-light p-2  border-mid hover:scale-105 shadow-mid  shadow-[rgba(17,_17,_26,_0.1)_0px_0px_10px] w-10 h-10" key={social.url}><PlatformFinder social={social as any} /></Link>
 
 
