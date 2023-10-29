@@ -26,7 +26,10 @@ model User {
   verifyToken               String?
   verifyTokenExpiry         DateTime?
   labels                    String[]
-  socials                   Social[]
+
+  socials      Social[]
+  sections     Section[]
+  sectionitems SectionItem[]
 }
 
 model Social {
@@ -36,4 +39,26 @@ model Social {
   platform String
   username String?
   url      String
+}
+
+model Section {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userid    String   @db.ObjectId
+  user      User     @relation(fields: [userid], references: [id])
+  name      String  
+  about     String?
+  isActive  Boolean  @default(true)
+  createAt  DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  SectionItems SectionItem[] 
+}
+
+model SectionItem {
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  userid    String  @db.ObjectId
+  user      User    @relation(fields: [userid], references: [id])
+  sectionid String  @db.ObjectId
+  section   Section @relation(fields: [sectionid], references: [id])
+  name String
 }

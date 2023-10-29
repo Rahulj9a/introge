@@ -33,7 +33,7 @@ import {
 import { platform } from "os";
 import { ExistingSocialscard } from "./existingSocialscard";
  
-import platformFinder, { socialPlatforms } from "@/components/socialPlatformList";
+import PlatformFinder, { socialPlatforms } from "@/components/socialPlatformList";
 
 
 const formSchema = z.object({
@@ -115,7 +115,7 @@ const SocialForm: React.FC<ProfileFormProps> = ({
 
                     {initialData.map((social) => (
                         <div className="rounded-full border-[1px] grid " key={social.url}>
-                            <ExistingSocialscard onDelete={(id)=>onDelete(id)} social={social} platformIcon={platformFinder({social})}/>
+                            <ExistingSocialscard onDelete={(id)=>onDelete(id)} social={social} platformIcon={PlatformFinder({social} as any)}/>
                         </div>
                     ))}
                 </div>

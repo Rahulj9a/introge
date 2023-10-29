@@ -17,9 +17,9 @@ const SideBar = () => {
             color: "text-sky-500",
         },
         {
-            label: "abc",
+            label: "Sections",
             icon: Edit,
-            href: "/setting/abc",
+            href: "/setting/section",
             color: "text-sky-500",
         },
 
