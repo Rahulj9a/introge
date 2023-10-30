@@ -4,10 +4,14 @@ import { Button } from "@/components/ui/button";
 import { Menu, } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import SideBarNav from "./sidebarNavs";
+import { Section, User } from "@prisma/client";
  
-
+interface ProfileSidebarProps{
+    user:User,
+    sections?:Section[]
+}
  
-const ProfileSidebar  = ( ) => {
+const ProfileSidebar:React.FC<ProfileSidebarProps>  = ({user, sections}) => {
     const [isMounted, setIsMounted] = useState(false)
     useEffect(()=>{
         setIsMounted(true)
@@ -24,7 +28,7 @@ const ProfileSidebar  = ( ) => {
                     </Button>
                 </SheetTrigger>
                 <SheetContent  side="left" className=" p-0 w-52 md:w-64 text-sm md:text-base">
-                     <SideBarNav/>
+                     <SideBarNav user={user} sections={sections as any}/>
                 </SheetContent>
             </Sheet>
         

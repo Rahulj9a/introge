@@ -15,6 +15,9 @@ const layout: React.FC<LayoutProps> = async ({ children, params }) => {
         where: {
             username: params.username
         },
+        include:{
+            sections:true
+        }
 
     })
     if (!user) {
@@ -27,7 +30,7 @@ const layout: React.FC<LayoutProps> = async ({ children, params }) => {
     return (
         <div>
             <div className="absolute pt-14">
-                <ProfileSidebar />
+                <ProfileSidebar user={user} sections={user.sections as any}/>
             </div>
             <main className="bg-darkest text-mid ">
                 {children}

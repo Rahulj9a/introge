@@ -146,7 +146,7 @@ const SocialForm: React.FC<ProfileFormProps> = ({
                                                 />
                                             </SelectTrigger>
                                         </FormControl>
-                                        <SelectContent style={{}}  className="h-96 overflow-y-scroll">
+                                        <SelectContent style={{}}  className="max-h-[250px] overflow-y-scroll">
                                             {socialPlatforms.map((platform) => (
                                                 <SelectItem
                                                     key={platform.label}

@@ -1,44 +1,59 @@
 "use client"
 import React from "react";
- 
+
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Edit } from "lucide-react";
+import { Edit, ExternalLink, User2 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Section, User } from "@prisma/client";
+import { TemplateFinder, templateList } from "@/components/templates/templateList";
 
-const SideBarNav = () => {
+interface sidebarNavsProps {
+    user: User,
+    sections?: Section[]
+}
+
+const SideBarNav: React.FC<sidebarNavsProps> = ({ user, sections }) => {
+    const sectionRoutes = [] as any
+
+    sections?.forEach(section => {
+        if (section.isActive) {
+            sectionRoutes.push({
+                label: section.name,
+                icon: [...templateList].find((template) => template.label === section.template)?.icon || ExternalLink,
+                href: `/${user.username}/${section.name}`,
+                color: [...templateList].find((template) => template.label === section.template)?.color || "text-darkest",
+            })
+        }
+    });
     const routes = [
         {
-            label: "Edit Profile",
-            icon: Edit,
+            label: user.name,
+            icon: User2,
             href: "/setting/profile",
             color: "text-sky-500",
         },
-        {
-            label: "abc",
-            icon: Edit,
-            href: "/setting/abc",
-            color: "text-sky-500",
-        },
+        ...sectionRoutes
 
     ];
+
     const pathname = usePathname();
     return (
 
 
         <nav className="space-y-4  flex flex-col h-full w-full pt-10 bg-mid text-darkest">
             <div className="px-3 py-2 flex-1">
-                 
+
                 <div className="space-y-1">
                     {routes.map((route) => (
                         <Link
                             href={route.href}
                             key={route.href}
                             className={`text-sm group flex p-3 w-full justify-start font-medium cursor-pointer hover:bg-light ${pathname === route.href
-                                    ? " text-darkest  bg-light/50"
-                                    : "text-dark hover:"
+                                ? " text-darkest  bg-light/50"
+                                : "text-dark hover:"
                                 } rounded-lg transition`}
                         >
                             <div className="flex text-center items-center flex-1">

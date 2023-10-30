@@ -46,7 +46,7 @@ const SectionLayout: React.FC<SectionLayoutProps> = async ({
 
   return (
     <div className="py-10 px-5">
-        <h1 className="font-semibold text-3xl mb-3">Edit {section?.name}</h1>
+        <h1 className="font-semibold text-2xl mb-3">Edit {section?.name} Section</h1>
       <SectionForm initialData={section as any} currentUser={currentUser} />
     </div>
   );

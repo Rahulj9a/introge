@@ -13,13 +13,16 @@ export async function POST(req: Request, { params }: { params: { username: strin
 
     try {
         const body = await req.json()
-        const { name, about, isActive } = body
+        const { name, about, isActive, template } = body
 
         if (!name) {
             return new NextResponse("Name is required", { status: 404 })
         }
         if (!about) {
             return new NextResponse("About is required", { status: 404 })
+        }
+        if(!template){
+            return new NextResponse("Template is required", { status: 404 })
         }
         const isSectionExist = await prisma.section.findFirst({
             where: {
@@ -37,7 +40,8 @@ export async function POST(req: Request, { params }: { params: { username: strin
                 userid: currentUser.id,
                 name,
                 about,
-                isActive
+                isActive,
+                template
             }
         })
         return NextResponse.json(section);
