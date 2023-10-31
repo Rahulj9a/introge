@@ -1,9 +1,11 @@
 import React from "react";
 import prisma from "@/lib/prismadb";
 import { redirect } from "next/navigation";
-import { Section } from "@prisma/client";
+ 
 import { serverAuth } from "@/lib/serverAuth";
 import SectionForm from "./components/sectionForm";
+import SectionItemForm from "./components/sectionItemForm";
+ 
 
 interface SectionLayoutProps {
   params: {
@@ -25,7 +27,7 @@ const SectionLayout: React.FC<SectionLayoutProps> = async ({
     return (
       <div className="p-10">
         <h1 className="font-semibold text-4xl mb-3">Build a new section</h1>
-         
+
         <SectionForm currentUser={currentUser} />
       </div>
     );
@@ -40,14 +42,16 @@ const SectionLayout: React.FC<SectionLayoutProps> = async ({
       SectionItems: true,
     },
   });
-  if(!section){
+  if (!section) {
     redirect("/section")
   }
 
   return (
     <div className="py-10 px-5">
-        <h1 className="font-semibold text-2xl mb-3">Edit {section?.name} Section</h1>
+      <h1 className="font-semibold text-2xl mb-3">Edit {section?.name} Section</h1>
       <SectionForm initialData={section as any} currentUser={currentUser} />
+      <h2 className="font-semibold text-xl my-3">Items</h2>
+      <SectionItemForm sectionId={section.id} currentUser={currentUser} sectionTemplate={section.template} sectionItems={section.SectionItems} />
     </div>
   );
 };

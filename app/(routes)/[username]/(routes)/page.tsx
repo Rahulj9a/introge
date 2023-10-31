@@ -33,7 +33,7 @@ const ProfilePage: React.FC<ProfilePageProps> = async ({ params }) => {
 
   return (
     <div className="w-full h-fit ">
-      <div className=" md:grid md:grid-cols-3 border-2 border-red-900 min-w-full h-fit w-fit min-h-screen pt-14">
+      <div className=" md:grid md:grid-cols-3 min-w-full h-fit w-fit min-h-screen pt-14">
         {user.profilepic ? <div className="flex items-center mt-5 md:mt-0 justify-center col-span-1">
           <Image
             src={user?.profilepic as string}
@@ -66,7 +66,7 @@ const ProfilePage: React.FC<ProfilePageProps> = async ({ params }) => {
             </div> : null}
 
             <div className="my-3 px-3 md:px-6">
-              <div className="  max-w-fit gap-3 md:gap-7 flex flex-wrap items-center justify-center">
+              <div className="  max-w-full gap-3 md:gap-7 flex flex-wrap items-center justify-center">
                 {user.socials.length > 0 ? user.socials.map(social => <Link href={social.url} target="_blank" className="rounded-full bg-light p-2  border-mid hover:scale-105 shadow-mid  shadow-[rgba(17,_17,_26,_0.1)_0px_0px_10px] w-10 h-10" key={social.url}><PlatformFinder social={social as any} /></Link>
 
 

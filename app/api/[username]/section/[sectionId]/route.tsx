@@ -22,7 +22,7 @@ export async function PATCH(req: Request, { params }: { params: { username: stri
 
     try {
         const body = await req.json()
-        const { name, about, isActive } = body
+        const { name, about, isActive} = body
 
         if (!name) {
             return new NextResponse("Name is required", { status: 404 })
@@ -48,7 +48,8 @@ export async function PATCH(req: Request, { params }: { params: { username: stri
             data: {
                 name,
                 about,
-                isActive
+                isActive,
+                
             }
         })
         return NextResponse.json(section);
