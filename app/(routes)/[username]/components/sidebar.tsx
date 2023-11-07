@@ -23,7 +23,7 @@ const ProfileSidebar:React.FC<ProfileSidebarProps>  = ({user, sections}) => {
          
             <Sheet>
                 <SheetTrigger>
-                    <Button className="absolute left-3 top-13" variant="outline" size="icon">
+                    <Button className="fixed left-3 top-13" variant="outline" size="icon">
                         <Menu className="w-4 l-4"/>
                     </Button>
                 </SheetTrigger>

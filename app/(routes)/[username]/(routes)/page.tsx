@@ -61,7 +61,7 @@ const ProfilePage: React.FC<ProfilePageProps> = async ({ params }) => {
             </p>
 
             {user.labels.length > 0 ? <div className="my-3 flex items-center justify-center gap-2 flex-wrap  max-h-[100px]">
-              {[...user.labels].slice(0, 4).map(label => <div key={label} className="py-2 px-3 rounded-3xl bg-mid text-darkest text-xs md:text-sm">{label}</div>)}
+              {[...user.labels].slice(0, 4).map(label => <div key={label} className="py-1 px-2 rounded-3xl bg-mid text-darkest text-xs md:text-sm">{label}</div>)}
               {user.labels.length > 5 ? <BsThreeDots /> : null}
             </div> : null}
 

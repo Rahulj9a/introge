@@ -11,6 +11,7 @@ import { useRegisterModal } from '@/hooks/useRegisterModal'
 
 import { useRouter } from 'next/navigation'
 import HeaderUserAvatar from './headerUserAvatar'
+import Image from 'next/image'
 
 
 
@@ -39,7 +40,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
     return (
         <div className='h-14 fixed z-30 bg-mid bg-opacity-80 w-full flex px-4 py-2 items-center lg:px-6 border-b justify-between'>
             <div className=''>
-
+                <Image width={50} height={50} src="/profiley.png" alt="Profiley"/>
             </div>
             <div className='flex items-center'>
 

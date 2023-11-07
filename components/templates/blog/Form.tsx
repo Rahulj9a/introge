@@ -1,9 +1,11 @@
-"use client";
+"use client"
 import { SectionItem } from "@prisma/client";
 import React, { useEffect, useState } from "react";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+
+
 import {
   Form,
   FormControl,
@@ -16,58 +18,6 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "../ui/tooltip";
-import { Trash } from "lucide-react";
-//Blog Template -->
-interface BlogTemplateProps {
-  data: SectionItem
-  onDelete?: () => void;
-}
-
-
-const BlogTemplate: React.FC<BlogTemplateProps> = ({ data, onDelete }) => {
-  const [isMounted, setIsMounted] = useState(false);
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-  if (!isMounted) {
-    return null;
-  }
-  return (
-    <div className="w-[300px] h-[380px] rounded-md border-2 relative">
-      {onDelete ? <Button
-      onClick={onDelete}
-        variant="destructive"
-        size="icon"
-        className=" rounded-md absolute -top-2 -right-2"
-      >
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger>
-              <Trash className=" w-6 h-6" />
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>Remove</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-      </Button> : null
-      }
-      <div>
-        {/* Priority for showing Image--> ImageURL -> URL fetched image -> Text */}
-        <div>
-          {data.name}
-        </div>
-      </div>
-    </div>
-  );
-};
-// BLog form -->
 
 interface BlogFormProps {
   onSubmit: (data: any) => void;
@@ -82,15 +32,15 @@ const formSchema = z.object({
     .min(3, {
       message: "Title must be atleast of 3 letters",
     })
-    .max(50, {
-      message: "Title must not be more than 50 letters",
+    .max(40, {
+      message: "Title must not be more than 40 letters",
     }),
   about: z
     .string()
     .min(5, {
       message: "About section should not be less than 5 letters",
     })
-    .max(200, {
+    .max(150, {
       message: "About section should not be more than 150 letters",
     }),
   url: z.string(),
@@ -101,7 +51,7 @@ const formSchema = z.object({
 });
 type BlogFormValues = z.infer<typeof formSchema>;
 
-export const BlogForm: React.FC<BlogFormProps> = ({
+const BlogForm: React.FC<BlogFormProps> = ({
   onSubmit,
   initialData,
   disabled,
@@ -120,10 +70,14 @@ export const BlogForm: React.FC<BlogFormProps> = ({
         labels: "",
       },
   });
+  const handleSubmit = async(data:BlogFormValues) =>{
+    await onSubmit(data)
+    form.reset
+  }
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(onSubmit)}
+        onSubmit={form.handleSubmit(handleSubmit)}
         className="space-y-2 w-[300px] h-[380px] border-2 rounded-md p-2"
       >
         <Label>{action}</Label>
@@ -226,4 +180,5 @@ export const BlogForm: React.FC<BlogFormProps> = ({
     </Form>
   );
 };
-export default BlogTemplate;
+
+export default BlogForm

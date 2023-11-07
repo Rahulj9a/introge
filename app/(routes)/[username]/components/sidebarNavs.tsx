@@ -64,6 +64,10 @@ const SideBarNav: React.FC<sidebarNavsProps> = ({ user, sections }) => {
                     ))}
                 </div>
             </div>
+            <Link className="w-full h-fit p-2 flex items-center justify-center gap-4 hover:bg-light cursor-pointer" href="/">
+                <Image width={50} height={50} src="/profiley.png" alt="Profiley" className=""/>
+                <span className="text-darkest font-bold text-2xl">Profiley</span>
+            </Link>
         </nav>
     );
 
