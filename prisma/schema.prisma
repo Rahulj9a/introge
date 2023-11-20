@@ -63,7 +63,7 @@ model SectionItem {
   section   Section  @relation(fields: [sectionid], references: [id])
   name      String
   url       String?
-  otherURLs  Json?
+  otherURLs Json?
   about     String?
   imageURL  String?
   videoURL  String?
