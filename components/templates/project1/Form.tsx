@@ -98,10 +98,16 @@ const Project1Form: React.FC<Project1FormProps> = ({
             setLink(""),
                 setLinkName("")
 
-            console.log(otherURLs)
+             
         }
     }
+    const removeLink = (index:number) =>{
+        console.log(index)
+        setOtherURLs(prevState =>JSON.stringify([...JSON.parse(String(prevState))].slice(index+1)))
+        console.log(otherURLs)
+    }
     const handleSubmit = async (data: Project1FormValues) => {
+        console.log("run")
         let reformedlabels;
         if (!initialData) {
             reformedlabels = data.progressDetail + ", " + data.labels
@@ -114,8 +120,8 @@ const Project1Form: React.FC<Project1FormProps> = ({
         }
         const reformedData = { ...data, labels: reformedlabels, otherURLs }
 
-        /*  await onSubmit(reformedData) */
-        form.reset
+        await onSubmit(reformedData)
+        form.reset()
     }
 
     return (
@@ -258,7 +264,7 @@ const Project1Form: React.FC<Project1FormProps> = ({
 
                     <Input
                         className="h-8"
-                        required
+                       
                         value={linkName}
                         disabled={disabled}
                         placeholder="Link Title"
@@ -266,7 +272,7 @@ const Project1Form: React.FC<Project1FormProps> = ({
                     />
                     <Input
                         className="h-8"
-                        required
+                        
                         type="url"
                         value={link}
                         disabled={disabled}
@@ -278,7 +284,7 @@ const Project1Form: React.FC<Project1FormProps> = ({
                     </Button>
 
                     <div className="flex gap-2 flex-wrap w-full">
-                        {otherURLsData && otherURLsData.length>0 ?otherURLsData.map((link:any,index:number)=> <ExistingUrlscard key={index} title={link.title} url={link.url} onDelete={()=>console.log('j')} index={index}/>):null}
+                        {otherURLsData && otherURLsData.length>0 ?otherURLsData.map((link:any,index:number)=> <ExistingUrlscard  key={index} title={link.title} url={link.url} onDelete={removeLink} index={index}/>):null}
                     </div>
 
                 </div>

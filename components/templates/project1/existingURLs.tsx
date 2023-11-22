@@ -5,10 +5,10 @@ import Link from "next/link"
 import { useEffect, useState } from "react"
 
 interface ExistingUrlscardProps {
-    title:string,
-    index:string | number
-    url:string,
-    onDelete:(index:string|number)=>void
+    title: string,
+    index: number
+    url: string,
+    onDelete: (index: number) => void
 }
 
 export const ExistingUrlscard: React.FC<ExistingUrlscardProps> = ({ title, url, onDelete, index }) => {
@@ -20,19 +20,20 @@ export const ExistingUrlscard: React.FC<ExistingUrlscardProps> = ({ title, url, 
         return null
     }
     return (
-        <Link className="flex gap-4 items-center justify-around" href={url} target='_blank'>
 
-            
+        <Link className="flex gap-2 py-2 px-2 items-center justify-around bg-mid text-darkest rounded-full text-xs w-fit h-fit" href={url} target='_blank'>
+
+
 
 
             <div>
                 <TooltipProvider>
                     <Tooltip>
                         <TooltipTrigger>
-                            <p>@{title}</p>
+                            <p>{title}</p>
                         </TooltipTrigger>
                         <TooltipContent>
-                            <p className="text-xs font-thin ">{url}</p>
+                            <p className="text-md ">{url}</p>
                         </TooltipContent>
                     </Tooltip>
                 </TooltipProvider>
@@ -43,20 +44,20 @@ export const ExistingUrlscard: React.FC<ExistingUrlscardProps> = ({ title, url, 
                         <TooltipTrigger>
                             <Button
                                 type="button"
-                                className="rounded-full h-8 w-8 my-2 "
+                                className="rounded-full h-5 w-5 "
                                 size="icon"
                                 variant="destructive"
-                                onClick={() => onDelete(index)}
+                                onClick={(e) =>{ e.preventDefault(); onDelete(index)}}
                             >
-                                <Unlink className="h-3 w-3" />
-                            </Button>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                            <p>Unlink {title}</p>
-                        </TooltipContent>
-                    </Tooltip>
-                </TooltipProvider>
-            </div>
-        </Link>
+                            <Unlink className="h-3 w-3" />
+                        </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                        <p>Unlink {title}</p>
+                    </TooltipContent>
+                </Tooltip>
+            </TooltipProvider>
+        </div>
+        </Link >
     )
 }
