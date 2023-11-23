@@ -78,7 +78,7 @@ const BlogForm: React.FC<BlogFormProps> = ({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(handleSubmit)}
-        className="space-y-2 w-[300px] h-[380px] border-2 rounded-md p-2"
+        className="space-y-2 w-[300px] h-[380px] border-2 rounded-md p-2 shadow-[rgba(17,_17,_26,_0.1)_0px_0px_30px] shadow-black"
       >
         <Label>{action}</Label>
         <FormField

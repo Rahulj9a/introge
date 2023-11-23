@@ -11,6 +11,7 @@ import { SectionItem } from "@prisma/client";
 import { Edit, Trash } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { ExistingUrlscard } from "./existingURLs";
 
 interface Project1TemplateProps {
     data: SectionItem;
@@ -49,7 +50,7 @@ const Project1Template: React.FC<Project1TemplateProps> = ({
         return null
     }
     return (
-        <div className="w-[300px] h-[380px] rounded-md relative shadow-[rgba(17,_17,_26,_0.1)_0px_0px_30px] shadow-black" >
+        <div className="w-[330px] max-h-fit min-h-[400px] flex flex-col justify-around rounded-md relative shadow-[rgba(17,_17,_26,_0.1)_0px_0px_30px] shadow-black" >
             {onDelete ? (
                 <div className="rounded-md absolute z-20 -top-2 -right-2">
                     <TooltipProvider>
@@ -80,20 +81,27 @@ const Project1Template: React.FC<Project1TemplateProps> = ({
                             </div>
                         )}
                     </div>
+                    
                     <div className="flex flex-col justify-around h-[200px]">
-                        <h1 className="text-lg font-semibold">{data.name}</h1>
-                        <p className="text-sm ">{data.about}</p>
+                        <h1 className="text-lg font-semibold flex items-center justify-between">{data.name} <span className="text-xs text-dark">{data.labels?.split(",")[0]}</span></h1>
                         <div className="flex text-xs gap-1 flex-wrap">
                             {data.labels
                                 ?.split(",")
                                 .map((e, index) =>
-                                    index < 3 ? (
+                                    index > 0 && index < 3 ? (
                                         <div className="py-1 px-2 rounded-md bg-black text-white">
                                             {e}
                                         </div>
                                     ) : null
                                 )}
                         </div>
+                        <p className="text-sm ">{data.about}</p>
+
+                        {data.otherURLs && <div className="flex text-xs gap-1 flex-wrap">
+                            {JSON.parse(String(data?.otherURLs)).map((link: any, index: number) =>
+                                <ExistingUrlscard index={index} key={index} title={link.title} url={link.url} />
+                            )}
+                        </div>}
                     </div>
                 </div>
             </Link>

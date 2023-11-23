@@ -88,7 +88,7 @@ const BlogTemplate: React.FC<BlogTemplateProps> = ({
                                 ?.split(",")
                                 .map((e, index) =>
                                     index < 3 ? (
-                                        <div className="py-1 px-2 rounded-md bg-black text-white">
+                                        <div key={index} className="py-1 px-2 rounded-md bg-black text-white">
                                             {e}
                                         </div>
                                     ) : null

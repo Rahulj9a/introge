@@ -13,7 +13,7 @@ export async function POST(req: Request, { params }: { params: { username: strin
 
     try {
         const body = await req.json()
-        const { name, about, url, imageURL, labels } = body
+        const { name, about, url, imageURL, labels, otherURLs } = body
        console.log(name)
         if (!name) {
             return new NextResponse("Name is required", { status: 404 })
@@ -32,8 +32,8 @@ export async function POST(req: Request, { params }: { params: { username: strin
                 about,
                 url,
                 imageURL,
-                labels
-                
+                labels,
+                otherURLs
             }
         })
         return NextResponse.json(section);

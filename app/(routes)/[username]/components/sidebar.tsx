@@ -23,9 +23,9 @@ const ProfileSidebar:React.FC<ProfileSidebarProps>  = ({user, sections}) => {
          
             <Sheet>
                 <SheetTrigger>
-                    <Button className="fixed left-3 top-13" variant="outline" size="icon">
+                    <div className="fixed left-3 top-13 p-2 rounded-lg z-30 hover:bg-gray-200 bg-white" >
                         <Menu className="w-4 l-4"/>
-                    </Button>
+                    </div>
                 </SheetTrigger>
                 <SheetContent  side="left" className=" p-0 w-52 md:w-64 text-sm md:text-base">
                      <SideBarNav user={user} sections={sections as any}/>

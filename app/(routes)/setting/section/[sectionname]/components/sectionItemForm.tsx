@@ -27,10 +27,10 @@ const SectionItemForm: React.FC<SectionFormProps> = ({
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   //if temlate set to edit it will record the id and replace template with Form
- 
+
   const username = currentUser.username;
 
-  const toastMessage = initialData ? "Section Updated" : "Section Created";
+  const toastMessage = initialData ? "Item Updated" : "Item Created";
   const templateDetail =
     templateList.find((template) => template.label === sectionTemplate) ||
     templateList[0];
@@ -38,13 +38,13 @@ const SectionItemForm: React.FC<SectionFormProps> = ({
   const onSubmit = async (data: any) => {
     try {
       setLoading(true);
-     
-        await axios.post(
-          `/api/${username}/section/${sectionId}/sectionItem`,
-          data
-        );
-      
-      
+
+      await axios.post(
+        `/api/${username}/section/${sectionId}/sectionItem`,
+        data
+      );
+
+
       /*} */
       router.refresh();
 
@@ -79,25 +79,28 @@ const SectionItemForm: React.FC<SectionFormProps> = ({
       setLoading(false);
     }
   };
-  
+
   const Form = templateDetail.form;
   const Template = templateDetail.template;
 
   return (
-    <div className="flex flex-wrap w-full gap-5 justify-center">
-      <Form onSubmit={onSubmit} disabled={loading} /> 
-      {sectionItems?.length > 0
-        ? sectionItems.map((data: SectionItem) =>
+    <div className="flex flex-col gap-3">
+      <Form onSubmit={onSubmit} disabled={loading} />
+      <h2 className="text-lg font-semibold">Existed Items : {sectionItems.length}</h2>
+      <div className="flex flex-wrap w-full my-2 gap-5 justify-start">
+        {sectionItems?.length > 0
+          ? sectionItems.map((data: SectionItem) =>
 
-          <Template
-            onDelete={() => onDelete(data.id)}
-            key={data.id}
-            data={data}
-           
-          />
-        )
+            <Template
+              onDelete={() => onDelete(data.id)}
+              key={data.id}
+              data={data}
 
-        : null}
+            />
+          )
+
+          : null}
+      </div>
     </div>
   );
 };
