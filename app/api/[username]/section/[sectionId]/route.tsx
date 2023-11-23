@@ -36,7 +36,7 @@ export async function PATCH(req: Request, { params }: { params: { username: stri
                 name
             }
         })
-        if (isSectionExist) {
+        if (isSectionExist && isSectionExist.id!==params.sectionId) {
             return new NextResponse("Name is already used to create another section", { status: 404, })
 
         }
