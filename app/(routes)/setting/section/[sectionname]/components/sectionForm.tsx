@@ -22,8 +22,8 @@ const formSchema = z.object({
         message: "Section name must be atleast of 3 letters"
     }).max(15, {
         message: "Section name must not be more than "
-    }).regex(/^[a-zA-Z]+$/, {
-        message: "Section name should only contain letters without any special characters and spaces"
+    }).regex(/^[a-zA-Z0-9\-._&!+()]+$/, {
+        message: "Only letters, numbers and `-` `.` `_` `&` `!` `+` `(` `)` are allowed"
     }),
     about: z.string().min(5, {
         message: "About section should not be less than 5 letters"
