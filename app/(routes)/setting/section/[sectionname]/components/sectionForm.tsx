@@ -74,6 +74,7 @@ const SectionForm: React.FC<SectionFormProps> = ({ initialData, currentUser }) =
         try {
             setLoading(true)
             if (initialData) {
+                console.log(data)
                 await axios.patch(`/api/${currentUser.username}/section/${initialData.id}`, data)
             } else {
                 await axios.post(`/api/${currentUser.username}/section`, data)

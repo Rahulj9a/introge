@@ -1,12 +1,14 @@
 "use client"
 
-import { GrBlog, GrProjects } from "react-icons/gr";
+import { GrBlog, GrProjects, GrYoutube } from "react-icons/gr";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
 import { useEffect, useState } from "react";
 import BlogTemplate from "./blog/Template";
 import BlogForm from "./blog/Form";
 import Project1Template from "./project1/Template";
 import Project1Form from "./project1/Form";
+import YoutubeTemplate from "./youtubeVideos/Template";
+import YoutubeForm from "./youtubeVideos/Form";
 
 export const templateList = [
     {
@@ -23,6 +25,13 @@ export const templateList = [
         form:Project1Form,
         color: "text-white"
     },
+    {
+        label: "Youtube",
+        icon: GrYoutube,
+        template: YoutubeTemplate,
+        form:YoutubeForm,
+        color: "text-red-700"
+    }
 
 ];
 export const TemplateFinder = ({ section }: { section: { name: string, template: string } }) => {
