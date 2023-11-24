@@ -49,7 +49,7 @@ const YoutubeTemplate: React.FC<BlogTemplateProps> = ({ data, onDelete }) => {
     const videoId = (url: string) => {
         const regex = /^https?:\/\/(?:www\.)?youtu\.?be(?:\.com)?\/(?:watch\?v=|embed\/|v\/|u\/\w+\/|app\/)?([^#\&\?]*).*/i;
         const match = url.match(regex);
-        console.log(match)
+        
         if (match && match[1]) {
             return match[1];
         } else {

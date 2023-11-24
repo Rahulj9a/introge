@@ -9,7 +9,7 @@ const SectionList: React.FC<SectionListProps> = ({ sections }) => {
     return (
         <>
             {sections?.map(section =>  
-            section.isActive?<SectionItemList section={section}/>:null
+            section.isActive?<SectionItemList key={section.name} section={section}/>:null
             )}
         </>
     )
