@@ -1,3 +1,4 @@
+import Sidebar from '@/components/headersAndFooters/mainSideBar'
 import Navbar from '@/components/headersAndFooters/navbar'
 import { serverAuth } from '@/lib/serverAuth'
 import React from 'react'
@@ -14,7 +15,9 @@ const layout: React.FC<LayoutProps> = async({ children }) => {
      
     return (
         <div className='pt-14'>
-            {/* <Navbar currentUser={currentUser as any}/> */}
+            <div className="absolute">
+                <Sidebar />
+            </div>
             {children}
         </div>
     )

@@ -1,3 +1,4 @@
+import SubNav from "@/components/headersAndFooters/mainSubNav";
 import Navbar from "@/components/headersAndFooters/navbar";
 import { serverAuth } from "@/lib/serverAuth";
 import React from "react";
@@ -11,7 +12,7 @@ const Layout: React.FC<LayoutProps> = async ({ children }) => {
 
     return (
         <div >
-            <Navbar currentUser={currentUser as any} />
+            <Navbar currentUser={currentUser as any} SubNav={SubNav}/>
             <div >{children}</div>
         </div>
     );

@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button'
 import { useLoginModal } from '@/hooks/useLoginModal'
 import { useRegisterModal } from '@/hooks/useRegisterModal'
 
- 
+
 
 import { useRouter } from 'next/navigation'
 import HeaderUserAvatar from './headerUserAvatar'
@@ -23,9 +23,10 @@ interface NavbarProps {
         username: string
         profilepic: string
     }
+    SubNav?: any
 }
 
-const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
+const Navbar: React.FC<NavbarProps> = ({ currentUser, SubNav }) => {
 
 
 
@@ -38,14 +39,18 @@ const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
 
 
     return (
-        <div className='h-14 fixed z-30 bg-mid bg-opacity-80 w-full flex px-4 py-2 items-center lg:px-6 border-b justify-between'>
+        <div className='h-14 fixed z-30 bg-mid bg-opacity-80 w-full flex pr-4 pl-1 py-2 items-center lg:px-6 border-b justify-between'>
             <div className=''>
-                <Image width={50} height={50} src="/profiley.png" alt="Profiley"/>
+                <Image width={40} height={40} src="/profiley.png" alt="Profiley" />
+            </div>
+            <div className='hidden md:block'>
+
+                <SubNav />
             </div>
             <div className='flex items-center'>
 
                 {currentUser ?
-                     <HeaderUserAvatar currentUser={currentUser}/>
+                    <HeaderUserAvatar currentUser={currentUser} />
 
                     :
                     <div className='flex space-x-4'>
@@ -55,6 +60,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
 
             </div>
         </div>
+
     )
 }
 
