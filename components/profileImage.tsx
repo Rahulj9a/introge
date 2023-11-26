@@ -6,6 +6,7 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { cn } from "@/lib/utils";
 import { Delete, LucideDelete, Pencil, RemoveFormatting, Trash, UserCircle2 } from "lucide-react";
 import Image from "next/image";
 import React from "react";
@@ -18,12 +19,14 @@ interface ProfileImageProps {
     editable:boolean 
     value?: string | null
     disabled: boolean;
+    className?:string
 }
 const ProfileImage: React.FC<ProfileImageProps> = ({
     onChange,
     editable = false,
     value,
     disabled,
+    className
 }) => {
     const [base64, setBase64] = useState(value);
     const handleChange = useCallback(
@@ -60,7 +63,7 @@ const ProfileImage: React.FC<ProfileImageProps> = ({
         },
     });
     return (
-        <div className="relative w-48 h-48 rounded-full">
+        <div className={cn("relative w-48 h-48 rounded-full", className)}>
             
 
             

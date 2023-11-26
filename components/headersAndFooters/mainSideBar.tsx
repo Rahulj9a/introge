@@ -28,7 +28,7 @@ const Sidebar: React.FC<ProfileSidebarProps> = ({ }) => {
                     <Menu className="w-4 l-4" />
                 </div>
             </SheetTrigger>
-            <SheetContent side="left" className="px-4 flex flex-col justify-between w-52 md:w-64 text-sm md:text-base">
+            <SheetContent side="left" className="bg-mid px-4 flex flex-col justify-between w-52 md:w-64 text-sm md:text-base">
                 <SubNav />
                 <Link className="w-full h-fit p-2 flex items-center justify-center gap-4 hover:bg-light cursor-pointer" href="/">
                     <Image width={50} height={50} src="/profiley.png" alt="Profiley" className="" />

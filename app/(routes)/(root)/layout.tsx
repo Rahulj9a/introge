@@ -10,12 +10,12 @@ interface LayoutProps {
 
 
 const layout: React.FC<LayoutProps> = async({ children }) => {
-    let {currentUser} = await serverAuth()
+     
      
      
     return (
         <div className='pt-14'>
-            <div className="absolute">
+            <div className="absolute md:hidden">
                 <Sidebar />
             </div>
             {children}

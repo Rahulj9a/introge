@@ -4,8 +4,9 @@ import type { Metadata } from 'next'
 import { Noto_Serif } from 'next/font/google'
 import { NextAuthProvider } from '@/providers/nextAuthProvider'
 import { ToasterProvider } from '@/providers/toastProvider'
+import { ReactQueryProvider } from '@/providers/reactQueryProvider'
 
-const inter =  Noto_Serif({ subsets: ['latin'] })
+const inter = Noto_Serif({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -20,11 +21,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <NextAuthProvider/>
-        <ToasterProvider/>
-        <ModalProvider/>
-        {children}
-        </body>
+        <ReactQueryProvider>
+          <NextAuthProvider />
+          <ToasterProvider />
+          <ModalProvider />
+          {children}
+        </ReactQueryProvider>
+      </body>
     </html>
   )
 }
