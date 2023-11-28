@@ -1,6 +1,4 @@
 
-
- 
 import { User } from '@prisma/client'
 import React, { useState } from 'react'
 import ProfileImage from '../../../../../components/profileImage'

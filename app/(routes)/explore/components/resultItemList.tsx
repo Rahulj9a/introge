@@ -4,13 +4,14 @@ import UserCard from '@/components/userCard';
 import { UseUser } from '@/hooks/useUser';
 import { User } from '@prisma/client';
 import { useSearchParams } from 'next/navigation'
+import { encode } from 'punycode';
 import React from 'react'
 
 const ResultList = () => {
   const search = useSearchParams();
- /*  const searchQuery = search?search.get("q"):null;
-  const encodedSearchQuery = encodeURI(searchQuery || ""); */
-  const {data:Users, isLoading} = UseUser()
+  const searchQuery = search?search.get("q"):null;
+  const encodedSearchQuery = encodeURI(searchQuery || "");
+  const {data:Users, isLoading} = UseUser(encodedSearchQuery)
   if(isLoading){
     console.log("loading")
   }

@@ -11,10 +11,10 @@ const Layout: React.FC<LayoutProps> = async ({ children }) => {
     let { currentUser } = await serverAuth();
 
     return (
-        <div >
+        <>
             <Navbar currentUser={currentUser as any} SubNav={SubNav}/>
             <div >{children}</div>
-        </div>
+        </>
     );
 };
 
