@@ -21,7 +21,7 @@ import { Textarea } from "@/components/ui/textarea";
 
 interface BlogFormProps {
   onSubmit: (data: any) => void;
-  initialData?: SectionItem;
+  initialData?: SectionItem | null
   disabled: boolean;
 
 }

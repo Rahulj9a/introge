@@ -71,7 +71,7 @@ const Project1Form: React.FC<Project1FormProps> = ({
         resolver: zodResolver(formSchema),
 
         defaultValues: initialData
-            ? ({ ...initialData } as any)
+            ? ({ ...initialData, progressDetail:initialData.labels?.split(", ")?.[0], labels:initialData.labels?.split(", ").slice(1).join(", ")} as any)
             : {
                 name: "",
                 about: "",
@@ -82,7 +82,7 @@ const Project1Form: React.FC<Project1FormProps> = ({
 
             },
     });
-    const progressEnqList = ["Completed", "On Progress", "Not started", "Abondand", "Planning"]
+    const progressEnqList = ["Completed ✔", "On Progress ⚙", "Not started 📪", "Abondand 🛑", "Continuous Development 🚀"]
     const addLink = () => {
         if (linkName.length < 3 || link.length < 3) {
             alert("Invalid Input")
@@ -107,17 +107,10 @@ const Project1Form: React.FC<Project1FormProps> = ({
         console.log(otherURLs)
     }
     const handleSubmit = async (data: Project1FormValues) => {
-        console.log("run")
+        
         let reformedlabels;
-        if (!initialData) {
+        
             reformedlabels = data.progressDetail + ", " + data.labels
-
-        }
-        if (initialData) {
-            reformedlabels = data.labels.split(", ")
-            reformedlabels[0] = data.progressDetail
-
-        }
         const reformedData = { ...data, labels: reformedlabels, otherURLs }
 
         await onSubmit(reformedData)

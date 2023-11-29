@@ -18,7 +18,7 @@ const SubNav = () => {
         {
             label: "Get started",
             icon: Rocket,
-            href: "/explore",
+            href: "/getstarted",
             color: "text-sky-500",
         },
          

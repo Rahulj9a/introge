@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/tooltip";
 import { useLinkPreview } from "@/hooks/useLinkPreview";
 import { SectionItem } from "@prisma/client";
-import { Edit, Trash } from "lucide-react";
+import { Edit, Pencil, Trash } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { ExistingUrlscard } from "./existingURLs";
@@ -27,6 +27,7 @@ const getlinkpreview = async (url: string) => {
 const Project1Template: React.FC<Project1TemplateProps> = ({
     data,
     onDelete,
+    onEdit
 }) => {
     const [isMounted, setIsMounted] = useState(false)
     const [previewdata, setPreviewData] = useState<{ image: string } | null>(null);
@@ -52,7 +53,7 @@ const Project1Template: React.FC<Project1TemplateProps> = ({
     return (
         <div className="w-[330px] max-h-fit min-h-[400px] flex flex-col justify-around rounded-md relative shadow-[rgba(17,_17,_26,_0.1)_0px_0px_30px] shadow-black" >
             {onDelete ? (
-                <div className="rounded-md absolute z-20 -top-2 -right-2">
+                <div className="rounded-md flex gap-1 absolute z-20 -top-2 -right-2">
                     <TooltipProvider>
                         <Tooltip>
                             <TooltipTrigger>
@@ -65,6 +66,19 @@ const Project1Template: React.FC<Project1TemplateProps> = ({
                             </TooltipContent>
                         </Tooltip>
                     </TooltipProvider>
+                    <TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger>
+                                <Button onClick={onEdit} variant="secondary" size="icon">
+                                    <Pencil className="w-6 h-6" />
+                                </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                                <p>Edit</p>
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
+
                 </div>
             ) : null}
             <Link href={data.url as string} target="_blank">
@@ -88,7 +102,7 @@ const Project1Template: React.FC<Project1TemplateProps> = ({
                             {data.labels
                                 ?.split(",")
                                 .map((e, index) =>
-                                    index > 0 && index < 3 ? (
+                                    index > 0 && index < 5 ? (
                                         <div className="py-1 px-2 rounded-md bg-black text-white">
                                             {e}
                                         </div>

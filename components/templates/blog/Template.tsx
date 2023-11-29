@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/tooltip";
 import { useLinkPreview } from "@/hooks/useLinkPreview";
 import { SectionItem } from "@prisma/client";
-import { Edit, Trash } from "lucide-react";
+import { Edit, Pencil, PencilIcon, Trash } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -26,6 +26,7 @@ const getlinkpreview = async (url: string) => {
 const BlogTemplate: React.FC<BlogTemplateProps> = ({
     data,
     onDelete,
+    onEdit
 }) => {
     const [isMounted, setIsMounted] = useState(false)
     const [previewdata, setPreviewData] = useState<{ image: string } | null>(null);
@@ -51,7 +52,7 @@ const BlogTemplate: React.FC<BlogTemplateProps> = ({
     return (
         <div className="w-[300px] h-[380px] rounded-md sh relative shadow-[rgba(17,_17,_26,_0.1)_0px_0px_30px] shadow-black">
             {onDelete ? (
-                <div className="rounded-md z-20 absolute -top-2 -right-2">
+                <div className="rounded-md z-20 absolute flex gap-1 -top-2 -right-2">
                     <TooltipProvider>
                         <Tooltip>
                             <TooltipTrigger>
@@ -64,6 +65,19 @@ const BlogTemplate: React.FC<BlogTemplateProps> = ({
                             </TooltipContent>
                         </Tooltip>
                     </TooltipProvider>
+                    <TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger>
+                                <Button onClick={onEdit} variant="secondary" size="icon">
+                                    <Pencil className="w-6 h-6" />
+                                </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                                <p>Edit</p>
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
+
                 </div>
             ) : null}
             <Link href={data.url as string} target="_blank"  >

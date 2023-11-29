@@ -10,7 +10,6 @@ import { useRouter } from "next/navigation";
 import { templateList } from "@/components/templates/templateList";
 
 interface SectionFormProps {
-  initialData?: SectionItem;
   currentUser: User;
   sectionItems: SectionItem[];
   sectionTemplate: String;
@@ -18,7 +17,6 @@ interface SectionFormProps {
 }
 
 const SectionItemForm: React.FC<SectionFormProps> = ({
-  initialData,
   currentUser,
   sectionItems,
   sectionTemplate,
@@ -27,10 +25,10 @@ const SectionItemForm: React.FC<SectionFormProps> = ({
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   //if temlate set to edit it will record the id and replace template with Form
-
+  const [initialDataId, setInitialDataId] = useState("");
   const username = currentUser.username;
 
-  const toastMessage = initialData ? "Item Updated" : "Item Created";
+  const toastMessage = initialDataId.length > 0 ? "Item Updated" : "Item Created";
   const templateDetail =
     templateList.find((template) => template.label === sectionTemplate) ||
     templateList[0];
@@ -38,17 +36,26 @@ const SectionItemForm: React.FC<SectionFormProps> = ({
   const onSubmit = async (data: any) => {
     try {
       setLoading(true);
+      if (initialDataId.length > 1) {
+        await axios.patch(
+          `/api/${username}/section/${sectionId}/sectionItem/${initialDataId}`,
+          data
+        );
 
-      await axios.post(
-        `/api/${username}/section/${sectionId}/sectionItem`,
-        data
-      );
-
+      } else {
+        await axios.post(
+          `/api/${username}/section/${sectionId}/sectionItem`,
+          data
+        );
+      }
 
       /*} */
-      router.refresh();
 
       toast.success(toastMessage);
+      setInitialDataId("");
+      router.refresh();
+
+
     } catch (error: any) {
       console.log(error);
       toast.error("Something went wrong");
@@ -59,12 +66,7 @@ const SectionItemForm: React.FC<SectionFormProps> = ({
   const onDelete = async (itemId: string) => {
     try {
       setLoading(true);
-      /* if (initialData) {
-        await axios.patch(
-          `/api/${currentUser.username}/section/${initialData.sectionid}/sectionitem/${initialData.id}`,
-          { ...data }
-        );
-      } else { */
+
       await axios.delete(
         `/api/${username}/section/${sectionId}/sectionItem/${itemId}`
       );
@@ -85,20 +87,36 @@ const SectionItemForm: React.FC<SectionFormProps> = ({
 
   return (
     <div className="flex flex-col gap-3">
-      <Form onSubmit={onSubmit} disabled={loading} />
-      <h2 className="text-lg font-semibold">Existed Items : {sectionItems.length}</h2>
+      <Form
+        onSubmit={onSubmit}
+        disabled={loading || initialDataId.length > 1}
+
+      />
+      <h2 className="text-lg font-semibold">
+        Existed Items : {sectionItems.length}
+      </h2>
       <div className="flex flex-wrap w-full my-2 gap-5 justify-start">
         {sectionItems?.length > 0
           ? sectionItems.map((data: SectionItem) =>
-
-            <Template
-              onDelete={() => onDelete(data.id)}
-              key={data.id}
-              data={data}
-
-            />
+            data.id !== initialDataId ? (
+              <Template
+                onDelete={() => onDelete(data.id)}
+                key={data.id}
+                data={data}
+                onEdit={() => setInitialDataId(data.id)}
+              />
+            ) : (
+              <Form
+                onSubmit={onSubmit}
+                disabled={loading}
+                initialData={
+                  initialDataId
+                    ? sectionItems.find((data) => data.id === initialDataId)
+                    : undefined
+                }
+              />
+            )
           )
-
           : null}
       </div>
     </div>
