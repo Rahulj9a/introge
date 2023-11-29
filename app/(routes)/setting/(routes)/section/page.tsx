@@ -19,7 +19,7 @@ const Page = async () => {
     return(
       <div className='p-5'>
         <Sectioncard />
-        {sections?sections.map(section => <Sectioncard data={section} user={currentUser}/>):null}
+        {sections?sections.map(section => <Sectioncard key={section.id} data={section} user={currentUser}/>):null}
       </div>
     )
 }

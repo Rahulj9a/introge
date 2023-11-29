@@ -1,6 +1,7 @@
 "use client";
 
 import { User } from "@prisma/client";
+import { UserIcon } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -24,13 +25,14 @@ const UserCard: React.FC<UserCardProps> = ({ data }) => {
         className=" w-full flex-1 flex gap-2 h-5/6"
       >
         <div className="flex flex-col justify-around items-center w-auto">
-          <Image
+          {data.profilepic ? <Image
             width={100}
             height={100}
             src={data.profilepic as string}
             alt={data.username}
             className="rounded-full w-16 h-16 object-contain"
-          />
+          /> : <UserIcon className="w-16 h-16 rounded-full" />
+          }
         </div>
         <div className=" flex-1 px-1 py-1  flex flex-col justify-around text-light">
           <p className="text-light truncate max-w-full">

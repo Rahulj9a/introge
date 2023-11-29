@@ -18,9 +18,7 @@ export async function POST(req: Request, { params }: { params: { username: strin
         if (!name) {
             return new NextResponse("Name is required", { status: 404 })
         }
-        if (!url) {
-            return new NextResponse("URL is required", { status: 404 })
-        }
+        
          
         
         const section = await prisma.sectionItem.create({
