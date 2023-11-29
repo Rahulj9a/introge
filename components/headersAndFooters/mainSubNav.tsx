@@ -28,17 +28,17 @@ const SubNav = () => {
         <div className='flex flex-col gap-4 '>
             <div className="px-3 py-1 flex-1">
 
-                <div className="space-y-1 flex flex-1">
+                <div className=" items-center justify-center flex flex-1">
                     {routes.map((route) => (
                         <Link
                             href={route.href}
                             key={route.href}
-                            className={`text-sm group flex p-3 w-full justify-start font-medium cursor-pointer hover:bg-light ${pathname === route.href
+                            className={`group flex p-3 w-fit justify-start font-medium cursor-pointer hover:bg-light ${pathname === route.href
                                 ? " text-darkest  bg-light/50 md:bg-transparent "
-                                : "text-dark hover:"
+                                : "text-dark "
                                 } rounded-lg transition`}
                         >
-                            <div className="flex text-center items-center flex-1 text-sm">
+                            <div className="flex justify-center items-center text-sm">
                                 <route.icon className={cn("h-6 w-6 mr-3 md:hidden", route.color)} />
                                 <p>{route.label}</p>
                             </div>

@@ -28,7 +28,7 @@ const SuggestionBox: React.FC<SuggestionBoxProps> = ({ input = "" }) => {
         <>
             {<div className='w-full max-h-[300px] p-2 z-10 overflow-x-hidden overflow-y-scroll bg-dark text-light absolute m-0 top-14 rounded-lg'>
                 {users && users?.filter(e => e.username.includes(input as string)).map((user: User) =>
-                    <div key={user.id} className=' w-full rounded-md my-1 p-1 items-center gap-2 bg-light text-darkest flex'>
+                    <div key={user.id} className=' w-full rounded-md my-1 p-1 items-center gap-2 bg-light hover:bg-mid cursor-pointer text-darkest flex'>
                         <div className='flex gap-2 items-center flex-1' ><Image width={50} height={50} className="object-contain w-8 h-8 rounded-full" alt={user.name as string} src={user.profilepic as string} />
                             <span>{user.name}</span>
                             <span className='text-xs'>@{user.username}</span>

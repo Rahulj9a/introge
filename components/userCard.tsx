@@ -19,7 +19,7 @@ const UserCard: React.FC<UserCardProps> = ({ data }) => {
   }
   return (
     <div onClick={() => router.push(`/${data.username}`)}
-      className="cursor-pointer p-2 max-w-[350px] h-[150px] rounded-md bg-dark shadow-[rgba(17,_17,_26,_0.1)_0px_0px_10px] shadow-black">
+      className="cursor-pointer p-2 max-w-[350px] hover:scale-105 h-[150px] rounded-md bg-dark shadow-[rgba(17,_17,_26,_0.1)_0px_0px_10px] shadow-black">
       <div
         className=" w-full flex-1 flex gap-2 h-5/6"
       >
