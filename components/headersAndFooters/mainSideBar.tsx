@@ -24,8 +24,8 @@ const Sidebar: React.FC<ProfileSidebarProps> = ({ }) => {
 
         <Sheet>
             <SheetTrigger>
-                <div className="fixed left-3 bg-mid  block top-13 p-2 rounded-lg z-30 hover:bg-gray-200" >
-                    <Menu className="w-4 l-4" />
+                <div className="fixed right-20 bg-mid  block top-2 p-2 rounded-lg z-30 hover:bg-gray-200" >
+                    <Menu className="w-4 " />
                 </div>
             </SheetTrigger>
             <SheetContent side="left" className="bg-mid px-4 flex flex-col justify-between w-52 md:w-64 text-sm md:text-base">

@@ -4,12 +4,11 @@ import React, { useState } from "react";
 import SuggestionBox from "./components/suggestionBox";
 import SearchForm from "./components/searchForm";
 import ResultList from "./components/resultItemList";
+import { serverAuth } from "@/lib/serverAuth";
 
-const page = () => {
-    const onSubmit = () => console.log('e')
-    let data:any = []
-     
-
+const Page = async() => {
+    const {currentUser} = await serverAuth()
+    
     return (
         <div className="mx-4 md:mx-8 min-h-screen  max-h-fit">
             <p className="text-xl text-mid my-3 w-full text-center">Explore</p>
@@ -19,9 +18,9 @@ const page = () => {
 
             </div>
             
-            <ResultList/>
+            <ResultList currentUser={currentUser||undefined}/>
         </div>
     );
 };
 
-export default page;
+export default Page;

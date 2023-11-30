@@ -49,18 +49,22 @@ const Sectioncard: React.FC<SectioncardProps> = ({ data, user }) => {
         )
     }
     const onDelete = async () => {
-        try {
-            setLoading(true)
+        
+        const confirmDelete = window.confirm(`THIS ACTION IS IRREVERSIBLE. Are you sure you want to delete ${data.name} section. All of your data related to section will be deleted.`)
+        if (confirmDelete) {
+            try {
+                setLoading(true)
 
-            await axios.delete(`/api/${user?.username}/section/${data.id}`)
+                await axios.delete(`/api/${user?.username}/section/${data.id}`)
 
-            router.refresh()
-            router.push(`/setting/section`)
-            toast.success(`${data.name} deleted`)
-        } catch (error: any) {
-            toast.error("Something went wrong")
-        } finally {
-            setLoading(false)
+                router.refresh()
+                router.push(`/setting/section`)
+                toast.success(`${data.name} deleted`)
+            } catch (error: any) {
+                toast.error("Something went wrong")
+            } finally {
+                setLoading(false)
+            }
         }
     }
     return (

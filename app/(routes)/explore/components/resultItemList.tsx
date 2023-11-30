@@ -7,15 +7,17 @@ import { useSearchParams } from 'next/navigation'
 import { encode } from 'punycode';
 import React from 'react'
 
-const ResultList = () => {
+interface ResultListProps{
+  currentUser?:User
+}
+
+const ResultList:React.FC<ResultListProps> = ({currentUser}) => {
   const search = useSearchParams();
   const searchQuery = search?search.get("q"):null;
   const encodedSearchQuery = encodeURI(searchQuery || "");
   const {data:Users, isLoading} = UseUser(encodedSearchQuery)
-  if(isLoading){
-    console.log("loading")
-  }
-  const data = Users?.data
+ 
+  const data = (searchQuery && currentUser?.labels)?Users?.data.filter((user:User)=>user.labels.some(tag=>currentUser.labels.includes(tag))):Users?.data
  
   return (
     <div className='w-full h-fit px-2 flex flex-wrap gap-4'>

@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Edit } from "lucide-react";
+import { Edit, LayoutList } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const SideBar = () => {
@@ -18,7 +18,7 @@ const SideBar = () => {
         },
         {
             label: "Sections",
-            icon: Edit,
+            icon: LayoutList,
             href: "/setting/section",
             color: "text-sky-500",
         },

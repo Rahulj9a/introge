@@ -15,12 +15,12 @@ const SubNav = () => {
             href: "/explore",
             color: "text-sky-500",
         },
-        {
+       /*  {
             label: "Get started",
             icon: Rocket,
-            href: "/getstarted",
+            href: "/getStarted",
             color: "text-sky-500",
-        },
+        }, */
          
     ]
     const pathname = usePathname();
@@ -28,7 +28,7 @@ const SubNav = () => {
         <div className='flex flex-col gap-4 '>
             <div className="px-3 py-1 flex-1">
 
-                <div className=" items-center justify-center flex flex-1">
+                <div className=" items-center justify-center flex-col md:flex-row flex flex-1">
                     {routes.map((route) => (
                         <Link
                             href={route.href}

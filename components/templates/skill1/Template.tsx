@@ -50,7 +50,7 @@ const Skill1Template: React.FC<Skill1TemplateProps> = ({
         return null
     }
     return (
-        <div className="w-[170px] min-h-[200px] max-h-[280] flex flex-col items-center rounded-md sh relative shadow-[rgba(17,_17,_26,_0.1)_0px_0px_30px] shadow-black">
+        <div className="w-[170px] min-h-fit max-h-full flex flex-col items-center rounded-md sh relative shadow-[rgba(17,_17,_26,_0.1)_0px_0px_30px] shadow-black">
             {onDelete ? (
                 <div className="rounded-md z-20 absolute flex gap-1 -top-2 -right-2">
                     <TooltipProvider>
@@ -89,12 +89,12 @@ const Skill1Template: React.FC<Skill1TemplateProps> = ({
                         ) : previewdata && previewdata.image ? (
                             <img src={previewdata?.image} className="rounded-lg" />
                         ) : (
-                            <div className="w-20 h-20 bg-black text-white text-center flex items-center justify-center rounded-full">
+                            <div className="w-20 h-20 bg-black text-xs text-white text-center flex items-center justify-center rounded-full">
                                 {data.name}
                             </div>
                         )}
                     </div>
-                    <div className="flex flex-col items-center justify-around flex-1">
+                    <div className="flex flex-col gap-2 items-center justify-around flex-1">
                         <h1 className="text-lg font-semibold">{data.name}</h1>
                         <p className="text-xs ">{data.about}</p>
                      </div>
