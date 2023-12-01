@@ -14,8 +14,7 @@ const Page = async () => {
       userid: currentUser.id,
     },
   });
-  const sectionsOrder = sections ? sections.map((section) => section.name) : [];
-  return (
+   return (
     <div className="p-5">
 {/*       <div className="w-full rounded-lg flex flex-col gap-2 h-fit bg-mid py-6 px-4">
         <p>Priority Order* :</p>
@@ -33,9 +32,8 @@ const Page = async () => {
         <p className="text-[10px] text-dark">
           *Last updated         
           </p>
-      </div>
- */}      <h1>Sections</h1>
-      <Sectioncard />
+      </div>*/}      
+       <Sectioncard />
       {sections
         ? sections.map((section) => (
           <Sectioncard key={section.id} data={section} user={currentUser} />

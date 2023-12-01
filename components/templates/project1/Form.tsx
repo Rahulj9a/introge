@@ -66,8 +66,7 @@ const Project1Form: React.FC<Project1FormProps> = ({
     const [link, setLink] = useState("")
 
     const [otherURLs, setOtherURLs] = useState(initialData ? initialData?.otherURLs : '[]')
-    const otherURLsData = JSON.parse(String(otherURLs))
-    const form = useForm<Project1FormValues>({
+     const form = useForm<Project1FormValues>({
         resolver: zodResolver(formSchema),
 
         defaultValues: initialData
@@ -103,8 +102,8 @@ const Project1Form: React.FC<Project1FormProps> = ({
     }
     const removeLink = (index:number) =>{
         console.log(index)
-        setOtherURLs(prevState =>JSON.stringify([...JSON.parse(String(prevState))].slice(index+1)))
-        console.log(otherURLs)
+        const newURLs = [...JSON.parse(String(otherURLs)).slice(0,index),...JSON.parse(String(otherURLs)).slice(index+1)]
+        setOtherURLs(JSON.stringify(newURLs))
     }
     const handleSubmit = async (data: Project1FormValues) => {
         
@@ -121,7 +120,7 @@ const Project1Form: React.FC<Project1FormProps> = ({
         <Form {...form}>
             <form
                 onSubmit={form.handleSubmit(handleSubmit)}
-                className="space-y-2 w-[330px] md:w-[450px]  border-2 rounded-md p-2 shadow-[rgba(17,_17,_26,_0.1)_0px_0px_30px] shadow-black"
+                className="space-y-2 w-full md:w-[450px]  border-2 rounded-md p-2 shadow-[rgba(17,_17,_26,_0.1)_0px_0px_30px] shadow-black"
             >
                 <Label>{action}</Label>
                 <FormField
@@ -277,7 +276,7 @@ const Project1Form: React.FC<Project1FormProps> = ({
                     </Button>
 
                     <div className="flex gap-2 flex-wrap w-full">
-                        {otherURLsData && otherURLsData.length>0 ?otherURLsData.map((link:any,index:number)=> <ExistingUrlscard  key={index} title={link.title} url={link.url} onDelete={removeLink} index={index}/>):null}
+                        { JSON.parse(String(otherURLs)).length>0 ? JSON.parse(String(otherURLs)).map((link:any,index:number)=> <ExistingUrlscard  key={index} title={link.title} url={link.url} onDelete={removeLink} index={index}/>):null}
                     </div>
 
                 </div>

@@ -2,12 +2,16 @@
 import * as z from "zod";
 
 import { Section, SectionItem, User } from "@prisma/client";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
 import { templateList } from "@/components/templates/templateList";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Plus, PlusCircle } from "lucide-react";
+import Modal from "@/components/ui/modal";
 
 interface SectionFormProps {
   currentUser: User;
@@ -23,12 +27,15 @@ const SectionItemForm: React.FC<SectionFormProps> = ({
   sectionId,
 }) => {
   const router = useRouter();
+  const DialogRef = useRef(null)
   const [loading, setLoading] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
   //if temlate set to edit it will record the id and replace template with Form
   const [initialDataId, setInitialDataId] = useState("");
   const username = currentUser.username;
 
-  const toastMessage = initialDataId.length > 0 ? "Item Updated" : "Item Created";
+  const toastMessage =
+    initialDataId.length > 0 ? "Item Updated" : "Item Created";
   const templateDetail =
     templateList.find((template) => template.label === sectionTemplate) ||
     templateList[0];
@@ -41,7 +48,6 @@ const SectionItemForm: React.FC<SectionFormProps> = ({
           `/api/${username}/section/${sectionId}/sectionItem/${initialDataId}`,
           data
         );
-
       } else {
         await axios.post(
           `/api/${username}/section/${sectionId}/sectionItem`,
@@ -54,8 +60,6 @@ const SectionItemForm: React.FC<SectionFormProps> = ({
       toast.success(toastMessage);
       setInitialDataId("");
       router.refresh();
-
-
     } catch (error: any) {
       console.log(error);
       toast.error("Something went wrong");
@@ -87,14 +91,21 @@ const SectionItemForm: React.FC<SectionFormProps> = ({
 
   return (
     <div className="flex flex-col gap-3">
-      <Form
-        onSubmit={onSubmit}
-        disabled={loading || initialDataId.length > 1}
+      <h1 className="text-lg font-semibold">Items : {sectionItems.length}</h1>
+      <Button type="button" onClick={()=>setIsOpen(true)} className="w-full h-14 rounded-md flex gap-4 bg-dark">Create Item <Plus className="w-6 h-6"></Plus></Button>
+      <Modal title="Create" description="Create an Item" isOpen={isOpen} onClose={() => {setInitialDataId(""); setIsOpen(false)}}>
+        <Form
+          onSubmit={onSubmit}
+          disabled={loading}
+          initialData={
+            initialDataId
+              ? sectionItems.find((data) => data.id === initialDataId)
+              : undefined
+          }
+        />
 
-      />
-      <h2 className="text-lg font-semibold">
-        Existed Items : {sectionItems.length}
-      </h2>
+      </Modal>
+      
       <div className="flex flex-wrap w-full my-2 gap-5 justify-start">
         {sectionItems?.length > 0
           ? sectionItems.map((data: SectionItem) =>
@@ -103,19 +114,9 @@ const SectionItemForm: React.FC<SectionFormProps> = ({
                 onDelete={() => onDelete(data.id)}
                 key={data.id}
                 data={data}
-                onEdit={() => setInitialDataId(data.id)}
+                onEdit={() => {setIsOpen(true); setInitialDataId(data.id); }}
               />
-            ) : (
-              <Form
-                onSubmit={onSubmit}
-                disabled={loading}
-                initialData={
-                  initialDataId
-                    ? sectionItems.find((data) => data.id === initialDataId)
-                    : undefined
-                }
-              />
-            )
+            ) : null
           )
           : null}
       </div>

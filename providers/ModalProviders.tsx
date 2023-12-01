@@ -23,7 +23,7 @@ export const ModalProvider = () => {
     return (
         
         <>
-            
+                
                 <LoginModal   />
                 <RegisterModal  />
           

@@ -12,6 +12,7 @@ import { Edit, Pencil, Trash } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { ExistingUrlscard } from "./existingURLs";
+import { useRouter } from "next/navigation";
 
 interface Project1TemplateProps {
     data: SectionItem;
@@ -30,6 +31,7 @@ const Project1Template: React.FC<Project1TemplateProps> = ({
     onEdit
 }) => {
     const [isMounted, setIsMounted] = useState(false)
+    const router = useRouter()
     const [previewdata, setPreviewData] = useState<{ image: string } | null>(null);
 
 
@@ -81,7 +83,7 @@ const Project1Template: React.FC<Project1TemplateProps> = ({
 
                 </div>
             ) : null}
-            <Link href={data.url as string} target="_blank">
+            <div onClick={()=>router.push(data.url as string)}>
                 <div className="w-full p-2 flex flex-col gap-2">
                     {/* Priority for showing Image--> ImageURL -> URL fetched image -> Text */}
                     <div className="w-full h-[140px] rounded-lg">
@@ -118,7 +120,7 @@ const Project1Template: React.FC<Project1TemplateProps> = ({
                         </div>}
                     </div>
                 </div>
-            </Link>
+            </div>
         </div>
     );
 };

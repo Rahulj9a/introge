@@ -1,4 +1,4 @@
-import { ModalProvider } from '@/providers/authModalProviders'
+import { ModalProvider } from '@/providers/ModalProviders'
 import './globals.css'
 import type { Metadata } from 'next'
 import { Noto_Serif } from 'next/font/google'

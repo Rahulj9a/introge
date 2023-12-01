@@ -77,7 +77,7 @@ const Skill1Form: React.FC<Skill1FormProps> = ({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(handleSubmit)}
-        className="space-y-2 w-[300px] h-auto border-2 rounded-md p-2 shadow-[rgba(17,_17,_26,_0.1)_0px_0px_30px] shadow-black"
+        className="space-y-2 w-full h-auto border-2 rounded-md p-2 shadow-[rgba(17,_17,_26,_0.1)_0px_0px_30px] shadow-black"
       >
         <Label>Add Item</Label>
         <FormField
