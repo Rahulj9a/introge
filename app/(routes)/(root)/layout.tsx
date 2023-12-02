@@ -15,10 +15,7 @@ const layout: React.FC<LayoutProps> = async({ children }) => {
      
     return (
         <div className='pt-14'>
-            <div className="absolute md:hidden">
-                <Sidebar />
-            </div>
-            {children}
+             {children}
         </div>
     )
 }

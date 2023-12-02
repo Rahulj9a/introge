@@ -68,21 +68,24 @@ const SectionItemForm: React.FC<SectionFormProps> = ({
     }
   };
   const onDelete = async (itemId: string) => {
-    try {
-      setLoading(true);
+    const confirmDelete = window.confirm("This action is irreversible, do you still want to delete it?")
+    if (confirmDelete) {
+      try {
+        setLoading(true);
 
-      await axios.delete(
-        `/api/${username}/section/${sectionId}/sectionItem/${itemId}`
-      );
-      /*} */
-      router.refresh();
+        await axios.delete(
+          `/api/${username}/section/${sectionId}/sectionItem/${itemId}`
+        );
+        /*} */
+        router.refresh();
 
-      toast.success("Successfully Deleted");
-    } catch (error: any) {
-      console.log(error);
-      toast.error("Something went wrong");
-    } finally {
-      setLoading(false);
+        toast.success("Successfully Deleted");
+      } catch (error: any) {
+        console.log(error);
+        toast.error("Something went wrong");
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
@@ -92,8 +95,8 @@ const SectionItemForm: React.FC<SectionFormProps> = ({
   return (
     <div className="flex flex-col gap-3">
       <h1 className="text-lg font-semibold">Items : {sectionItems.length}</h1>
-      <Button type="button" onClick={()=>setIsOpen(true)} className="w-full h-14 rounded-md flex gap-4 bg-dark">Create Item <Plus className="w-6 h-6"></Plus></Button>
-      <Modal title="Create" description="Create an Item" isOpen={isOpen} onClose={() => {setInitialDataId(""); setIsOpen(false)}}>
+      <Button type="button" onClick={() => setIsOpen(true)} className="w-full h-14 rounded-md flex gap-4 bg-dark">Create Item <Plus className="w-6 h-6"></Plus></Button>
+      <Modal title="Create" description="Create an Item" isOpen={isOpen} onClose={() => { setInitialDataId(""); setIsOpen(false) }}>
         <Form
           onSubmit={onSubmit}
           disabled={loading}
@@ -105,7 +108,7 @@ const SectionItemForm: React.FC<SectionFormProps> = ({
         />
 
       </Modal>
-      
+
       <div className="flex flex-wrap w-full my-2 gap-5 justify-start">
         {sectionItems?.length > 0
           ? sectionItems.map((data: SectionItem) =>
@@ -114,7 +117,7 @@ const SectionItemForm: React.FC<SectionFormProps> = ({
                 onDelete={() => onDelete(data.id)}
                 key={data.id}
                 data={data}
-                onEdit={() => {setIsOpen(true); setInitialDataId(data.id); }}
+                onEdit={() => { setIsOpen(true); setInitialDataId(data.id); }}
               />
             ) : null
           )

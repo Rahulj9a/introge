@@ -137,9 +137,9 @@ const SectionForm: React.FC<SectionFormProps> = ({ initialData, currentUser }) =
                                         </SelectTrigger>
                                     </FormControl>
                                     <SelectContent style={{}} className="max-h-[200px] overflow-y-scroll">
-                                        {templateList.map((template) => (
+                                        {templateList.map((template,index:number) => (
                                             <SelectItem
-                                                key={template.label}
+                                                key={index}
                                                 className="w-full h-10 cursor-pointer my-1"
                                                 value={template.label}
                                             >

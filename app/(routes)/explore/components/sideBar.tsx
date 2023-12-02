@@ -1,8 +1,7 @@
 "use client"
 import React from "react";
 
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
+ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Edit, LayoutList } from "lucide-react";
@@ -11,17 +10,31 @@ import { cn } from "@/lib/utils";
 const SideBar = () => {
     const routes = [
         {
-            label: "Edit Profile",
+            label: "Users",
             icon: Edit,
-            href: "/setting/profile",
+            href: "/explore/users",
             color: "text-sky-500",
         },
         {
             label: "Sections",
             icon: LayoutList,
-            href: "/setting/section",
+            href: "/explore/sections",
             color: "text-sky-500",
         },
+        {
+            label: "Items",
+            icon: LayoutList,
+            href: "/explore/items",
+            color: "text-sky-500",
+        },
+        {
+            label: "Available Templates",
+            icon: LayoutList,
+            href: "/explore/templates",
+            color: "text-sky-500",
+        },
+
+
 
     ];
     const pathname = usePathname();
@@ -35,10 +48,10 @@ const SideBar = () => {
 
                 </div>
                 <div className="space-y-1">
-                    {routes.map((route, index:number) => (
+                    {routes.map((route) => (
                         <Link
                             href={route.href}
-                            key={index}
+                            key={route.href}
                             className={`text-sm group flex p-3 w-full justify-start font-medium cursor-pointer hover:bg-light ${pathname === route.href
                                 ? " text-darkest  bg-light/50"
                                 : "text-dark hover:"

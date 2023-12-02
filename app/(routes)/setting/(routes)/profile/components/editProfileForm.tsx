@@ -3,7 +3,7 @@ import * as z from "zod";
 import { Button } from "@/components/ui/button";
 
 import { Social } from "@prisma/client";
- 
+
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -19,13 +19,14 @@ import { Input } from "@/components/ui/input";
 import { toast } from "react-hot-toast";
 
 import axios from "axios";
-import {   useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import ProfileImage from "@/components/profileImage";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
- 
 
-import { ExsitingLabelscard } from "./existingSocialscard";
+
+import { ExsitingLabelscard } from "./existingSocial&Labelcard";
+import { LabelList } from "@/components/templates/labelsList";
 
 const formSchema = z.object({
     name: z.string().min(3, {
@@ -70,7 +71,6 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
 
     const [loading, setloading] = useState(false);
     const [profilepic, setProfilepic] = useState(initialData?.profilepic);
-    const [providedLabels, setProvidedLabels] = useState(["Frontend", "Backend", "Javascript", "Python", "Web"])
     const [labels, setLabels] = useState([...initialData.labels] || []);
 
     const form = useForm<ProfileFormValues>({
@@ -105,6 +105,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
 
     return (
         <div className={cn("w-full p-1", className)}>
+            <h1 className="text-xl font-bold">Basic Profile</h1>
             <div className="grid md:grid-cols-3">
                 <div className="col-span-1 py-2 flex  justify-center">
                     <div className=" h-full">
@@ -166,55 +167,65 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
                                         </FormItem>
                                     )}
                                 />
-
-                                <div className="w-full">
-                                    <h3 className="font-semibold text-sm py-2">Labels</h3>
-                                    {labels.length > 0 ? (<div className="max-h-[100px] flex gap-2 flex-wrap w-full overflow-y-scroll">
-                                        {labels.map((label) => (
-                                            <ExsitingLabelscard
-                                                value={label}
-                                                exist={true}
-                                                disabled={loading}
-                                                onClick={(value) => {
-
-                                                    setLabels([
-                                                        ...labels.filter((label) => label !== value),
-                                                    ])
-
-                                                }
-
-                                                }
-                                            />
-                                        ))}
-                                    </div>) : null}
-                                    <hr />
-                                    <div className="py-2 max-h-[100px] w-full overflow-y-scroll flex gap-2 flex-wrap">
-
-                                        {[...providedLabels].filter(label => ![...labels].includes(label)).map((label) => (
-                                            <ExsitingLabelscard
-                                                value={label}
-                                                exist={false}
-                                                disabled={loading}
-                                                onClick={(value) => {
-                                                    setLabels([
-                                                        ...labels, value
-                                                    ]);
-
-                                                }
-                                                }
-                                            />
-                                        ))}
-                                    </div>
-                                </div>
-
-                                <Button disabled={loading} className="ml-auto">
-                                    Save Profile Changes
-                                </Button>
                             </div>
+
+
                         </form>
                     </Form>
                 </div>
             </div>
+            <div className="w-full py-2">
+                <h3 className="font-semibold text-sm py-2">Labels</h3>
+                {labels.length > 0 ? (<div className="max-h-[100px] py-1 flex gap-2 flex-wrap w-full flex-wrap">
+                    {labels.map((label) => (
+                        <ExsitingLabelscard
+                            value={label}
+                            exist={true}
+                            disabled={loading}
+                            onClick={(value) => {
+
+                                setLabels([
+                                    ...labels.filter((label) => label !== value),
+                                ])
+
+                            }
+
+                            }
+                        />
+                    ))}
+                </div>) : null}
+
+                <hr />
+                {LabelList.map((labelGroup) =>
+                    <div>
+                        <h3 className="text-xs text-semibold ">{labelGroup.title}</h3>
+                        <div className="flex flex-wrap max-h-[200px] overflow-y-scroll gap-1 py-1">
+                            {[...labelGroup.list].filter(label => ![...labels].includes(label)).map((label) => (
+                                <ExsitingLabelscard
+                                    value={label}
+                                    exist={false}
+                                    disabled={loading}
+                                    onClick={(value) => {
+                                        setLabels([
+                                            ...labels, value
+                                        ]);
+
+                                    }
+                                    }
+                                />
+                            ))
+                            }
+                        </div>
+                    </div>
+
+                )}
+
+
+            </div>
+            <Button disabled={loading} className="w-full mt-5 ml-auto">
+                Save Profile Changes
+            </Button>
+
         </div>
     );
 };

@@ -18,8 +18,8 @@ const MobileSidebar  = ( ) => {
          
             <Sheet >
                 <SheetTrigger>
-                    <div className="md:hidden absolute right-20 top-2" >
-                        <Menu className="w-4"/>
+                    <div className="md:hidden h-10 w-10 flex items-center justify-center z-30" >
+                        <Menu className="w-10 hover:scale-105"/>
                     </div>
                 </SheetTrigger>
                 <SheetContent  side="left" className="md:hidden p-0 w-48">

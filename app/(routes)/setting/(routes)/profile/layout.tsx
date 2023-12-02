@@ -15,9 +15,8 @@ const Layout: React.FC<LayoutProps> = async ({ children }) => {
   return (
     <div>
       {/*  <Navbar currentUser={currentUser as any}/> */}
-       
-      <EditProfilePage />
-    </div>
+       {children}
+      </div>
   );
 };
 

@@ -31,7 +31,7 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 import { platform } from "os";
-import { ExistingSocialscard } from "./existingSocialscard";
+import { ExistingSocialscard } from "./existingSocial&Labelcard";
  
 import PlatformFinder, { socialPlatforms } from "@/components/socialPlatformList";
 

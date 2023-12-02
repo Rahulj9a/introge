@@ -1,7 +1,6 @@
 import React from "react";
 import { User } from "@prisma/client";
-import { UseUser } from "@/hooks/useUser";
-import { UseUserSuggestion } from "@/hooks/useUserSuggestion";
+ import { UseUserSuggestion } from "@/hooks/useUserSuggestion";
 import Image from "next/image";
 import { UserIcon } from "lucide-react";
 
@@ -16,16 +15,16 @@ const SuggestionBox: React.FC<SuggestionBoxProps> = ({ input = "" }) => {
     error,
     refetch,
   } = UseUserSuggestion(input);
-  if (isLoading) {
+  if (isLoading && !error) {
     return (
-      <div className="w-full z-10 h-fit bg-dark text-light text-center absolute m-0 top-14 rounded-lg p-2">
+      <div className="w-full h-fit bg-dark text-light text-center absolute rounded-lg p-2">
         Loading...
       </div>
     );
   }
   if (error) {
     return (
-      <div className="w-full z-10 h-fit bg-dark text-light text-center absolute m-0 top-14 rounded-lg p-2">
+      <div className="w-full  h-fit bg-dark text-light text-center rounded-lg p-2">
         Something went wrong
       </div>
     );
@@ -34,7 +33,7 @@ const SuggestionBox: React.FC<SuggestionBoxProps> = ({ input = "" }) => {
 
   if (users.length == 0 && !isLoading && !error) {
     return (
-      <div className="w-full z-10 h-fit bg-dark text-light text-center absolute m-0 top-14 rounded-lg p-2">
+      <div className="w-full h-fit bg-dark text-light text-center rounded-lg p-2">
         No result found
       </div>
     );
@@ -42,7 +41,7 @@ const SuggestionBox: React.FC<SuggestionBoxProps> = ({ input = "" }) => {
   return (
     <>
       {
-        <div className="w-full max-h-[300px] p-2 z-10 overflow-x-hidden overflow-y-scroll bg-dark text-light absolute m-0 top-14 rounded-lg">
+        <div className=" h-fit p-2 max-h-[300px] overflow-x-hidden overflow-y-scroll bg-dark text-light rounded-lg">
           {users &&
             users
               ?.filter((e) => e.username.includes(input as string))

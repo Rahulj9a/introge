@@ -62,7 +62,7 @@ const YoutubeTemplate: React.FC<BlogTemplateProps> = ({
     }
   };
   return (
-    <div className="w-[340px] md:w-[550px] h-fit flex items-center justify-center  rounded-md sh relative shadow-[rgba(17,_17,_26,_0.1)_0px_0px_30px] shadow-black">
+    <div className="w-[300px] md:w-[500px] h-fit flex items-center justify-center  rounded-md sh relative shadow-[rgba(17,_17,_26,_0.1)_0px_0px_30px] shadow-black">
       {onDelete ? (
         <div className="rounded-md z-20 absolute -top-2 -right-2">
           <TooltipProvider>

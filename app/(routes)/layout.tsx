@@ -1,3 +1,4 @@
+import Sidebar from "@/components/headersAndFooters/mainSideBar";
 import SubNav from "@/components/headersAndFooters/mainSubNav";
 import Navbar from "@/components/headersAndFooters/navbar";
 import { serverAuth } from "@/lib/serverAuth";
@@ -12,7 +13,8 @@ const Layout: React.FC<LayoutProps> = async ({ children }) => {
 
     return (
         <>
-            <Navbar currentUser={currentUser as any} SubNav={SubNav}/>
+            <Navbar currentUser={currentUser as any} SubNav={SubNav} />
+            <div className="fixed md:hidden left-16 top-2 z-30"> <Sidebar/></div>
             <div >{children}</div>
         </>
     );

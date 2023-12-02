@@ -23,7 +23,7 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ user, sections }) => {
 
         <Sheet>
             <SheetTrigger>
-                <div className="fixed right-20 top-2 p-2 rounded-lg z-30 hover:bg-gray-200 bg-white" >
+                <div className="fixed left-4 p-2 rounded-lg z-30 hover:bg-gray-200 bg-white" >
                     <Menu className="w-4" />
                 </div>
             </SheetTrigger>

@@ -12,7 +12,7 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = async ({ children }) => {
   let { currentUser } = await serverAuth();
 
-  if(!currentUser){
+  if (!currentUser) {
     redirect("/")
   }
   return (
@@ -21,10 +21,11 @@ const Layout: React.FC<LayoutProps> = async ({ children }) => {
       <div className="hidden h-full md:flex md:w-56 md:flex-col md:fixed md:inset-y- z-[80] bg-gray-900">
         <SideBar />
       </div>
-      <div className="md:hidden absolute">
-        <MobileSidebar />
-      </div>
-      <main className="md:pl-56">{children}</main>
+      <div className="flex gap-2 fixed left-3 md:static md:pl-56 top-14 items-center py-2 z-30 bg-white w-full"> <MobileSidebar/> <h1 className="font-bold text-3xl ">Settings</h1></div>
+          
+      <main className="md:pl-56 pt-10 md:pt-0">
+        {children}
+      </main>
     </div>
   );
 };
