@@ -5,15 +5,22 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import Link from "next/link";
 import Image from "next/image";
 import { LabelList } from "@/components/templates/labelsList";
-
-const FilterBar = () => {
+ 
+interface FilterBarProps{
+    onClick:(input:string)=>void
+    selectedLabels?:string
+}
+const FilterBar:React.FC<FilterBarProps> = ({onClick, selectedLabels}) => {
   const [isMounted, setIsMounted] = useState(false);
+ 
   useEffect(() => {
     setIsMounted(true);
   }, []);
   if (!isMounted) {
     return null;
   }
+
+  
   return (
     <Sheet>
       <SheetTrigger>
@@ -23,20 +30,20 @@ const FilterBar = () => {
       </SheetTrigger>
       <SheetContent
         side="right"
-        className=" flex flex-col justify-between  bg-mid h-full w-48 "
+        className=" flex flex-col justify-between  bg-mid h-full w-48 md:w-64"
       >
-        <div className="pt-2 px-1 flex-1">
+        <div className="pt-2 px-1 flex-1 overflow-y-scroll">
           <h1 className="text-darkest text-xl py-1">Filter Result:</h1>
           <hr />
           <div>
             <h2 className="text- text-dark py-1">By Label:</h2>
             <div>
               {LabelList.map((labelGroup) => (
-                <div>
-                  <p>{labelGroup.title}</p>
-                  <div>
+                <div key={labelGroup.title}>
+                  <p className="text-bold text-sm">{labelGroup.title}</p>
+                  <div className="flex flex-wrap gap-1 ">
                     {[...labelGroup.list].map((label) => (
-                      <div>{label}</div>
+                      <div key={label} onClick={()=>onClick(label)} className={`px-3 rounded-md cursor-pointer py-2 text-xs ${selectedLabels?.split(",").includes(label)?"bg-light":"bg-white"}`}>{label}</div>
                     ))}
                   </div>
                 </div>

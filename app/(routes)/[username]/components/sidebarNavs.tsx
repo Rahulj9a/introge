@@ -9,6 +9,7 @@ import { Edit, ExternalLink, User2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Section, User } from "@prisma/client";
 import { TemplateFinder, templateList } from "@/components/templates/templateList";
+import UserAvatar from "@/components/userAvatar";
 
 interface sidebarNavsProps {
     user: User,
@@ -29,13 +30,7 @@ const SideBarNav: React.FC<sidebarNavsProps> = ({ user, sections }) => {
         }
     });
     const routes = [
-        {
-            label: user.name,
-            icon: User2,
-            href: "/setting/profile",
-            color: "text-sky-500",
-        },
-        ...sectionRoutes
+         ...sectionRoutes
 
     ];
 
@@ -47,6 +42,7 @@ const SideBarNav: React.FC<sidebarNavsProps> = ({ user, sections }) => {
             <div className="px-3 py-2 flex-1">
 
                 <div className="space-y-1">
+                    <UserAvatar username={user.username} name={user.name as string} userPic={user.profilepic as string} />
                     {routes.map((route) => (
                         <Link
                             href={route.href}

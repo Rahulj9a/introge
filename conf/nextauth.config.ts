@@ -28,6 +28,7 @@ const authOptions: NextAuthOptions = {
         });
         if (!user || !user?.hashedPassword) {
           throw new Error("Invalid credentials");
+          
         }
 
         const isCorrectPassword = await bcrypt.compare(
@@ -39,7 +40,7 @@ const authOptions: NextAuthOptions = {
         }
 
          
-          return user
+          return user 
          
       },
     }),

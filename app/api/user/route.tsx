@@ -2,15 +2,20 @@ import { NextRequest, NextResponse } from "next/server";
 
 
 export async function GET(req: NextRequest) {
-    const searchquery = req.nextUrl.searchParams.get("q")
-
+    const namequery = req.nextUrl.searchParams.get("username")||""
+    const labelsquery = req.nextUrl.searchParams.get("labels")
+    const labels = labelsquery?.split(",")||[]
     try {
 
         const user = await prisma?.user.findMany({
             where: {
-                OR: [{username: {contains: searchquery as string}},
-                    {name: {contains: searchquery as string}}
-                ]
+                username: { contains: namequery as string },
+                labels: {
+                    hasEvery: labels
+
+                        
+ 
+                }
             },
             include: {
                 socials: true
