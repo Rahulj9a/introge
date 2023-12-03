@@ -58,26 +58,19 @@ export const socialPlatforms = [
     },
 ];
 
-const PlatformFinder = ({ social }: { social: { platform: string, username:string } }) => {
-    const [isMounted, setIsMounted] = useState(false)
-    useEffect(() => {
-        setIsMounted(true)
-    }, [])
-    if (!isMounted) {
-        return null
-    }
+const PlatformFinder = ({ social }: { social: { title: string, username:string } }) => {    
     const platform = socialPlatforms.find(
-        (platform) => platform.label === social.platform
+        (platform) => platform.label === social.title
     );
+     
     return platform ? (
-        
             <TooltipProvider>
                 <Tooltip>
                     <TooltipTrigger>
                         <platform.icon className={`w-6 h-6 ${platform?.color}`} />
                     </TooltipTrigger>
                     <TooltipContent >
-                        <span className="text-xs" >{social.platform} : @{social.username}</span>
+                        <span className="text-xs" >{social.title} : @{social.username}</span>
                     </TooltipContent>
                 </Tooltip>
             </TooltipProvider >

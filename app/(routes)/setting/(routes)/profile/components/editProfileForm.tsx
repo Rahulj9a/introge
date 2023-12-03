@@ -2,8 +2,6 @@
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
 
-import { Social } from "@prisma/client";
-
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -17,16 +15,22 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { toast } from "react-hot-toast";
-
+import { User } from "@prisma/client";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import ProfileImage from "@/components/profileImage";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 
-
 import { ExsitingLabelscard } from "./existingSocial&Labelcard";
 import { LabelList } from "@/components/templates/labelsList";
+import SocialForm from "./editSocialForm";
+import {
+    Accordion,
+    AccordionContent,
+    AccordionItem,
+    AccordionTrigger,
+} from "@/components/ui/accordion";
 
 const formSchema = z.object({
     name: z.string().min(3, {
@@ -47,8 +51,6 @@ const formSchema = z.object({
 
 type ProfileFormValues = z.infer<typeof formSchema>;
 
-
-
 interface ProfileFormProps {
     className?: string;
     initialData: {
@@ -58,7 +60,7 @@ interface ProfileFormProps {
         profilepic?: string | null;
         bio: string | undefined;
         username: string;
-        socials: Social[];
+        socials: any;
         labels: string[];
     };
 }
@@ -72,8 +74,8 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
     const [loading, setloading] = useState(false);
     const [profilepic, setProfilepic] = useState(initialData?.profilepic);
     const [labels, setLabels] = useState([...initialData.labels] || []);
-
-    const form = useForm<ProfileFormValues>({
+    const [socials, setSocials] = useState(initialData?.socials || "[]");
+     const form = useForm<ProfileFormValues>({
         resolver: zodResolver(formSchema),
         defaultValues: initialData || {
             email: "",
@@ -84,15 +86,37 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
             socials: [],
         },
     });
-
+    const addSocial = (data: any) => {
+        
+        if (
+            data.title.length < 2 ||
+            data.url.length < 2 ||
+            data.username.length < 2
+        ) {
+            alert("Invalid social details");
+        } else {
+            const newSocialDetail = { ...data };
+            setSocials(
+                (prevState: { title: string; url: string; username: string }[]) =>
+                    JSON.stringify([...JSON.parse(String(prevState)), newSocialDetail])
+            );
+        }
+    };
+    const removeSocial = (index: number) => {
+        const newSocialDetail = [
+            ...JSON.parse(String(socials)).slice(0, index),
+            ...JSON.parse(String(socials)).slice(index + 1),
+        ];
+        setSocials(JSON.stringify(newSocialDetail));
+    };
     const onSubmit = async (data: ProfileFormValues) => {
-
         try {
             setloading(true);
             await axios.patch(`/api/${initialData.username}/editprofile`, {
                 ...data,
                 profilepic,
-                labels
+                labels,
+                socials,
             });
             router.refresh();
             toast.success("Profile Updated");
@@ -168,64 +192,71 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
                                     )}
                                 />
                             </div>
-
-
                         </form>
                     </Form>
                 </div>
             </div>
             <div className="w-full py-2">
                 <h3 className="font-semibold text-sm py-2">Labels</h3>
-                {labels.length > 0 ? (<div className="max-h-[100px] py-1 flex gap-2 flex-wrap w-full flex-wrap">
-                    {labels.map((label) => (
-                        <ExsitingLabelscard
-                            value={label}
-                            exist={true}
-                            disabled={loading}
-                            onClick={(value) => {
-
-                                setLabels([
-                                    ...labels.filter((label) => label !== value),
-                                ])
-
-                            }
-
-                            }
-                        />
-                    ))}
-                </div>) : null}
+                {labels.length > 0 ? (
+                    <div className="max-h-[100px] py-1 flex gap-2 w-full flex-wrap">
+                        {labels.map((label) => (
+                            <ExsitingLabelscard
+                                key={label}
+                                value={label}
+                                exist={true}
+                                disabled={loading}
+                                onClick={(value) => {
+                                    setLabels([...labels.filter((label) => label !== value)]);
+                                }}
+                            />
+                        ))}
+                    </div>
+                ) : null}
 
                 <hr />
-                {LabelList.map((labelGroup) =>
-                    <div>
-                        <h3 className="text-xs text-semibold ">{labelGroup.title}</h3>
-                        <div className="flex flex-wrap max-h-[200px] overflow-y-scroll gap-1 py-1">
-                            {[...labelGroup.list].filter(label => ![...labels].includes(label)).map((label) => (
-                                <ExsitingLabelscard
-                                    value={label}
-                                    exist={false}
-                                    disabled={loading}
-                                    onClick={(value) => {
-                                        setLabels([
-                                            ...labels, value
-                                        ]);
+                {LabelList.map((labelGroup) => (
+                    <div key={labelGroup.title}>
+                        <Accordion type="single" collapsible className="w-full overflow-y-scroll">
+                            <AccordionItem value="item-1">
+                                <AccordionTrigger>
+                                    <h3>{labelGroup.title} Labels</h3>
+                                </AccordionTrigger>
+                                <AccordionContent>
+                                    <div className="flex flex-wrap max-h-[200px]  gap-1 py-1">
+                                        {[...labelGroup.list]
+                                            .filter((label) => ![...labels].includes(label))
+                                            .map((label) => (
+                                                <ExsitingLabelscard
+                                                    key={label}
+                                                    value={label}
+                                                    exist={false}
+                                                    disabled={loading}
+                                                    onClick={(value) => {
+                                                        setLabels([...labels, value]);
+                                                    }}
+                                                />
+                                            ))}
+                                    </div>
 
-                                    }
-                                    }
-                                />
-                            ))
-                            }
-                        </div>
+                                </AccordionContent>
+                            </AccordionItem>
+                        </Accordion>
                     </div>
-
-                )}
-
-
+                ))}
             </div>
-            <Button disabled={loading} className="w-full mt-5 ml-auto">
+            <SocialForm
+                initialData={[...JSON.parse(String(socials))]}
+                removeSocial={removeSocial}
+                addSocial={addSocial}
+            />
+            <Button
+                onClick={form.handleSubmit(onSubmit)}
+                disabled={loading}
+                className="w-full mt-5 ml-auto"
+            >
                 Save Profile Changes
             </Button>
-
         </div>
     );
 };

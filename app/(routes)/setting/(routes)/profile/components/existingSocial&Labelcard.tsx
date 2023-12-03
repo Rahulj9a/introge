@@ -8,13 +8,12 @@ import Link from 'next/link'
 
 interface ExistingSocialscardProps {
     social: {
-        id: string,
-        platform: string,
+        title: string,
         username: string | null,
         url: string
     },
     platformIcon: React.ReactNode,
-    onDelete: (id: string) => void
+    onDelete: () => void
 }
 interface ExsitingLabelscardprops {
     value: string,
@@ -32,7 +31,8 @@ export const ExistingSocialscard: React.FC<ExistingSocialscardProps> = ({ social
         return null
     }
     return (
-        <Link className="flex gap-4 items-center justify-around" href={social.url} target='_blank'>
+        <div className='flex items-center justify-center px-3'>
+        <Link className="flex items-center justify-around flex-1 " href={social.url} target='_blank'>
 
             {platformIcon}
 
@@ -49,27 +49,29 @@ export const ExistingSocialscard: React.FC<ExistingSocialscardProps> = ({ social
                     </Tooltip>
                 </TooltipProvider>
             </div>
-            <div className="md:col-span-1  flex items-center justify-center">
+        </Link>
+        <div className="md:col-span-1  flex items-center justify-center">
                 <TooltipProvider>
                     <Tooltip>
                         <TooltipTrigger>
-                            <Button
-                                type="button"
-                                className="rounded-full h-8 w-8 my-2 "
-                                size="icon"
-                                variant="destructive"
-                                onClick={() => onDelete(social.id)}
+                            <div
+                                
+                                className="rounded-full h-8 w-8 my-2 bg-red-600 hover:bg-red-400 flex items-center justify-center text-white"
+                                
+                                
+                                onClick={onDelete}
                             >
-                                <Unlink className="h-3 w-3" />
-                            </Button>
+                                <Unlink className="h-4 w-4" />
+                            </div>
                         </TooltipTrigger>
                         <TooltipContent>
-                            <p>Unlink {social.platform}</p>
+                            <p>Unlink {social.title}</p>
                         </TooltipContent>
                     </Tooltip>
                 </TooltipProvider>
             </div>
-        </Link>
+
+        </div>
     )
 }
 

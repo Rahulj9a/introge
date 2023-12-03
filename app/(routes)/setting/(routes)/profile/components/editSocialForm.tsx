@@ -1,26 +1,20 @@
 "use client";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
-
-import { Social} from "@prisma/client";
-
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
- 
+
 import {
     Form,
     FormControl,
     FormField,
     FormItem,
-    
+
     FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { toast } from "react-hot-toast";
-
-import axios from "axios";
-import {   useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 
 import {
@@ -30,18 +24,17 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
-import { platform } from "os";
-import { ExistingSocialscard } from "./existingSocial&Labelcard";
- 
+ import { ExistingSocialscard } from "./existingSocial&Labelcard";
+
 import PlatformFinder, { socialPlatforms } from "@/components/socialPlatformList";
 
 
 const formSchema = z.object({
-    userId: z.string(),
-    platform: z.string().min(1, {
+
+    title: z.string().min(1, {
         message: "Platform name should not be less that 1 letter",
     }),
-    platformUsername: z.string().min(2, {
+    username: z.string().min(2, {
         message: "Username should have more than 2 letters",
     }),
     url: z
@@ -53,58 +46,37 @@ type ProfileFormValues = z.infer<typeof formSchema>;
 
 interface ProfileFormProps {
     className?: string;
-    initialData?: Social[];
-    userid: string;
-    username: string;
+    initialData?: { title: string, url: string, username: string }[];
+    addSocial: (form: any) => void
+    removeSocial: (index: number) => void
+    loading?: boolean
 }
 
 const SocialForm: React.FC<ProfileFormProps> = ({
     className,
     initialData,
-    userid,
-    username,
+    addSocial,
+    removeSocial,
+    loading = false
 }) => {
-    const router = useRouter();
 
-    const [loading, setloading] = useState(false);
 
     const form = useForm<ProfileFormValues>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            userId: userid,
-            platform: "",
-            platformUsername: "",
+            title: "",
+            username: "",
             url: "",
         },
     });
-     
 
-    const onSubmit = async (data: ProfileFormValues) => {
-        console.log(data);
-        try {
-            setloading(true);
-            await axios.post(`/api/${username}/editsocials`, data);
-            form.reset();
-            router.refresh();
-            toast.success("Social Updated");
-        } catch (error: any) {
-            toast.error("Something went wrong");
-        } finally {
-            setloading(false);
-        }
-    };
-    const onDelete = async (id: string) => {
-        try {
-            setloading(true);
-            await axios.delete(`/api/${username}/editsocials/${id}`);
-            router.refresh();
-            toast.success(`Social unlinked`);
-        } catch (error) {
-            toast.error("Something went wrong");
-        } finally {
-            setloading(false);
-        }
-    };
+    const handleSubmit  = async(data:ProfileFormValues) => {
+         
+        addSocial(data)
+        form.reset()
+    }
+
+
 
     return (
         <div className={cn("w-full p-1", className)}>
@@ -113,9 +85,9 @@ const SocialForm: React.FC<ProfileFormProps> = ({
             {initialData && initialData?.length > 0 ? (
                 <div className=" py-4 grid grid-cols-1 md:grid-cols-2 gap-2 lg:gird-cols-3 xl:grid-cols-4">
 
-                    {initialData.map((social) => (
+                    {initialData.map((social, index: number) => (
                         <div className="rounded-full border-[1px] grid " key={social.url}>
-                            <ExistingSocialscard onDelete={(id)=>onDelete(id)} social={social} platformIcon={PlatformFinder({social} as any)}/>
+                            <ExistingSocialscard onDelete={() => removeSocial(index)} social={social} platformIcon={PlatformFinder({ social } as any)} />
                         </div>
                     ))}
                 </div>
@@ -123,13 +95,13 @@ const SocialForm: React.FC<ProfileFormProps> = ({
 
             <Form  {...form}>
                 <form
-                    onSubmit={form.handleSubmit(onSubmit)}
+                    onSubmit={form.handleSubmit(handleSubmit)}
                     className="space-y-8 w-full py-2"
                 >
                     <div className="w-full p-2 md:flex-row flex-col flex gap-4 md:gap-6 items-center md:border-none border-[1px]">
                         <FormField
                             control={form.control}
-                            name="platform"
+                            name="title"
                             render={({ field }) => (
                                 <FormItem className="w-full">
                                     <Select
@@ -146,7 +118,7 @@ const SocialForm: React.FC<ProfileFormProps> = ({
                                                 />
                                             </SelectTrigger>
                                         </FormControl>
-                                        <SelectContent style={{}}  className="max-h-[250px] overflow-y-scroll">
+                                        <SelectContent style={{}} className="max-h-[250px] overflow-y-scroll">
                                             {socialPlatforms.map((platform) => (
                                                 <SelectItem
                                                     key={platform.label}
@@ -170,7 +142,7 @@ const SocialForm: React.FC<ProfileFormProps> = ({
 
                         <FormField
                             control={form.control}
-                            name="platformUsername"
+                            name="username"
                             render={({ field }) => (
                                 <FormItem className="w-full">
                                     <FormControl>
@@ -193,7 +165,7 @@ const SocialForm: React.FC<ProfileFormProps> = ({
                                     <FormControl>
                                         <Input
                                             disabled={loading}
-                                            placeholder="https://twitter.com/username"
+                                            placeholder="e.g- https://twitter.com/username"
                                             {...field}
                                         />
                                     </FormControl>
@@ -201,10 +173,11 @@ const SocialForm: React.FC<ProfileFormProps> = ({
                                 </FormItem>
                             )}
                         />
+                        <Button type="submit" disabled={loading} className="ml-auto">
+                            Add
+                        </Button>
                     </div>
-                    <Button disabled={loading} className="ml-auto" type="submit">
-                        Save Social Changes
-                    </Button>
+
                 </form>
             </Form>
         </div>

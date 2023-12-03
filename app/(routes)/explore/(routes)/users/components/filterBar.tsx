@@ -5,14 +5,20 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import Link from "next/link";
 import Image from "next/image";
 import { LabelList } from "@/components/templates/labelsList";
- 
-interface FilterBarProps{
-    onClick:(input:string)=>void
-    selectedLabels?:string
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+
+interface FilterBarProps {
+  onClick: (input: string) => void;
+  selectedLabels?: string[];
 }
-const FilterBar:React.FC<FilterBarProps> = ({onClick, selectedLabels}) => {
+const FilterBar: React.FC<FilterBarProps> = ({  onClick, selectedLabels }) => {
   const [isMounted, setIsMounted] = useState(false);
- 
+
   useEffect(() => {
     setIsMounted(true);
   }, []);
@@ -20,12 +26,11 @@ const FilterBar:React.FC<FilterBarProps> = ({onClick, selectedLabels}) => {
     return null;
   }
 
-  
   return (
     <Sheet>
       <SheetTrigger>
-        <div className=" hover:bg-mid bg-light rounded-md h-10 w-10 flex items-center justify-center z-30 ">
-          <Filter className="w-10" />
+        <div className=" hover:bg-mid text-darkest  bg-light rounded-md h-10 w-fit px-2 flex items-center justify-center z-30 ">
+          <Filter className="w-6" /> <p>Filter</p>
         </div>
       </SheetTrigger>
       <SheetContent
@@ -39,14 +44,31 @@ const FilterBar:React.FC<FilterBarProps> = ({onClick, selectedLabels}) => {
             <h2 className="text- text-dark py-1">By Label:</h2>
             <div>
               {LabelList.map((labelGroup) => (
-                <div key={labelGroup.title}>
-                  <p className="text-bold text-sm">{labelGroup.title}</p>
-                  <div className="flex flex-wrap gap-1 ">
-                    {[...labelGroup.list].map((label) => (
-                      <div key={label} onClick={()=>onClick(label)} className={`px-3 rounded-md cursor-pointer py-2 text-xs ${selectedLabels?.split(",").includes(label)?"bg-light":"bg-white"}`}>{label}</div>
-                    ))}
-                  </div>
-                </div>
+                <Accordion type="single" collapsible key={labelGroup.title}>
+                  <AccordionItem value="item-1">
+                    <AccordionTrigger>
+                        <p>{labelGroup.title}</p>
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      {" "}
+                      <div className="flex flex-wrap gap-1 ">
+                        {[...labelGroup.list].map((label) => (
+                          <div
+                            key={label}
+                           onClick={() => onClick(label)}
+                          className={`px-3 rounded-md cursor-pointer py-2 text-xs ${
+                              selectedLabels?.includes(label)
+                                ? "bg-light"
+                                : "bg-white"
+                            }`}
+                          >
+                            {label}
+                          </div>
+                        ))}
+                      </div>
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
               ))}
             </div>
           </div>

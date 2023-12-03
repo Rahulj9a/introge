@@ -20,9 +20,6 @@ const EditProfilePage: React.FC<EditProfilePageProps> =  async( ) => {
   let user = await prisma?.user.findUnique({
     where:{
       id:currentUser.id
-    },
-    include:{
-      socials:true
     }
   })
 
@@ -34,8 +31,8 @@ const EditProfilePage: React.FC<EditProfilePageProps> =  async( ) => {
       <div className='flex flex-col items-center justify-start '>
          
          <ProfileForm   initialData={user as any}/>
-         <SocialForm userid={currentUser.id as string} username={currentUser.username as string} initialData={user?.socials as []}/>
-      </div>
+{/*          <SocialForm userid={currentUser.id as string} username={currentUser.username as string} initialData={user?.socials as []}/>
+ */}      </div>
     </div>
   )
 }

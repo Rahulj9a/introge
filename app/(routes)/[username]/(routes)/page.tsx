@@ -21,8 +21,7 @@ const ProfilePage: React.FC<ProfilePageProps> = async ({ params }) => {
       username: params.username,
     },
     include: {
-      socials: true,
-      sections: true,
+       sections: true,
     },
   });
   if (!user) {
@@ -81,8 +80,8 @@ const ProfilePage: React.FC<ProfilePageProps> = async ({ params }) => {
 
           <div className="my-3 px-3 md:px-6">
             <div className="  max-w-full gap-3 md:gap-7 flex flex-wrap items-center justify-center">
-              {user.socials.length > 0
-                ? user.socials.map((social) => (
+              {user.socials
+                ? [...JSON.parse(String(user.socials))].map((social) => (
                   <Link
                     href={social.url}
                     target="_blank"

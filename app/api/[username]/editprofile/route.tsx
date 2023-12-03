@@ -9,7 +9,7 @@ export async function PATCH(req:Request, {params}:{params:{ username:string }}){
             return new NextResponse("Unauthenticated", {status:401})
         }
         const body = await req.json()
-        const {profilepic, name, bio, labels} = await body
+        const {profilepic, name, bio, labels, socials} = await body
         
         const username = params.username
         if(!username){
@@ -24,7 +24,7 @@ export async function PATCH(req:Request, {params}:{params:{ username:string }}){
                 username
             },
             data:{
-                name, bio, profilepic,labels
+                name, bio, profilepic,labels,socials
             }
         })
 

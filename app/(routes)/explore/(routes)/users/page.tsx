@@ -1,9 +1,10 @@
 
-import React, { useState } from "react";
+import React from "react";
 import SearchForm from "./components/searchForm";
 import ResultList from "./components/resultList";
 import { serverAuth } from "@/lib/serverAuth";
 import RecommendList from "./components/recommendItemList";
+import FilterBar from "./components/filterBar";
 
 const Page = async () => {
     const { currentUser } = await serverAuth()
@@ -11,7 +12,7 @@ const Page = async () => {
     return (
         <div className="mx-4 md:mx-8 flex min-h-screen py-2 max-h-fit">
             <div className="flex flex-col flex-1 gap-4">
-                <SearchForm />
+                <div className="flex gap-2"><SearchForm /></div>
                 <ResultList/>
                 {currentUser &&
                     (
