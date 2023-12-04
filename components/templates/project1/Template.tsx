@@ -102,10 +102,10 @@ const Project1Template: React.FC<Project1TemplateProps> = ({
                         <h1 className="text-lg font-semibold flex items-center justify-between">{data.name} <span className="text-xs text-dark">{data.labels?.split(",")[0]}</span></h1>
                         <div className="flex text-xs gap-1 flex-wrap">
                             {data.labels
-                                ?.split(",")
+                                ?.split(/\s*,\s*/)
                                 .map((e, index) =>
                                     index > 0 && index < 5 ? (
-                                        <div className="py-1 px-2 rounded-md bg-black text-white">
+                                        <div key={index} className="py-1 px-2 rounded-md bg-black text-white">
                                             {e}
                                         </div>
                                     ) : null

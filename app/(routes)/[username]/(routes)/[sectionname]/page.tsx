@@ -12,11 +12,7 @@ const SectionPage: React.FC<SectionPageProps> = async ({ params }) => {
     where: {
       username: params.username,
     },
-    include: {
-      socials: true,
-      sections: true,
-    },
-  });
+   });
   if (!user) {
     return <div>User can't be found</div>;
   }

@@ -42,7 +42,7 @@ const SideBarNav: React.FC<sidebarNavsProps> = ({ user, sections }) => {
             <div className="px-3 py-2 flex-1">
 
                 <div className="space-y-1">
-                    <UserAvatar username={user.username} name={user.name as string} userPic={user.profilepic as string} />
+                    <Link href={`/${user.username}`}><UserAvatar username={user.username} name={user.name as string} userPic={user.profilepic as string} /></Link>
                     {routes.map((route) => (
                         <Link
                             href={route.href}

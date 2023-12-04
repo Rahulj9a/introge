@@ -99,7 +99,7 @@ const BlogTemplate: React.FC<BlogTemplateProps> = ({
                         <p className="text-sm ">{data.about}</p>
                         <div className="flex text-xs gap-1 flex-wrap">
                             {data.labels
-                                ?.split(",")
+                                ?.split(/\s*,\s*/)
                                 .map((e, index) =>
                                     index < 3 ? (
                                         <div key={index} className="py-1 px-2 rounded-md bg-black text-white">

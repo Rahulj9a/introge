@@ -4,34 +4,27 @@ import React from "react";
  import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Edit, LayoutList } from "lucide-react";
+import { Frame, LayoutList, User } from "lucide-react";
 import { cn } from "@/lib/utils";
-
 const SideBar = () => {
     const routes = [
         {
             label: "Users",
-            icon: Edit,
+            icon: User,
             href: "/explore/users",
-            color: "text-sky-500",
+            color: "text-dark",
         },
         {
             label: "Sections",
             icon: LayoutList,
             href: "/explore/sections",
-            color: "text-sky-500",
+            color: "text-dark",
         },
         {
-            label: "Items",
-            icon: LayoutList,
-            href: "/explore/items",
-            color: "text-sky-500",
-        },
-        {
-            label: "Available Templates",
-            icon: LayoutList,
+            label: "Templates",
+            icon: Frame,
             href: "/explore/templates",
-            color: "text-sky-500",
+            color: "text-dark",
         },
 
 
