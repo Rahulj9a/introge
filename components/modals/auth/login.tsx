@@ -38,7 +38,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ refetch }) => {
   const onSubmit = async () => {
     try {
        const user = await signIn('google');
-      console.log("hello", user)
+    
 
 
 

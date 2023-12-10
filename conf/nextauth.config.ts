@@ -16,7 +16,7 @@ const authOptions: NextAuthOptions = {
     },
     //@ts-ignore
     async signIn({ profile }) {
-      console.log(profile);
+      
       try {
         const usersNumber = await prisma.user.count();
         const userExist = await prisma.user.findUnique({
