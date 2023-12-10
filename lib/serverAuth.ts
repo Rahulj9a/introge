@@ -11,7 +11,7 @@ import { authOptions } from "@/conf/nextauth.config";
 
 export async function serverAuth() {
   const session = await getServerSession(authOptions);
- console.log(session, 'session')
+ 
  
   if (!session?.user?.email) {
     return {currentUser:null}
