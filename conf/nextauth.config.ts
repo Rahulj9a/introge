@@ -1,51 +1,45 @@
 import { NextAuthOptions } from "next-auth";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
 import prisma from "@/lib/prismadb";
-import bcrypt from "bcrypt";
-import { Session } from "inspector";
-import { NextResponse } from "next/server";
 
 const authOptions: NextAuthOptions = {
-  adapter: PrismaAdapter(prisma),
   providers: [
-    CredentialsProvider({
-      name: "credentials",
-      credentials: {
-        username: { label: "username", type: "text" },
-        password: { label: "password", type: "password" },
-      },
-
-      async authorize(credentials) {
-        if (!credentials?.username || !credentials?.password) {
-          throw new Error("Invalid credentials");
-        }
-
-        const user = await prisma.user.findUnique({
-          where: {
-            username: credentials.username,
-          },
-        });
-        if (!user || !user?.hashedPassword) {
-          throw new Error("Invalid credentials");
-          
-        }
-
-        const isCorrectPassword = await bcrypt.compare(
-          credentials.password,
-          user.hashedPassword
-        );
-        if (!isCorrectPassword) {
-          throw new Error("Invlaid credentials");
-        }
-
-         
-          return user 
-         
-      },
+    GoogleProvider({
+      clientId: process.env.GOOGLE_ID as string,
+      clientSecret: process.env.GOOGLE_SECRET as string,
     }),
   ],
-
+  callbacks: {
+    async session({ session }) {
+      return session;
+    },
+    //@ts-ignore
+    async signIn({ profile }) {
+      console.log(profile);
+      try {
+        const usersNumber = await prisma.user.count();
+        const userExist = await prisma.user.findUnique({
+          where: {
+            email: profile?.email,
+          },
+        });
+        if (!userExist) {
+          const user = await prisma.user.create({
+            data: {
+              email: profile?.email as string,
+              username: `${profile?.name}${usersNumber + 1}`,
+              name: profile?.name,
+            },
+          });
+        }
+        return true;
+      } catch (error) {
+        console.log(error);
+        return false
+      }
+    },
+  },
   debug: process.env.NODE_ENV === "development",
   session: {
     strategy: "jwt",
