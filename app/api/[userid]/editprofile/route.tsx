@@ -2,29 +2,28 @@ import { serverAuth } from "@/lib/serverAuth";
 import  prisma from "@/lib/prismadb";
 import { NextResponse } from "next/server";
 
-export async function PATCH(req:Request, {params}:{params:{ username:string }}){
+export async function PATCH(req:Request, {params}:{params:{ userid:string }}){
     try{
         const {currentUser} = await serverAuth()
         if(!currentUser){
             return new NextResponse("Unauthenticated", {status:401})
         }
         const body = await req.json()
-        const {profilepic, name, bio, labels, socials} = await body
+        const {profilepic, name, bio, labels, socials, username} = await body
         
-        const username = params.username
-        if(!username){
+         if(!params.userid){
             return new NextResponse("Username is required")
         }
-        if(currentUser.username!== username){
+        if(currentUser.id!== params.userid){
             return new NextResponse("Permission not granted",{status:401})
         }
         const user = await prisma.user.update({
             where:{
                 id:currentUser.id,
-                username
+                 
             },
             data:{
-                name, bio, profilepic,labels,socials
+                name, bio, profilepic,labels,socials, username
             }
         })
 

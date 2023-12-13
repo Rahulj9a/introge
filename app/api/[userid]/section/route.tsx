@@ -2,12 +2,12 @@ import { serverAuth } from "@/lib/serverAuth";
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prismadb";
 
-export async function POST(req: Request, { params }: { params: { username: string } }) {
+export async function POST(req: Request, { params }: { params: { userid: string } }) {
     const { currentUser } = await serverAuth()
     if (!currentUser) {
         return new NextResponse("Unauthenticated", { status: 400 });
     }
-    if (currentUser.username !== params.username) {
+    if (currentUser.id !== params.userid) {
         return new NextResponse("Unauthenticated", { status: 400 });
     }
 

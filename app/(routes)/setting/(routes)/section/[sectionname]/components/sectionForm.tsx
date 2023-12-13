@@ -75,9 +75,9 @@ const SectionForm: React.FC<SectionFormProps> = ({ initialData, currentUser }) =
             setLoading(true)
             if (initialData) {
                 console.log(data)
-                await axios.patch(`/api/${currentUser.username}/section/${initialData.id}`, data)
+                await axios.patch(`/api/${currentUser.id}/section/${initialData.id}`, data)
             } else {
-                await axios.post(`/api/${currentUser.username}/section`, data)
+                await axios.post(`/api/${currentUser.id}/section`, data)
             }
             router.refresh()
             router.push(`/setting/section`)

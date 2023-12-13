@@ -50,7 +50,7 @@ const Skill1Template: React.FC<Skill1TemplateProps> = ({
         return null
     }
     return (
-        <div className="w-[170px] min-h-fit max-h-full flex flex-col items-center rounded-md sh relative shadow-[rgba(17,_17,_26,_0.1)_0px_0px_30px] shadow-black">
+        <div className="w-[100px] md:w-[170px] min-h-fit max-h-full flex flex-col items-center rounded-md sh relative shadow-[rgba(17,_17,_26,_0.1)_0px_0px_30px] shadow-black">
             {onDelete ? (
                 <div className="rounded-md z-20 absolute flex gap-1 -top-2 -right-2">
                     <TooltipProvider>
@@ -81,22 +81,22 @@ const Skill1Template: React.FC<Skill1TemplateProps> = ({
                 </div>
             ) : null}
             <Link href={data.url as string} target="_blank"  >
-                <div className="w-full p-2 items-center flex flex-col gap-2">
+                <div className="w-full p-2 items-center justify-center flex flex-col gap-2">
                     {/* Priority for showing Image--> ImageURL -> URL fetched image -> Text */}
-                    <div className="w-20 h-20 rounded-full">
+                    <div className="w-10 h-10 md:w-20 md:h-20 rounded-full">
                         {data.imageURL ? (
                             <img src={data.imageURL} className="rounded-lg" />
                         ) : previewdata && previewdata.image ? (
                             <img src={previewdata?.image} className="rounded-lg" />
                         ) : (
-                            <div className="w-20 h-20 bg-black text-xs text-white text-center flex items-center justify-center rounded-full">
+                            <div className="w-full h-full bg-black text-[8px] md:text-xs text-white text-center flex items-center justify-center rounded-full">
                                 {data.name}
                             </div>
                         )}
                     </div>
                     <div className="flex flex-col gap-2 items-center justify-around flex-1">
-                        <h1 className="text-lg font-semibold">{data.name}</h1>
-                        <p className="text-xs ">{data.about}</p>
+                        <h1 className="md:text-lg  font-semibold">{data.name}</h1>
+                        <p className="text-[8px] md:text-xs ">{data.about}</p>
                      </div>
                 </div>
             </Link>

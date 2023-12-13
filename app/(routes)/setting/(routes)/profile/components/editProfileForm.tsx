@@ -33,6 +33,11 @@ import {
 } from "@/components/ui/accordion";
 
 const formSchema = z.object({
+    username:z.string().min(4,{
+        message:"Username can't be less than 4 letters"
+    }).regex(/^[a-zA-Z0-9\-._&!+()]+$/, {
+        message: "Only letters, numbers and `-` `.` `_` `&` `!` `+` `(` `)` are allowed"
+    }),
     name: z.string().min(3, {
         message: "Name should have more than 3 letters",
     }),
@@ -45,7 +50,7 @@ const formSchema = z.object({
         .max(300, {
             message: "Bio should not be more that 300 letters",
         }),
-    username: z.string(),
+  
     email: z.string(),
 });
 
@@ -112,7 +117,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
     const onSubmit = async (data: ProfileFormValues) => {
         try {
             setloading(true);
-            await axios.patch(`/api/${initialData.username}/editprofile`, {
+            await axios.patch(`/api/${initialData.id}/editprofile`, {
                 ...data,
                 profilepic,
                 labels,
@@ -143,7 +148,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
                         </div>
                         <div className="flex flex-col items-center justify-center gap-y-2 py-2 font-semibold text-lg text-gray-600">
                             <p className="py-2">{initialData.email}</p>
-                            <p className="py-2">@{initialData.username}</p>
+                           
                         </div>
                     </div>
                 </div>
@@ -155,6 +160,24 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
                             className="space-y-8 w-full"
                         >
                             <div className="w-full px-2 flex flex-col gap-6 items-center ">
+                            <FormField
+                                    control={form.control}
+                                    name="username"
+                                    render={({ field }) => (
+                                        <FormItem className="w-full">
+                                            <FormLabel>Username</FormLabel>
+                                            <FormControl>
+                                                <Input
+                                                    disabled={loading}
+                                                    placeholder="Your Username"
+                                                    {...field}
+                                                />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+
                                 <FormField
                                     control={form.control}
                                     name="name"

@@ -2,12 +2,12 @@ import prisma from "@/lib/prismadb"
 import { serverAuth } from "@/lib/serverAuth";
 import { NextResponse } from "next/server";
 
-export async function DELETE(req: Request, { params }: { params: { username: string, sectionId: string, itemId:string } }) {
+export async function DELETE(req: Request, { params }: { params: { userid: string, sectionId: string, itemId:string } }) {
     const { currentUser } = await serverAuth()
     if (!currentUser) {
         return new NextResponse("Unauthenticated", { status: 400 });
     }
-    if (currentUser.username !== params.username) {
+    if (currentUser.id !== params.userid) {
         return new NextResponse("Unauthenticated", { status: 400 });
     }
      
@@ -26,14 +26,14 @@ export async function DELETE(req: Request, { params }: { params: { username: str
         return new NextResponse("Internal Error", { status: 500 })
     }
 }
-export async function PATCH(req: Request, { params }: { params: { username: string, sectionId: string, itemId:string } }) {
+export async function PATCH(req: Request, { params }: { params: { userid: string, sectionId: string, itemId:string } }) {
     const { currentUser } = await serverAuth()
     const data= await req.json()
     const {name, imageURL, url, labels, about } = data
     if (!currentUser) {
         return new NextResponse("Unauthenticated", { status: 400 });
     }
-    if (currentUser.username !== params.username) {
+    if (currentUser.id !== params.userid) {
         return new NextResponse("Unauthenticated", { status: 400 });
     }
      

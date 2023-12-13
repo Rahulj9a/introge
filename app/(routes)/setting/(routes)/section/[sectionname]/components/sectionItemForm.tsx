@@ -1,16 +1,15 @@
 "use client";
 import * as z from "zod";
 
-import { Section, SectionItem, User } from "@prisma/client";
-import React, { useRef, useState } from "react";
+import { SectionItem, User } from "@prisma/client";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
 import { templateList } from "@/components/templates/templateList";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { Plus, PlusCircle } from "lucide-react";
+ import { Button } from "@/components/ui/button";
+import { Plus } from "lucide-react";
 import Modal from "@/components/ui/modal";
 
 interface SectionFormProps {
@@ -27,12 +26,11 @@ const SectionItemForm: React.FC<SectionFormProps> = ({
   sectionId,
 }) => {
   const router = useRouter();
-  const DialogRef = useRef(null)
-  const [loading, setLoading] = useState(false);
+   const [loading, setLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false)
   //if temlate set to edit it will record the id and replace template with Form
   const [initialDataId, setInitialDataId] = useState("");
-  const username = currentUser.username;
+  const userid = currentUser.id;
 
   const toastMessage =
     initialDataId.length > 0 ? "Item Updated" : "Item Created";
@@ -45,12 +43,12 @@ const SectionItemForm: React.FC<SectionFormProps> = ({
       setLoading(true);
       if (initialDataId.length > 1) {
         await axios.patch(
-          `/api/${username}/section/${sectionId}/sectionItem/${initialDataId}`,
+          `/api/${userid}/section/${sectionId}/sectionItem/${initialDataId}`,
           data
         );
       } else {
         await axios.post(
-          `/api/${username}/section/${sectionId}/sectionItem`,
+          `/api/${userid}/section/${sectionId}/sectionItem`,
           data
         );
       }
@@ -74,7 +72,7 @@ const SectionItemForm: React.FC<SectionFormProps> = ({
         setLoading(true);
 
         await axios.delete(
-          `/api/${username}/section/${sectionId}/sectionItem/${itemId}`
+          `/api/${userid}/section/${sectionId}/sectionItem/${itemId}`
         );
         /*} */
         router.refresh();

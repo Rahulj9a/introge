@@ -1,6 +1,6 @@
 "use client"
 import { cn } from '@/lib/utils';
-import { Rocket } from 'lucide-react';
+import { Home, Rocket } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React from 'react'
@@ -9,6 +9,13 @@ import { MdPersonSearch } from "react-icons/md";
 
 const SubNav = () => {
     const routes = [
+        {
+            label: "Home",
+            icon: Home,
+            href: "/",
+            color: "text-sky-500",
+        },
+
         {
             label: "Explore",
             icon: MdPersonSearch,
@@ -28,7 +35,7 @@ const SubNav = () => {
         <div className='flex flex-col gap-4 '>
             <div className="px-3 py-1 flex-1">
 
-                <div className=" items-center justify-center flex-col md:flex-row flex flex-1">
+                <div className=" items-center justify-center flex-col md:flex-row gap-2 flex flex-1">
                     {routes.map((route) => (
                         <Link
                             href={route.href}
