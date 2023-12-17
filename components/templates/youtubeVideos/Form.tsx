@@ -49,7 +49,7 @@ const YoutubeForm: React.FC<YoutubeFormProps> = ({
     initialData,
     disabled,
 }) => {
-    const action = initialData ? "Save Changes" : "Add Video";
+    const action = initialData ? "Save Changes" : "Add Youtube video";
     const form = useForm<YoutubeFormValues>({
         resolver: zodResolver(formSchema),
 

@@ -14,7 +14,7 @@ const layout: React.FC<LayoutProps> = async({ children }) => {
      
      
     return (
-        <div className='pt-14'>
+        <div className='box-decoration-clone bg-gradient-to-b from-light to-dark h-fit pt-14 bg-light w-full min-h-screen max-h-fit '>
              {children}
         </div>
     )

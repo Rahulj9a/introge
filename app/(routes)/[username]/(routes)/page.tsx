@@ -24,10 +24,7 @@ const ProfilePage: React.FC<ProfilePageProps> = async ({ params }) => {
        sections: true,
     },
   });
-  if (!user) {
-    return <div>User can't be found</div>;
-  }
-
+  if(user)
   return (
     <div className="w-full h-fit ">
       <div className=" md:grid md:grid-cols-3 flex flex-col min-w-full max-h-fit pb-5 md:h-screen min-h-[90vh] w-fit pt-16">

@@ -33,6 +33,7 @@ const Page = async () => {
           *Last updated         
           </p>
       </div>*/}      
+      <p className="text-dark">Edit or Add new Section</p>
        <Sectioncard />
       {sections
         ? sections.map((section) => (

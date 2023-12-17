@@ -3,6 +3,8 @@ import { serverAuth } from "@/lib/serverAuth";
 import React from "react";
 import prisma from "@/lib/prismadb"
  import ProfileSidebar from "./components/sidebar";
+import Error from "next/error";
+import { Button } from "@/components/ui/button";
 
 interface LayoutProps {
     children: React.ReactNode;
@@ -20,12 +22,12 @@ const layout: React.FC<LayoutProps> = async ({ children, params }) => {
         }
 
     })
-    if (!user) {
-        return (
-            <div className="w-full h-full flex items-center justify-center">
-                User can't be found
+
+    if(!user){
+        return <div className="w-full h-full flex items-center justify-center pt-20 text-dark">
+            <p>404 | Page can't be found</p>
+            <a href="/" className="px-4 py-2 rounded-md bg-darkest text-mid">GO HOME</a>
             </div>
-        )
     }
     return (
         <div>

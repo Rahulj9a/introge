@@ -56,7 +56,7 @@ const BlogForm: React.FC<BlogFormProps> = ({
   initialData,
   disabled,
 }) => {
-  const action = initialData ? "Save Changes" : "Add Blog";
+  const action = initialData ? "Save Changes" : "Add Item";
   const form = useForm<BlogFormValues>({
     resolver: zodResolver(formSchema),
 

@@ -25,8 +25,8 @@ const SectionLayout: React.FC<SectionLayoutProps> = async ({
   const sectionname = params.sectionname;
   if (sectionname === "new") {
     return (
-      <div className="p-10">
-        <h1 className="font-semibold text-4xl mb-3">Build a new section</h1>
+      <div className="p-5">
+        <h1 className="font-semibold text-xl md:text-2xl lg:text-4xl mb-3 ">Build a new section</h1>
 
         <SectionForm currentUser={currentUser} />
       </div>
@@ -47,7 +47,7 @@ const SectionLayout: React.FC<SectionLayoutProps> = async ({
   }
 
   return (
-    <div className="py-10 px-5">
+    <div className="p-5">
       <h1 className="font-semibold text-2xl mb-3">Edit {section?.name} Section</h1>
       <SectionForm initialData={section as any} currentUser={currentUser} />
       <SectionItemForm sectionId={section.id} currentUser={currentUser} sectionTemplate={section.template} sectionItems={section.SectionItems} />
@@ -56,3 +56,4 @@ const SectionLayout: React.FC<SectionLayoutProps> = async ({
 };
 
 export default SectionLayout;
+

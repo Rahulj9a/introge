@@ -10,10 +10,10 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = async ({ children }) => {
     let { currentUser } = await serverAuth();
-
+    
     return (
         <>
-            <Navbar currentUser={currentUser as any} SubNav={SubNav} />
+            <Navbar currentUser={currentUser ? currentUser as any : null} SubNav={SubNav} />
             <div className="fixed md:hidden left-16 top-2 z-30"> <Sidebar/></div>
             <div >{children}</div>
         </>

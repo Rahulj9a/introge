@@ -93,8 +93,8 @@ const SectionItemForm: React.FC<SectionFormProps> = ({
   return (
     <div className="flex flex-col gap-3">
       <h1 className="text-lg font-semibold">Items : {sectionItems.length}</h1>
-      <Button type="button" onClick={() => setIsOpen(true)} className="w-full h-14 rounded-md flex gap-4 bg-dark">Create Item <Plus className="w-6 h-6"></Plus></Button>
-      <Modal title="Create" description="Create an Item" isOpen={isOpen} onClose={() => { setInitialDataId(""); setIsOpen(false) }}>
+      <Button type="button" onClick={() => setIsOpen(true)} className="w-full h-14 rounded-md flex gap-4 bg-dark">Add Item <Plus className="w-6 h-6"></Plus></Button>
+      <Modal title="Add" description={`${initialDataId?"Edit Item":"Add an Item"}`} isOpen={isOpen} onClose={() => { setInitialDataId(""); setIsOpen(false) }}>
         <Form
           onSubmit={onSubmit}
           disabled={loading}
