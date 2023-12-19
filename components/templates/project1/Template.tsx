@@ -16,6 +16,8 @@ import { useRouter } from "next/navigation";
 
 interface Project1TemplateProps {
     data: SectionItem;
+    backgroundColor?:string,
+    textColor?:string
     onDelete?: () => void;
     onEdit?: () => void;
 }
@@ -28,7 +30,9 @@ const getlinkpreview = async (url: string) => {
 const Project1Template: React.FC<Project1TemplateProps> = ({
     data,
     onDelete,
-    onEdit
+    onEdit,
+    backgroundColor,
+    textColor
 }) => {
     const [isMounted, setIsMounted] = useState(false)
     const router = useRouter()
@@ -53,7 +57,7 @@ const Project1Template: React.FC<Project1TemplateProps> = ({
         return null
     }
     return (
-        <div className="w-[330px] max-h-fit min-h-[400px] flex flex-col justify-around rounded-md relative shadow-[rgba(17,_17,_26,_0.1)_0px_0px_30px] shadow-black" >
+        <div style={{backgroundColor:backgroundColor, color:textColor}} className="w-[330px] max-h-fit min-h-[400px] flex flex-col justify-around rounded-md relative shadow-[rgba(17,_17,_26,_0.1)_0px_0px_30px] shadow-black" >
             {onDelete ? (
                 <div className="rounded-md flex gap-1 absolute z-20 -top-2 -right-2">
                     <TooltipProvider>
@@ -83,7 +87,7 @@ const Project1Template: React.FC<Project1TemplateProps> = ({
 
                 </div>
             ) : null}
-            <div onClick={()=>router.push(data.url as string)}>
+            <Link  href= {data.url as string} target="_blank">
                 <div className="w-full p-2 flex flex-col gap-2">
                     {/* Priority for showing Image--> ImageURL -> URL fetched image -> Text */}
                     <div className="w-full h-[140px] rounded-lg">
@@ -120,7 +124,7 @@ const Project1Template: React.FC<Project1TemplateProps> = ({
                         </div>}
                     </div>
                 </div>
-            </div>
+            </Link>
         </div>
     );
 };

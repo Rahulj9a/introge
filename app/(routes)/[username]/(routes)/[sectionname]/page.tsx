@@ -31,9 +31,9 @@ const SectionPage: React.FC<SectionPageProps> = async ({ params }) => {
 
   return (
     <div className="w-full h-fit">
-      <div className=" min-w-full flex flex-col items-center h-fit w-fit min-h-screen pt-14">
+      <div className=" min-w-full flex flex-col items-center max-h-fit max-w-fit min-h-screen pt-14">
         <h1 className="font-bold text-3xl my-6">{sectionInfo.name}</h1>
-        <div className="flex flex-wrap gap-4 items-center justify-start w-full">
+        <div className="flex flex-wrap gap-2 items-center justify-center w-full">
           <SectionItem sectionPage={true} sectionItems={sectionInfo.SectionItems} sectionTemplate={sectionInfo.template} />
         </div>
 

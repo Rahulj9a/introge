@@ -34,7 +34,7 @@ const ProfilePage: React.FC<ProfilePageProps> = async ({ params }) => {
               src={user?.profilepic as string}
               width={100}
               height={100}
-              className=" shadow-[rgba(17,_17,_26,_0.1)_0px_0px_30px]  inset-0 spread-x-4 shadow-mid rounded-full lg:w-80 lg:h-80 md:w-60 md:h-60 w-48 h-48  fill"
+              className=" shadow-[rgba(17,_17,_26,_0.1)_0px_0px_30px]  inset-0 spread-x-4 shadow-black rounded-full lg:w-80 lg:h-80 md:w-60 md:h-60 w-48 h-48  fill"
               alt={user?.name as string}
             />
           </div>
@@ -47,11 +47,11 @@ const ProfilePage: React.FC<ProfilePageProps> = async ({ params }) => {
         >
           <p className="text-sm my-1 ">Hey I am</p>
 
-          <p className="text-6xl my-5  text-light">
+          <p className="text-6xl my-5">
             {user?.name}{" "}
             <Link
               href={`/${user.username}`}
-              className="text-xs  hidden md:block text-dark"
+              className="text-xs  hidden md:block"
             >
               @{user?.username}
             </Link>
@@ -66,7 +66,8 @@ const ProfilePage: React.FC<ProfilePageProps> = async ({ params }) => {
               {[...user.labels].slice(0, 4).map((label) => (
                 <div
                   key={label}
-                  className="py-1 px-2 rounded-3xl bg-mid text-darkest text-xs md:text-sm"
+                  style={{backgroundColor:user.textColor || "#CFE3E9", color:user.backgroundColor || "#01161E"}}
+                  className="py-1 px-2 rounded-3xl text-xs md:text-sm"
                 >
                   {label}
                 </div>
@@ -82,7 +83,7 @@ const ProfilePage: React.FC<ProfilePageProps> = async ({ params }) => {
                   <Link
                     href={social.url}
                     target="_blank"
-                    className="rounded-full bg-light p-2  border-mid hover:scale-105 shadow-mid  shadow-[rgba(17,_17,_26,_0.1)_0px_0px_10px] w-10 h-10"
+                    className="p-2 hover:scale-10 hover:border-white rounded-full border-2 border-transparent w-14 h-14 flex items-center justify-center"
                     key={social.url}
                   >
                     <PlatformFinder social={social as any} />

@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { templateList } from "@/components/templates/templateList";
 import { cn } from "@/lib/utils";
+import { HexColorPicker } from "react-colorful";
 
 const formSchema = z.object({
     name: z.string().min(3, {
@@ -30,7 +31,7 @@ const formSchema = z.object({
     }).max(300, {
         message: "About section should not be more than 300 letters"
     }),
-    template: z.string().min(1,{
+    template: z.string().min(1, {
         message: "Template field can't be empty"
     }),
     isActive: z.boolean().default(true).optional(),
@@ -45,7 +46,11 @@ interface SectionFormProps {
         about: string,
         isActive: boolean,
         sectionItems: SectionItem,
-        template: string
+        template: string,
+        backgroundColor?: string,
+        itemsBackgroundColor?: string,
+        textColor?: string,
+        itemsTextColor?: string
     },
     currentUser: User
 }
@@ -55,6 +60,10 @@ const SectionForm: React.FC<SectionFormProps> = ({ initialData, currentUser }) =
 
     const router = useRouter();
     const [loading, setLoading] = useState(false)
+    const [backgroundColor, setBackgroundColor] = useState(initialData?.backgroundColor?initialData.backgroundColor:currentUser.backgroundColor?currentUser.backgroundColor:"#01161E")
+    const [textColor, setTextColor] = useState(initialData?.textColor?initialData.textColor:currentUser.textColor?currentUser.textColor:"#CFE3E9")
+    const[itemsBackgroundColor, setItemsBackgroundColor] = useState(initialData?.itemsBackgroundColor?initialData.itemsBackgroundColor:currentUser.backgroundColor?currentUser.backgroundColor:"#01161E")
+    const[itemsTextColor, setItemsTextColor] = useState(initialData?.itemsTextColor?initialData.itemsTextColor:currentUser.textColor?currentUser.textColor:"#CFE3E9")
 
     const toastMessage = initialData ? "Section Updated" : "Section Created"
     const action = initialData ? "Save Changes" : "Create"
@@ -75,9 +84,9 @@ const SectionForm: React.FC<SectionFormProps> = ({ initialData, currentUser }) =
             setLoading(true)
             if (initialData) {
                 console.log(data)
-                await axios.patch(`/api/${currentUser.id}/section/${initialData.id}`, data)
+                await axios.patch(`/api/${currentUser.id}/section/${initialData.id}`, {...data, backgroundColor, textColor, itemsBackgroundColor, itemsTextColor})
             } else {
-                await axios.post(`/api/${currentUser.id}/section`, data)
+                await axios.post(`/api/${currentUser.id}/section`, {...data, backgroundColor, textColor, itemsBackgroundColor, itemsTextColor})
             }
             router.refresh()
             router.push(`/setting/section`)
@@ -122,7 +131,7 @@ const SectionForm: React.FC<SectionFormProps> = ({ initialData, currentUser }) =
                         render={({ field }) => (
                             <FormItem className="w-full md:flex-1">
                                 <Select
-                                    required = {true}
+                                    required={true}
                                     disabled={loading || Boolean(initialData?.template)}
                                     onValueChange={field.onChange}
                                     value={field.value}
@@ -137,7 +146,7 @@ const SectionForm: React.FC<SectionFormProps> = ({ initialData, currentUser }) =
                                         </SelectTrigger>
                                     </FormControl>
                                     <SelectContent style={{}} className="max-h-[200px] overflow-y-scroll">
-                                        {templateList.map((template,index:number) => (
+                                        {templateList.map((template, index: number) => (
                                             <SelectItem
                                                 key={index}
                                                 className="w-full h-10 cursor-pointer my-1"
@@ -196,6 +205,38 @@ const SectionForm: React.FC<SectionFormProps> = ({ initialData, currentUser }) =
                         </FormItem>
                     )}
                 />
+                <div style={{ backgroundColor: backgroundColor, color: textColor }} className={`rounded-lg py-2 w-full gap-4  items-center justify-around h-fit flex flex-col md:flex-row  `}>
+                <h3 className="py-2">Section Apperance</h3>
+                    <div className="md:w-1/3 flex flex-col items-center">
+                        <p >Set Section's background color</p>
+
+                        <HexColorPicker className="py-2 w-full" color={backgroundColor} onChange={setBackgroundColor} />
+                        <Input className="text-black" value={backgroundColor} onChange={(e) => { e.preventDefault(); setBackgroundColor(e.target.value) }} />
+                    </div>
+                    <div className="md:w-1/3 flex flex-col items-center">
+                        <p>Set Section's text color</p>
+
+                        <HexColorPicker className="py-2 w-full" color={textColor} onChange={setTextColor} />
+                        <Input className="text-black" value={textColor} onChange={(e) => { e.preventDefault(); setTextColor(e.target.value) }} />
+                    </div>
+                </div>
+                <div style={{ backgroundColor: itemsBackgroundColor, color: itemsTextColor }} className={`rounded-lg py-2 w-full gap-4  items-center justify-around h-fit flex flex-col md:flex-row  `}>
+                <h3 className="py-2">Items Apperance</h3>
+                    <div className="md:w-1/3 flex flex-col items-center">
+                        <p >Set Item's background color</p>
+
+                        <HexColorPicker className="py-2 w-full" color={itemsBackgroundColor} onChange={setItemsBackgroundColor} />
+                        <Input className="text-black" value={itemsBackgroundColor} onChange={(e) => { e.preventDefault(); setItemsBackgroundColor(e.target.value) }} />
+                    </div>
+                    <div className="md:w-1/3 flex flex-col items-center">
+                        <p>Set Item's text color</p>
+
+                        <HexColorPicker className="py-2 w-full" color={itemsTextColor} onChange={setItemsTextColor} />
+                        <Input className="text-black" value={itemsTextColor} onChange={(e) => { e.preventDefault(); setItemsTextColor(e.target.value) }} />
+                    </div>
+                </div>
+
+
                 <Button disabled={loading} className="ml-auto w-full md:w-1/3 bg-dark" type="submit">
                     {action}
                 </Button>

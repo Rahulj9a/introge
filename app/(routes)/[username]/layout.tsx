@@ -34,7 +34,7 @@ const layout: React.FC<LayoutProps> = async ({ children, params }) => {
             <div className="absolute pt-14">
                 <ProfileSidebar user={user} sections={user.sections as any}/>
             </div>
-            <main className="bg-darkest text-mid ">
+            <main style={{backgroundColor:user.backgroundColor || "#01161E", color:user.textColor || "#CFE3E9"}}>
                 {children}
             </main>
         </div>

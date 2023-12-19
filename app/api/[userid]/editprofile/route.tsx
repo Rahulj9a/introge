@@ -9,7 +9,7 @@ export async function PATCH(req:Request, {params}:{params:{ userid:string }}){
             return new NextResponse("Unauthenticated", {status:401})
         }
         const body = await req.json()
-        const {profilepic, name, bio, labels, socials, username} = await body
+        const {profilepic, name, bio, labels, socials, username, backgroundColor, textColor} = await body
         
          if(!params.userid){
             return new NextResponse("Username is required")
@@ -23,7 +23,7 @@ export async function PATCH(req:Request, {params}:{params:{ userid:string }}){
                  
             },
             data:{
-                name, bio, profilepic,labels,socials, username
+                name, bio, profilepic,labels,socials, username, backgroundColor, textColor
             }
         })
 

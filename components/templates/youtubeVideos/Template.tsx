@@ -16,6 +16,8 @@ interface BlogTemplateProps {
   data: SectionItem;
   onDelete?: () => void;
   onEdit?: () => void;
+  backgroundColor?:string,
+    textColor?:string
 }
 
 const getlinkpreview = async (url: string) => {
@@ -27,6 +29,8 @@ const YoutubeTemplate: React.FC<BlogTemplateProps> = ({
   data,
   onDelete,
   onEdit,
+  backgroundColor,
+    textColor
 }) => {
   const [isMounted, setIsMounted] = useState(false);
   const [previewdata, setPreviewData] = useState<{ image: string } | null>(
@@ -62,7 +66,7 @@ const YoutubeTemplate: React.FC<BlogTemplateProps> = ({
     }
   };
   return (
-    <div className="w-[300px] md:w-[500px] h-fit flex items-center justify-center  rounded-md sh relative shadow-[rgba(17,_17,_26,_0.1)_0px_0px_30px] shadow-black">
+    <div style={{backgroundColor:backgroundColor, color:textColor}} className="w-[300px] md:w-[500px] h-fit flex items-center justify-center  rounded-md sh relative shadow-[rgba(17,_17,_26,_0.1)_0px_0px_30px] shadow-black">
       {onDelete ? (
         <div className="rounded-md z-20 absolute -top-2 -right-2">
           <TooltipProvider>

@@ -1,7 +1,7 @@
 "use client";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
-
+import {HexColorPicker} from "react-colorful"
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -67,6 +67,8 @@ interface ProfileFormProps {
         username: string;
         socials: any;
         labels: string[];
+        backgroundColor?:string;
+        textColor?:string
     };
 }
 
@@ -80,12 +82,14 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
     const [profilepic, setProfilepic] = useState(initialData?.profilepic);
     const [labels, setLabels] = useState([...initialData.labels] || []);
     const [socials, setSocials] = useState(initialData?.socials || "[]");
+    const [backgroundColor, setBackgroundColor] = useState(initialData.backgroundColor ? initialData.backgroundColor : "#01161E");
+    const [textColor, setTextColor] = useState(initialData.textColor || "#CFE3E9")
+    console.log(backgroundColor)
      const form = useForm<ProfileFormValues>({
         resolver: zodResolver(formSchema),
         defaultValues: initialData || {
             email: "",
             username: "",
-
             name: "",
             bio: "",
             socials: [],
@@ -122,6 +126,8 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
                 profilepic,
                 labels,
                 socials,
+                backgroundColor,
+                textColor
             });
             router.refresh();
             toast.success("Profile Updated");
@@ -133,7 +139,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
     };
 
     return (
-        <div className={cn("w-full p-1", className)}>
+        <div className={cn(`w-full p-1`, className)}>
             <h1 className="text-xl font-bold">Basic Profile</h1>
             <div className="grid md:grid-cols-3">
                 <div className="col-span-1 py-2 flex  justify-center">
@@ -146,7 +152,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
                                 onChange={(value) => setProfilepic(value)}
                             />
                         </div>
-                        <div className="flex flex-col items-center justify-center gap-y-2 py-2 font-semibold text-lg text-gray-600">
+                        <div className="flex flex-col items-center justify-center gap-y-2 py-2 font-semibold text-lg ">
                             <p className="py-2">{initialData.email}</p>
                            
                         </div>
@@ -170,6 +176,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
                                                 <Input
                                                     disabled={loading}
                                                     placeholder="Your Username"
+                                                    className="text-black"
                                                     {...field}
                                                 />
                                             </FormControl>
@@ -188,6 +195,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
                                                 <Input
                                                     disabled={loading}
                                                     placeholder="Your name"
+                                                    className="text-black"
                                                     {...field}
                                                 />
                                             </FormControl>
@@ -204,9 +212,10 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
                                             <FormLabel>Bio</FormLabel>
                                             <FormControl>
                                                 <Textarea
-                                                    className="min-h-[120px]"
+                                                    className="min-h-[120px] text-black"
                                                     disabled={loading}
                                                     placeholder="Tell us something about yourself"
+                                                     
                                                     {...field}
                                                 />
                                             </FormControl>
@@ -267,6 +276,21 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
                         </Accordion>
                     </div>
                 ))}
+            </div>
+            <div style={{backgroundColor:backgroundColor, color:textColor}} className={`rounded-lg py-2 w-full gap-4  items-center justify-around h-fit flex flex-col md:flex-row  `}>
+                <h3 className="py-2">Apperance</h3>
+                <div className="md:w-1/3 flex flex-col items-center">
+                    <p >Set Primary background color</p>
+                    
+                <HexColorPicker className="py-2 w-full" color={backgroundColor} onChange={setBackgroundColor}/>
+                <Input className="text-black" value={backgroundColor} onChange={(e)=>{e.preventDefault(); setBackgroundColor(e.target.value)}}/>
+                </div>
+                <div className="md:w-1/3 flex flex-col items-center">
+                    <p>Set Primary text color</p>
+                    
+                <HexColorPicker className="py-2 w-full" color={textColor} onChange={setTextColor}/>
+                <Input className="text-black" value={textColor} onChange={(e)=>{e.preventDefault(); setTextColor(e.target.value)}} />
+                </div>
             </div>
             <SocialForm
                 initialData={[...JSON.parse(String(socials))]}

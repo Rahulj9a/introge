@@ -103,18 +103,20 @@ const SocialForm: React.FC<ProfileFormProps> = ({
                             control={form.control}
                             name="title"
                             render={({ field }) => (
-                                <FormItem className="w-full">
+                                <FormItem className="w-full text-black">
                                     <Select
                                         disabled={loading}
                                         onValueChange={field.onChange}
                                         value={field.value}
                                         defaultValue={field.value}
+                                        
                                     >
                                         <FormControl>
                                             <SelectTrigger>
                                                 <SelectValue
                                                     defaultValue={field.value}
                                                     placeholder="Select a Platform"
+                                                    className="text-black"
                                                 />
                                             </SelectTrigger>
                                         </FormControl>
@@ -144,7 +146,7 @@ const SocialForm: React.FC<ProfileFormProps> = ({
                             control={form.control}
                             name="username"
                             render={({ field }) => (
-                                <FormItem className="w-full">
+                                <FormItem className="w-full text-black">
                                     <FormControl>
                                         <Input
                                             disabled={loading}
@@ -161,7 +163,7 @@ const SocialForm: React.FC<ProfileFormProps> = ({
                             control={form.control}
                             name="url"
                             render={({ field }) => (
-                                <FormItem className="w-full">
+                                <FormItem className="w-full text-black">
                                     <FormControl>
                                         <Input
                                             disabled={loading}

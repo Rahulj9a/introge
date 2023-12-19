@@ -39,7 +39,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentUser, SubNav }) => {
 
 
     return (
-        <div className='h-14 fixed z-30 bg-mid bg-opacity-80 w-full flex pr-4 pl-1 py-2 items-center lg:px-6 border-b justify-between'>
+        <div className='h-14 fixed z-30 bg-mid bg-opacity-80 w-[100vw] flex pr-4 pl-1 py-2 items-center lg:px-6 border-b justify-between'>
             <div className='cursor-pointer' onClick={()=>router.push("/")}>
                 <Image width={40} height={40} src="/profiley.png" alt="Profiley" />
             </div>
