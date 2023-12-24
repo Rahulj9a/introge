@@ -1,10 +1,11 @@
- 
+
 import { serverAuth } from "@/lib/serverAuth";
 import React from "react";
 import prisma from "@/lib/prismadb"
- import ProfileSidebar from "./components/sidebar";
+import ProfileSidebar from "./components/sidebar";
 import Error from "next/error";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 interface LayoutProps {
     children: React.ReactNode;
@@ -17,27 +18,31 @@ const layout: React.FC<LayoutProps> = async ({ children, params }) => {
         where: {
             username: params.username
         },
-        include:{
-            sections:true
+        include: {
+            sections: true
         }
 
     })
 
-    if(!user){
-        return <div className="w-full h-full flex items-center justify-center pt-20 text-dark">
-            <p>404 | Page can't be found</p>
-            <a href="/" className="px-4 py-2 rounded-md bg-darkest text-mid">GO HOME</a>
-            </div>
+    if (!user) {
+        return <div className="w-full h-[80vh] flex flex-col gap-6 items-center justify-center pt-20 text-dark">
+            <Image alt="Page can't be founds" width={330} height={400} src="/404.avif"/>
+            <h1 className="font-bold text-xl">404 | Page can't be found</h1>
+            <div className="flex gap-2">
+                <a href="/" className="px-4 py-2 rounded-md bg-darkest text-mid">Home</a>
+                <a href="/explore/people" className="px-4 py-2 rounded-md bg-darkest text-mid">Discover Peoples</a>
+             </div>
+        </div>
     }
     return (
-        <div>
+        <>
             <div className="absolute pt-14">
-                <ProfileSidebar user={user} sections={user.sections as any}/>
+                <ProfileSidebar user={user} sections={user.sections as any} />
             </div>
-            <main style={{backgroundColor:user.backgroundColor || "#01161E", color:user.textColor || "#CFE3E9"}}>
+            <main style={{ backgroundColor: user.backgroundColor || "#01161E", color: user.textColor || "#CFE3E9" }}>
                 {children}
             </main>
-        </div>
+        </>
     );
 };
 

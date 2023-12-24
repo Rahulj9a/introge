@@ -1,6 +1,7 @@
 import React from "react";
 import prisma from "@/lib/prismadb";
 import SectionItem from "../components/sectionItem";
+import Image from "next/image";
 interface SectionPageProps {
   params: {
     username: string;
@@ -12,9 +13,15 @@ const SectionPage: React.FC<SectionPageProps> = async ({ params }) => {
     where: {
       username: params.username,
     },
-   });
+  });
   if (!user) {
-    return <div>User can't be found</div>;
+    return <div className="w-full h-[80vh] bg-white flex flex-col gap-6 items-center justify-center pt-20 text-dark">
+      <Image alt="Page can't be founds" width={330} height={400} src="/404.avif" />
+      <h1 className="font-bold text-xl">404 | Page can't be found</h1>
+      <div className="flex gap-2">
+        <a href={`/exlore/people`} className="px-4 py-2 rounded-md bg-darkest text-mid">Explore People</a>
+      </div>
+    </div>
   }
   const sectionInfo = await prisma.section.findFirst({
     where: {
@@ -25,8 +32,15 @@ const SectionPage: React.FC<SectionPageProps> = async ({ params }) => {
       SectionItems: true,
     },
   });
-  if (!sectionInfo) {
-    return <div>Section can't be found</div>;
+  if (!sectionInfo || !sectionInfo.isActive) {
+    return <div className="w-full h-[80vh] bg-white flex flex-col gap-6 items-center justify-center pt-20 text-dark">
+      <Image alt="Page can't be founds" width={330} height={400} src="/404.avif" />
+      <h1 className="font-bold text-xl">404 | Page can't be found</h1>
+      <div className="flex gap-2">
+        <a href={`/${user.username}`} className="px-4 py-2 rounded-md bg-darkest text-mid">Explore Profile</a>
+      </div>
+    </div>
+
   }
 
   return (

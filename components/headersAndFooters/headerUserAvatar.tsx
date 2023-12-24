@@ -1,5 +1,5 @@
 import React from 'react'
-import { LogOutIcon, Settings, User } from 'lucide-react'
+import { LayoutList, LogOutIcon, Settings, User } from 'lucide-react'
 import UserAvatar from '@/components/userAvatar'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { useRouter } from 'next/navigation'
@@ -40,14 +40,15 @@ const HeaderUserAvatar: React.FC<HeaderUserAvatarProps> = ({ currentUser }) => {
                         <span>Edit Profile</span>
 
                     </DropdownMenuItem>
+                    <DropdownMenuItem className='cursor-pointer' onClick={() => router.push("/setting/section")}>
+                        <LayoutList className="mr-4 h-4 w-4 " />
+                        <span>Sections</span>
+
+                    </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
-                    <DropdownMenuItem className='cursor-pointer' onClick={() => router.push("/setting/section")}>
-                        <Settings className="mr-4 h-4 w-4 " />
-                        <span>Settings</span>
 
-                    </DropdownMenuItem>
                     <DropdownMenuItem className='cursor-pointer' onClick={() => signOut()}>
                         <LogOutIcon className="mr-4 h-4 w-4" />
                         <span>Sign out</span>

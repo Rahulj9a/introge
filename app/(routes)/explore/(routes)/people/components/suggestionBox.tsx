@@ -2,7 +2,8 @@ import React from "react";
 import { User } from "@prisma/client";
 import { UseUserSuggestion } from "@/hooks/useUserSuggestion";
 import Image from "next/image";
-import { UserIcon } from "lucide-react";
+import {  UserIcon } from "lucide-react";
+import Link from "next/link";
 
 interface SuggestionBoxProps {
   input?: string;
@@ -57,7 +58,8 @@ const SuggestionBox: React.FC<SuggestionBoxProps> = ({ input = "" }) => {
                 }
               })
               .map((user: User) => (
-                <div
+                <Link
+                  href={`/${user.username}`}
                   key={user.id}
                   className=" w-full rounded-md my-1 p-1 items-center gap-2 bg-light hover:bg-slate-100 cursor-pointer text-darkest flex"
                 >
@@ -92,7 +94,7 @@ const SuggestionBox: React.FC<SuggestionBoxProps> = ({ input = "" }) => {
                           )
                       )}
                   </div>
-                </div>
+                </Link>
               ))}
         </div>
       }

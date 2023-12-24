@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 const SideBar = () => {
     const routes = [
         {
-            label: "Users",
+            label: "Peoples",
             icon: User,
             href: "/explore/people",
             color: "text-dark",
