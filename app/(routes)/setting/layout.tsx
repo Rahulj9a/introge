@@ -21,9 +21,9 @@ const Layout: React.FC<LayoutProps> = async ({ children }) => {
       <div className="hidden h-full md:flex md:w-56 md:flex-col md:fixed md:inset-y- z-[80] bg-gray-900">
         <SideBar />
       </div>
-      <div className="flex gap-2 fixed left-3 md:static md:pl-56 top-14 items-center py-2 z-30 w-full"> <MobileSidebar/> <h1 className="font-bold text-3xl ">Settings</h1></div>
+      <div className="flex gap-2 left-3  md:pl-56 top-14 items-center py-2 z-30 w-full"> <MobileSidebar/> <h1 className="font-bold text-3xl ">Settings</h1></div>
           
-      <main className="md:pl-56 pt-10 md:pt-0">
+      <main className="md:pl-56">
         {children}
       </main>
     </div>

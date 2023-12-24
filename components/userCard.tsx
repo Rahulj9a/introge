@@ -20,11 +20,11 @@ const UserCard: React.FC<UserCardProps> = ({ data }) => {
   }
   return (
     <div onClick={() => router.push(`/${data.username}`)}
-      className="cursor-pointer p-2 max-w-[350px] hover:scale-105 h-[150px] rounded-md bg-dark shadow-[rgba(17,_17,_26,_0.1)_0px_0px_10px] shadow-black">
+      className="cursor-pointer p-2 w-[160px] lg:w-[250px] hover:scale-105 h-[220px] rounded-md bg-dark shadow-[rgba(17,_17,_26,_0.1)_0px_0px_10px] shadow-black">
       <div
-        className=" w-full flex-1 flex gap-2 h-5/6"
+        className=" w-full flex flex-col items-center gap-2  h-5/6"
       >
-        <div className="flex flex-col justify-around items-center w-auto">
+        <div className="flex justify-between   w-full">
           {data.profilepic ? <Image
             width={100}
             height={100}
@@ -33,14 +33,16 @@ const UserCard: React.FC<UserCardProps> = ({ data }) => {
             className="rounded-full w-16 h-16 object-contain"
           /> : <UserIcon className="w-16 h-16 rounded-full" />
           }
+          <p className="text-light flex-1 text-center lg:text-lg max-w-full">
+            {data.name}
+            <br/>
+            <span className="text-light text-xs truncate">@{data.username}</span>
+          </p>
+        
         </div>
         <div className=" flex-1 px-1 py-1  flex flex-col justify-around text-light">
-          <p className="text-light truncate max-w-full">
-            {data.name}{" "}
-            <span className="text-light text-xs">@{data.username}</span>
-          </p>
 
-          <p className="text-xs w-[180px] text-ellipsis">{data.bio}</p>
+          <p className="text-xs text-ellipsis">{data.bio}</p>
         </div>
       </div>
       <div className="flex flex-wrap bg-light rounded-sm px-2 py-1 gap-[2px] h-auto ">
@@ -50,9 +52,9 @@ const UserCard: React.FC<UserCardProps> = ({ data }) => {
               index < 3 && (
                 <div
                   key={label}
-                  className=" text-[10px]  text-darkest"
+                  className=" text-[10px] lg:text-sm  text-darkest"
                 >
-                  {label} |
+                  {label + " • "} 
                 </div>
               )
           )}

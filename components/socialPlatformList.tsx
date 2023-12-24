@@ -67,7 +67,7 @@ const PlatformFinder = ({ social }: { social: { title: string, username:string }
             <TooltipProvider>
                 <Tooltip>
                     <TooltipTrigger>
-                        <platform.icon className={`w-6 h-6 ${platform?.color}`} />
+                        <platform.icon className={`w-6 h-6`} />
                     </TooltipTrigger>
                     <TooltipContent >
                         <span className="text-xs" >{social.title} : @{social.username}</span>

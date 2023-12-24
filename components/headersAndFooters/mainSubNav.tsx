@@ -1,6 +1,6 @@
 "use client"
 import { cn } from '@/lib/utils';
-import { Home, Rocket } from 'lucide-react';
+import { Home, LayoutList, Rocket } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React from 'react'
@@ -10,16 +10,15 @@ import { MdPersonSearch } from "react-icons/md";
 const SubNav = () => {
     const routes = [
         {
-            label: "Home",
-            icon: Home,
-            href: "/",
+            label: "People",
+            icon: MdPersonSearch,
+            href: "/explore/people",
             color: "text-sky-500",
         },
-
         {
-            label: "Explore",
-            icon: MdPersonSearch,
-            href: "/explore",
+            label: "Sections",
+            icon: LayoutList,
+            href: "/explore/sections",
             color: "text-sky-500",
         },
        /*  {

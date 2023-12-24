@@ -11,7 +11,7 @@ const SideBar = () => {
         {
             label: "Users",
             icon: User,
-            href: "/explore/users",
+            href: "/explore/people",
             color: "text-dark",
         },
         {

@@ -141,7 +141,7 @@ const SectionForm: React.FC<SectionFormProps> = ({ initialData, currentUser }) =
                                         <SelectTrigger>
                                             <SelectValue
                                                 defaultValue={field.value}
-                                                placeholder="Select a Platform"
+                                                placeholder="Select a Template"
                                             />
                                         </SelectTrigger>
                                     </FormControl>

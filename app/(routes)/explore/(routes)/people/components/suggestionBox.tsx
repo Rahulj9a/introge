@@ -1,6 +1,6 @@
 import React from "react";
 import { User } from "@prisma/client";
- import { UseUserSuggestion } from "@/hooks/useUserSuggestion";
+import { UseUserSuggestion } from "@/hooks/useUserSuggestion";
 import Image from "next/image";
 import { UserIcon } from "lucide-react";
 
@@ -41,14 +41,25 @@ const SuggestionBox: React.FC<SuggestionBoxProps> = ({ input = "" }) => {
   return (
     <>
       {
-        <div className=" h-fit p-2 max-h-[300px] overflow-x-hidden overflow-y-scroll bg-dark text-light rounded-lg">
+        <div className=" h-fit p-2 max-h-[300px] flex flex-col overflow-x-hidden overflow-y-auto bg-mid text-light rounded-lg">
           {users &&
             users
-              ?.filter((e) => e.username.includes(input as string))
+              ?.filter((e) => {
+                const inputLowerCase =  (input as string).toLowerCase();
+                const usernameLowerCase = e.username.toLowerCase()
+                const nameLowerCase = e.name?.toLowerCase()
+                if (
+                  usernameLowerCase.includes(inputLowerCase) || nameLowerCase?.includes(inputLowerCase)
+                ){
+                  return true;
+                }else{
+                  return false
+                }
+              })
               .map((user: User) => (
                 <div
                   key={user.id}
-                  className=" w-full rounded-md my-1 p-1 items-center gap-2 bg-light hover:bg-mid cursor-pointer text-darkest flex"
+                  className=" w-full rounded-md my-1 p-1 items-center gap-2 bg-light hover:bg-slate-100 cursor-pointer text-darkest flex"
                 >
                   <div className="flex gap-2 items-center flex-1">
                     {user.profilepic ? (
@@ -62,8 +73,10 @@ const SuggestionBox: React.FC<SuggestionBoxProps> = ({ input = "" }) => {
                     ) : (
                       <UserIcon className="w-8 h-8 rounded-full" />
                     )}
-                    <span>{user.name}</span>
-                    <span className="text-xs">@{user.username}</span>
+                    <p className="flex items-center flex-col lg:flex-row lg:gap-4">
+                      <span>{user.name}</span>
+                      <span className="text-xs">@{user.username}</span>
+                    </p>
                   </div>
                   <div className="flex flex-wrap  rounded-sm px-2 py-1 gap-[2px] h-auto ">
                     {user.labels &&
@@ -72,9 +85,9 @@ const SuggestionBox: React.FC<SuggestionBoxProps> = ({ input = "" }) => {
                           index < 3 && (
                             <div
                               key={label}
-                              className=" text-[10px]  text-darkest"
+                              className=" text-[10px] lg:text-sm text-darkest"
                             >
-                              {label} |
+                              {label + " • "}
                             </div>
                           )
                       )}

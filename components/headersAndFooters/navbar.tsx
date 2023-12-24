@@ -32,8 +32,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentUser, SubNav }) => {
 
     const router = useRouter()
     const loginModal = useLoginModal()
-    const registerModal = useRegisterModal()
-
+ 
 
 
 
@@ -55,7 +54,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentUser, SubNav }) => {
                     :
                     <div className='flex space-x-4'>
 {/*                         <Button variant='outline' onClick={() => loginModal.onOpen()}>Login</Button>
- */}                        <Button variant='outline' onClick={() => registerModal.onOpen()}>Join</Button>
+ */}                        <Button variant='outline' onClick={() => loginModal.onOpen()}>Join</Button>
                     </div>}
 
             </div>
