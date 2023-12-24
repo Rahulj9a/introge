@@ -15,7 +15,7 @@ const ExploreAdvSec = () => {
         </p>
         <div className="flex gap-4 flex-col md:flex-row w-full h-fit text-[#ffc4c4]">
           <Link href="/explore/people" className="bg-[#0f2c30] hover:bg-[#425558] cursor-pointer gap-2 p-2 rounded-lg py-4 h-28 text-xl flex items-center justify-center flex-1">
-            Discover people <BsPeople className="w-6" />
+            Discover peoples <BsPeople className="w-6" />
           </Link>
           </div>
 

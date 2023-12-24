@@ -1,10 +1,10 @@
 "use client"
 import { Facebook, Github, Instagram, Linkedin, Twitter, Youtube } from "lucide-react";
-import { useEffect, useState } from "react";
-import { AiOutlineReddit, AiOutlineWhatsApp } from "react-icons/ai"
+ import { AiOutlineReddit, AiOutlineWhatsApp } from "react-icons/ai"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
-import { BsSnapchat, BsMedium } from 'react-icons/bs'
+import { BsMedium } from 'react-icons/bs'
 import {GrSnapchat} from "react-icons/gr"
+import {FaXTwitter} from "react-icons/fa6"
 
 export const socialPlatforms = [
     {
@@ -19,7 +19,7 @@ export const socialPlatforms = [
     },
     {
         label: "Twitter",
-        icon: Twitter,
+        icon: FaXTwitter,
         color: "text-sky-700",
     },
     {

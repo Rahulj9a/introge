@@ -21,8 +21,8 @@ const UserAvatar: React.FC<UserAvatarProps> = ({ className, userPic, username, n
                 <AvatarFallback>{username?.[0].toUpperCase()}</AvatarFallback>
             </Avatar>
             {name ? <div className='pr-1'>
-                <p className='text-base text-slate-900 font-serif'>{name}</p>
-                <p className='text-xs text-gray-600 font-mono'>@{username}</p>
+                <p className='text-base   font-serif'>{name}</p>
+                <p className='text-xs  font-mono'>@{username}</p>
             </div>
                 : ""}
         </div>
