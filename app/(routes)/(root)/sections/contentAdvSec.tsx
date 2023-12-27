@@ -2,19 +2,19 @@
 "use client"
  import {  Github, Mail, SearchIcon } from "lucide-react";
 import JoinNow from "./joinNow";
-import Image from 'next/image'
-import Link from 'next/link';
-import React from 'react'
+import Image from "next/image"
+import Link from "next/link";
+import React from "react"
 
 const ContentAdvSec = () => {
     const sendEmail = () => {
-        const recipient = 'rahulj9a@gmail.com';
-        const subject = 'Idea/ Suggestion for new Template';
-        const body = '';
+        const recipient = "rahulj9a@gmail.com";
+        const subject = "Idea/ Suggestion for new Template";
+        const body = "";
 
         const mailtoLink = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
-        // Open the user's email client
+        // Open the user email client
         window.location.href = mailtoLink;
     };
     const contentInfo = [
@@ -50,7 +50,7 @@ const ContentAdvSec = () => {
                     <div className="rounded-xl h-fit my-2 px-4 md:px-6 md:py-8 py-6  bg-white bg-opacity-40">
                         <div className="text-dakest w-full h-full flex flex-col justify-center gap-4 items-start">
                             <h1 className="lg:text-5xl text-2xl text-semi-bold">Showcase your content/ work/ skill etc. easily on one place with dedicated sections </h1>
-                            <p className="lg:text-xl text-lg">Whether it's blogs, projects, youtube video ... bascially anything, You can list them in seperate sections with each section having its seperate URL, giving you advantage to easily share just one type of content</p>
+                            <p className="lg:text-xl text-lg">Whether it is blog, project, youtube video ... bascially anything, You can list them in seperate sections with each section having its seperate URL, giving you advantage to easily share just one type of content</p>
                         </div>
                     </div>
                     <JoinNow />
@@ -62,13 +62,13 @@ const ContentAdvSec = () => {
                     List any type of content and share with world
                 </h1>
                 <p className="w-3/4 lg:w-2/3 text-lg my-2 text-mid">
-                    List and showcase your skill, work, content, whether it's blog, youtube video, project, skill ... basically anything, everything on one place with dedicated section and URL for each type.
+                    List and showcase your skill, work, content, whether it is blog, youtube video, project, skill ... basically anything, everything on one place with dedicated section and URL for each type.
                 </p>
                 <div className="  flex w-full snap-x scroll-auto lg:justify-center h-fit  pb-4 pt-8  overflow-y-hidden overflow-x-auto gap-8">
                     {contentInfo.map(info => (
-                        <div style={{ backgroundColor: info.background, color: info.text }} className={`flex-none flex  flex-col items-center justify-between p-2 w-60  h-96  rounded-lg snap-end`}>
-                            <p className='flex-1 flex items-center text-2xl font-semibold'>{info.title}</p>
-                            <Image src={info.image} alt={info.title} width={800} height={800} className='w-full h-auto rounded-md' />
+                        <div key={info.title} style={{ backgroundColor: info.background, color: info.text }} className={`flex-none flex  flex-col items-center justify-between p-2 w-60  h-96  rounded-lg snap-end`}>
+                            <p className="flex-1 flex items-center text-2xl font-semibold">{info.title}</p>
+                            <Image src={info.image} alt={info.title} width={800} height={800} className="w-full h-auto rounded-md" />
                         </div>
 
                     ))}

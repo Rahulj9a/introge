@@ -34,7 +34,7 @@ const Page = async () => {
     <section className="min-h-screen max-h-fit pb-8">
       <div className="mx-4 flex text-light flex-wrap mt-4 md:mx-8 gap-6 h-fit">
         {availSections.map( (section) => {
-          return <SectionCard section={section} user={section.user}/>
+          return <SectionCard key={section.id} section={section} user={section.user}/>
         })}
       </div>
     </section>

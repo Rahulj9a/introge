@@ -2,8 +2,8 @@
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Section, SectionItem, User } from '@prisma/client'
-import React, { useState } from 'react'
+import { Section, SectionItem, User } from "@prisma/client"
+import React, { useState } from "react"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Switch } from "@/components/ui/switch"
 
@@ -32,7 +32,7 @@ const formSchema = z.object({
         message: "About section should not be more than 300 letters"
     }),
     template: z.string().min(1, {
-        message: "Template field can't be empty"
+        message: "Template field can not be empty"
     }),
     isActive: z.boolean().default(true).optional(),
 });
@@ -71,10 +71,10 @@ const SectionForm: React.FC<SectionFormProps> = ({ initialData, currentUser }) =
         resolver: zodResolver(formSchema),
 
         defaultValues: initialData ? { ...initialData } : {
-            name: '',
-            about: '',
+            name: "",
+            about: "",
             isActive: true,
-            template: ''
+            template: ""
 
         },
     });
@@ -208,13 +208,13 @@ const SectionForm: React.FC<SectionFormProps> = ({ initialData, currentUser }) =
                 <div style={{ backgroundColor: backgroundColor, color: textColor }} className={`rounded-lg py-2 w-full gap-4  items-center justify-around h-fit flex flex-col md:flex-row  `}>
                 <h3 className="py-2">Section Apperance</h3>
                     <div className="md:w-1/3 flex flex-col items-center">
-                        <p >Set Section's background color</p>
+                        <p >Set Section background color</p>
 
                         <HexColorPicker className="py-2 w-full" color={backgroundColor} onChange={setBackgroundColor} />
                         <Input className="text-black" value={backgroundColor} onChange={(e) => { e.preventDefault(); setBackgroundColor(e.target.value) }} />
                     </div>
                     <div className="md:w-1/3 flex flex-col items-center">
-                        <p>Set Section's text color</p>
+                        <p>Set Section text color</p>
 
                         <HexColorPicker className="py-2 w-full" color={textColor} onChange={setTextColor} />
                         <Input className="text-black" value={textColor} onChange={(e) => { e.preventDefault(); setTextColor(e.target.value) }} />
@@ -223,13 +223,13 @@ const SectionForm: React.FC<SectionFormProps> = ({ initialData, currentUser }) =
                 <div style={{ backgroundColor: itemsBackgroundColor, color: itemsTextColor }} className={`rounded-lg py-2 w-full gap-4  items-center justify-around h-fit flex flex-col md:flex-row  `}>
                 <h3 className="py-2">Items Apperance</h3>
                     <div className="md:w-1/3 flex flex-col items-center">
-                        <p >Set Item's background color</p>
+                        <p >Set template background color</p>
 
                         <HexColorPicker className="py-2 w-full" color={itemsBackgroundColor} onChange={setItemsBackgroundColor} />
                         <Input className="text-black" value={itemsBackgroundColor} onChange={(e) => { e.preventDefault(); setItemsBackgroundColor(e.target.value) }} />
                     </div>
                     <div className="md:w-1/3 flex flex-col items-center">
-                        <p>Set Item's text color</p>
+                        <p>Set template text color</p>
 
                         <HexColorPicker className="py-2 w-full" color={itemsTextColor} onChange={setItemsTextColor} />
                         <Input className="text-black" value={itemsTextColor} onChange={(e) => { e.preventDefault(); setItemsTextColor(e.target.value) }} />

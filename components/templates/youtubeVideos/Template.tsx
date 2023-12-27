@@ -6,11 +6,9 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { useLinkPreview } from "@/hooks/useLinkPreview";
-import { SectionItem } from "@prisma/client";
-import { Edit, Pencil, Trash } from "lucide-react";
-import Link from "next/link";
-import { useEffect, useState } from "react";
+ import { SectionItem } from "@prisma/client";
+import {  Pencil, Trash } from "lucide-react";
+ import { useEffect, useState } from "react";
 
 interface BlogTemplateProps {
   data: SectionItem;
@@ -20,11 +18,7 @@ interface BlogTemplateProps {
     textColor?:string
 }
 
-const getlinkpreview = async (url: string) => {
-  const reponse = await useLinkPreview(url as string);
-  return reponse.data;
-};
-
+ 
 const YoutubeTemplate: React.FC<BlogTemplateProps> = ({
   data,
   onDelete,
@@ -33,22 +27,8 @@ const YoutubeTemplate: React.FC<BlogTemplateProps> = ({
     textColor
 }) => {
   const [isMounted, setIsMounted] = useState(false);
-  const [previewdata, setPreviewData] = useState<{ image: string } | null>(
-    null
-  );
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const fetcheddata = await getlinkpreview(data.url as string);
-        setPreviewData(fetcheddata);
-      } catch (error) {
-        setPreviewData(null);
-      }
-    };
-    fetchData();
-  }, [data.url]);
-  useEffect(() => {
+ 
+   useEffect(() => {
     setIsMounted(true);
   }, []);
   if (!isMounted) {

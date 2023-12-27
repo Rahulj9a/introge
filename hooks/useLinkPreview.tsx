@@ -1,5 +1,5 @@
 
-export const useLinkPreview = async(url:string) => {
+export const UseLinkPreview = async(url:string) => {
   
     try {
       const res = await fetch(
@@ -14,7 +14,7 @@ export const useLinkPreview = async(url:string) => {
     }  
 };
 
-export default useLinkPreview
+export default UseLinkPreview
 
 
 

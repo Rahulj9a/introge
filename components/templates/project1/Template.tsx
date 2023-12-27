@@ -6,7 +6,7 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { useLinkPreview } from "@/hooks/useLinkPreview";
+import { UseLinkPreview } from "@/hooks/useLinkPreview";
 import { SectionItem } from "@prisma/client";
 import { Edit, Pencil, Trash } from "lucide-react";
 import Link from "next/link";
@@ -23,7 +23,7 @@ interface Project1TemplateProps {
 }
 
 const getlinkpreview = async (url: string) => {
-    const reponse = await useLinkPreview(url as string);
+    const reponse = await UseLinkPreview(url as string);
     return reponse.data;
 };
 

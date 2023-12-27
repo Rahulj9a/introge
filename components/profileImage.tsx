@@ -33,7 +33,7 @@ const ProfileImage: React.FC<ProfileImageProps> = ({
         (base64: string) => {
             onChange(base64);
         },
-        [onChange, base64],
+        [onChange],
     );
     const removeImage = () => {
         setBase64(undefined);
