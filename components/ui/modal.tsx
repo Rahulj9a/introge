@@ -25,7 +25,7 @@ const Modal: React.FC<ModalProps>=({
     }
     return(
         <Dialog open={isOpen} onOpenChange={onChange}>
-            <DialogContent className="max-h-[90vh] overflow-y-scroll">
+            <DialogContent className="max-h-[90vh] scroll-smooth max-w-[90vw]">
                 <DialogHeader>
                     <DialogTitle>
                         {title}

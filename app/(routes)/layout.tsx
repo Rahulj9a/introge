@@ -1,4 +1,4 @@
-import Footer from "@/components/footer";
+import Footer from "@/components/headersAndFooters/footer";
 import Sidebar from "@/components/headersAndFooters/mainSideBar";
 import SubNav from "@/components/headersAndFooters/mainSubNav";
 import Navbar from "@/components/headersAndFooters/navbar";
@@ -16,7 +16,7 @@ const Layout: React.FC<LayoutProps> = async ({ children }) => {
     return (
         <>
             <Navbar currentUser={currentUser ? currentUser as any : null} SubNav={SubNav} />
-            <div className="fixed md:hidden left-16 top-2 z-30"> <Sidebar/></div>
+            <div className="fixed md:hidden left-12 top-1 z-30"> <Sidebar/></div>
              {children} 
              <Footer />
         </>

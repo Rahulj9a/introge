@@ -10,17 +10,17 @@ import { MdPersonSearch } from "react-icons/md";
 const SubNav = () => {
     const routes = [
         {
-            label: "Discover Peoples",
+            label: "Peoples",
             icon: MdPersonSearch,
             href: "/explore/people",
             color: "text-sky-500",
         },
-        {
+        /* {
             label: "Discover Sections",
             icon: LayoutList,
             href: "/explore/sections",
             color: "text-sky-500",
-        },
+        }, */
        /*  {
             label: "Get started",
             icon: Rocket,

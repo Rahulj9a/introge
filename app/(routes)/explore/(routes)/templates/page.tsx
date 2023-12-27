@@ -24,10 +24,6 @@ const Page = () => {
     about: "Description",
     labels: "Pending, Label1",
   };
-  const [isFormOpen, setIsFormOpen] = useState(false);
-  const [isTemplateOpen, setIsTemplateOpen] = useState(false);
-
-  const [Element, setElement] = useState();
 
   return (
     <>
@@ -37,7 +33,7 @@ const Page = () => {
           const Form = template.form;
           const Frame = template.template;
           return (
-            <div className="rounded-lg w-fit h-auto border-2 border-dark flex items-center justify-center gap-4 flex-col px-2 py-3">
+            <div key={template.label} className="rounded-lg w-fit h-auto border-2 border-dark flex items-center justify-center gap-4 flex-col px-2 py-3">
               <h1 className="text-lg">{template.label}</h1>
               <div className="bg-light h-fit text-darkest rounded-md">
               <Frame data={dummyData} />

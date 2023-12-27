@@ -9,7 +9,7 @@ const Layout: React.FC<LayoutProps> = async ({ children }) => {
 
 
     return (
-        <div className="pt-14 bg-darkest">
+        <div className="pt-10 bg-darkest">
             <div className="absolute md:hidden">
                 <Sidebar />
             </div>

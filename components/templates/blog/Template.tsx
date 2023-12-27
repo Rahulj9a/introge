@@ -54,7 +54,7 @@ const BlogTemplate: React.FC<BlogTemplateProps> = ({
         return null
     }
     return (
-        <div style={{backgroundColor:backgroundColor, color:textColor}} className="w-[300px] h-[380px] rounded-md sh relative shadow-[rgba(17,_17,_26,_0.1)_0px_0px_30px] shadow-black">
+        <div style={{backgroundColor:backgroundColor, color:textColor}} className="w-[270px]  rounded-md sh relative shadow-[rgba(17,_17,_26,_0.1)_0px_0px_20px] shadow-gray-500">
             {onDelete ? (
                 <div className="rounded-md z-20 absolute flex gap-1 -top-2 -right-2">
                     <TooltipProvider>
@@ -85,22 +85,22 @@ const BlogTemplate: React.FC<BlogTemplateProps> = ({
                 </div>
             ) : null}
             <Link href={data.url as string} target="_blank"  >
-                <div className="w-full p-2 flex flex-col gap-2">
+                <div className="w-full p-2 h-[330px]  flex flex-col gap-2">
                     {/* Priority for showing Image--> ImageURL -> URL fetched image -> Text */}
-                    <div className="w-full h-[140px] rounded-lg">
+                    <div className="w-full h-2/5 rounded-lg">
                         {data.imageURL ? (
-                            <img src={data.imageURL} className="rounded-lg" />
+                            <img src={data.imageURL} className="rounded-lg object-contain" />
                         ) : previewdata && previewdata.image ? (
-                            <img src={previewdata?.image} className="rounded-lg" />
+                            <img src={previewdata?.image} className="rounded-lg object-contain" />
                         ) : (
                             <div className="w-full h-full bg-black text-white text-center flex items-center justify-center rounded-lg">
                                 {data.name}
                             </div>
                         )}
                     </div>
-                    <div className="flex flex-col justify-around h-[200px]">
+                    <div className="flex flex-col justify-around flex-1">
                         <h1 className="text-lg font-semibold">{data.name}</h1>
-                        <p className="text-sm ">{data.about}</p>
+                        <p className="text-xs ">{data.about}</p>
                         <div className="flex text-xs gap-1 flex-wrap">
                             {data.labels
                                 ?.split(/\s*,\s*/)

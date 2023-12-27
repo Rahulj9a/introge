@@ -54,7 +54,7 @@ const Skill1Template: React.FC<Skill1TemplateProps> = ({
         return null
     }
     return (
-        <div style={{backgroundColor:backgroundColor, color:textColor}} className="w-[100px] md:w-[170px] min-h-fit max-h-full flex flex-col items-center rounded-md sh relative shadow-[rgba(17,_17,_26,_0.1)_0px_0px_30px] shadow-black">
+        <div style={{backgroundColor:backgroundColor, color:textColor}} className="w-[100px] shadow-gray-500 md:w-[170px] min-h-fit max-h-full flex flex-col items-center rounded-md sh relative shadow-[rgba(17,_17,_26,_0.1)_0px_0px_20px] ">
             {onDelete ? (
                 <div className="rounded-md z-20 absolute flex gap-1 -top-2 -right-2">
                     <TooltipProvider>

@@ -16,8 +16,8 @@ import { useRouter } from "next/navigation";
 
 interface Project1TemplateProps {
     data: SectionItem;
-    backgroundColor?:string,
-    textColor?:string
+    backgroundColor?: string,
+    textColor?: string
     onDelete?: () => void;
     onEdit?: () => void;
 }
@@ -57,7 +57,7 @@ const Project1Template: React.FC<Project1TemplateProps> = ({
         return null
     }
     return (
-        <div style={{backgroundColor:backgroundColor, color:textColor}} className="w-[330px] max-h-fit min-h-[400px] flex flex-col justify-around rounded-md relative shadow-[rgba(17,_17,_26,_0.1)_0px_0px_30px] shadow-black" >
+        <div style={{ backgroundColor: backgroundColor, color: textColor }} className="w-[290px] shadow-gray-500 h-fit flex flex-col rounded-md relative shadow-[rgba(17,_17,_26,_0.1)_0px_0px_20px] " >
             {onDelete ? (
                 <div className="rounded-md flex gap-1 absolute z-20 -top-2 -right-2">
                     <TooltipProvider>
@@ -87,10 +87,11 @@ const Project1Template: React.FC<Project1TemplateProps> = ({
 
                 </div>
             ) : null}
-            <Link  href= {data.url as string} target="_blank">
-                <div className="w-full p-2 flex flex-col gap-2">
+
+            <div className="w-full h-[400px] p-2 flex flex-col gap-2">
+                <Link href={data.url as string} className="flex-1 flex flex-col" target="_blank">
                     {/* Priority for showing Image--> ImageURL -> URL fetched image -> Text */}
-                    <div className="w-full h-[140px] rounded-lg">
+                    <div className="w-full aspect-[16/9] rounded-lg">
                         {data.imageURL ? (
                             <img src={data.imageURL} className="rounded-lg  w-full h-full object-contain " />
                         ) : previewdata && previewdata.image ? (
@@ -101,9 +102,9 @@ const Project1Template: React.FC<Project1TemplateProps> = ({
                             </div>
                         )}
                     </div>
-                    
-                    <div className="flex flex-col justify-around h-[200px]">
-                        <h1 className="text-lg font-semibold flex items-center justify-between">{data.name} <span className="text-xs text-dark">{data.labels?.split(",")[0]}</span></h1>
+
+                    <div className="flex flex-col justify-around flex-1">
+                        <h1 className="text-base font-semibold flex items-center justify-between">{data.name} <span className="text-xs text-dark w-fit">{data.labels?.split(",")[0]}</span></h1>
                         <div className="flex text-xs gap-1 flex-wrap">
                             {data.labels
                                 ?.split(/\s*,\s*/)
@@ -115,17 +116,18 @@ const Project1Template: React.FC<Project1TemplateProps> = ({
                                     ) : null
                                 )}
                         </div>
-                        <p className="text-sm ">{data.about}</p>
-
-                        {data.otherURLs && <div className="flex text-xs gap-1 flex-wrap">
-                            {JSON.parse(String(data?.otherURLs)).map((link: any, index: number) =>
-                                <ExistingUrlscard index={index} key={index} title={link.title} url={link.url} />
-                            )}
-                        </div>}
+                        <p className="text-xs ">{data.about}</p>
                     </div>
-                </div>
-            </Link>
-        </div>
+                </Link>
+                {data.otherURLs && <div className="flex text-xs gap-1 flex-wrap">
+                    {JSON.parse(String(data?.otherURLs)).map((link: any, index: number) =>
+                        <ExistingUrlscard index={index} key={index} title={link.title} url={link.url} />
+                    )}
+                </div>}
+
+            </div>
+
+        </div >
     );
 };
 export default Project1Template;

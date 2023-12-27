@@ -14,12 +14,12 @@ const SideBar = () => {
             href: "/explore/people",
             color: "text-dark",
         },
-        {
+       /*  {
             label: "Sections",
             icon: LayoutList,
             href: "/explore/sections",
             color: "text-dark",
-        },
+        }, */
         {
             label: "Templates",
             icon: Frame,

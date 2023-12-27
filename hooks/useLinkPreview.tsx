@@ -8,7 +8,7 @@ export const useLinkPreview = async(url:string) => {
 
       const data = await res.json();
     return {data, error:false}
-      /* setData(data); */
+      
     } catch (err :any) {
         return {data:null, error:true}
     }  
