@@ -6,7 +6,7 @@ interface UseLoginModalProps{
     onOpen:()=>void
 }
 
-export const UseLoginModal = create<UseLoginModalProps>((set)=>({
+export const useLoginModal = create<UseLoginModalProps>((set)=>({
     isOpen:false,
     onOpen:()=>set({isOpen:true}),
     onClose:()=>set({isOpen:false}),
