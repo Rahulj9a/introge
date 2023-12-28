@@ -229,9 +229,9 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
                 </div>
             </div>
             <div className="w-full py-2">
-                <h3 className="font-semibold text-sm py-2">Labels</h3>
+                <h3 className="font-semibold text-lg py-2">Edit Labels</h3>
                 {labels.length > 0 ? (
-                    <div className="max-h-[100px] py-1 flex gap-2 w-full flex-wrap">
+                    <div className="max-h-[100px] py-1 overflow-y-auto flex gap-2 w-full flex-wrap">
                         {labels.map((label) => (
                             <ExsitingLabelscard
                                 key={label}
@@ -247,9 +247,10 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
                 ) : null}
 
                 <hr />
+                <div className="w-full max-h-[300px] m-2 px-1 border-[1px] overflow-y-auto">
                 {LabelList.map((labelGroup) => (
                     <div key={labelGroup.title}>
-                        <Accordion type="single" collapsible className="w-full overflow-y-scroll">
+                        <Accordion type="single" collapsible className="w-full overflow-y-auto max-h-[200px]">
                             <AccordionItem value="item-1">
                                 <AccordionTrigger>
                                     <h3>{labelGroup.title} Labels</h3>
@@ -276,6 +277,8 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
                         </Accordion>
                     </div>
                 ))}
+                </div>
+                <p className="p-1 bg-dark text-xs text-light rounded-sm my-1">Not found your faviorable label? Contact Developer to update list</p>
             </div>
             <div style={{backgroundColor:backgroundColor, color:textColor}} className={`rounded-lg py-2 w-full gap-4  items-center justify-around h-fit flex flex-col md:flex-row  `}>
                 <h3 className="py-2">Apperance</h3>

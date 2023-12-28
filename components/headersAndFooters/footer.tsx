@@ -70,6 +70,7 @@ const Footer = async () => {
 
         </div>
       </div> */}
+      <p className="w-full flex items-center justify-center py-2">Contact Developer : rahulj9a@gmail.com</p>
 
       <p className="flex gap-2 py-2 items-center text-base w-full justify-center">
         Made with <BsHeartFill className="w-4 h-4 text-red-600"/> by 

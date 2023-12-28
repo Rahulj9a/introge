@@ -20,9 +20,9 @@ const RecommendList:React.FC<RecommendListProps> = async({currentUser}) => {
         labels: {
           hasSome:currentUser.labels
         },
-       /*  NOT:{
+        NOT:{
           id:currentUser.id
-        } */
+        }
        }
      })
    return (
