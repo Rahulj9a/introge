@@ -46,6 +46,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ refetch }) => {
 
       toast.error(error.message);
     } finally {
+      toast.success("Successfully registered, visit edit profile to choose custom username")
      }
   };
   return (
