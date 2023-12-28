@@ -19,8 +19,8 @@ const Footer = async () => {
           <Image
             width={50}
             height={50}
-            src="/profiley.png"
-            alt="Profiley"
+            src="/introge.png"
+            alt="introge"
             className=""
           />
           <span className="font-bold text-xl">Introge</span>
