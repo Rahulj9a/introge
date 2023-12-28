@@ -9,7 +9,7 @@ import { ReactQueryProvider } from '@/providers/reactQueryProvider'
 const inter = Noto_Serif({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Intorge',
+  title: 'Introge',
   description: 'Build your online portfolio',
   
 }
