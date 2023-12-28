@@ -15,7 +15,7 @@ const authOptions: NextAuthOptions = {
     },
     //@ts-ignore
     async signIn({ profile }) {
-      
+     
       try {
         const usersNumber = await prisma.user.count();
         const userExist = await prisma.user.findUnique({
@@ -27,7 +27,7 @@ const authOptions: NextAuthOptions = {
           const user = await prisma.user.create({
             data: {
               email: profile?.email as string,
-              username: `${profile?.name}${usersNumber + 1}`,
+              username: `user${usersNumber + 1}`,
               name: profile?.name,
             },
           });
