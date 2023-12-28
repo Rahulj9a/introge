@@ -80,11 +80,11 @@ const FilterBar: React.FC<FilterBarProps> = ({  onClick, selectedLabels }) => {
           <Image
             width={50}
             height={50}
-            src="/profiley.png"
-            alt="Profiley"
+            src="/introge.png"
+            alt="introge"
             className=""
           />
-          <span className="text-darkest font-bold text-2xl">Profiley</span>
+          <span className="text-darkest font-bold text-2xl">introge</span>
         </Link>
       </SheetContent>
     </Sheet>

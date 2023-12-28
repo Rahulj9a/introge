@@ -25,7 +25,7 @@ const Page = async () => {
               <p className="text-lg">Unleash your digital presence with</p>
               <br />
               <p className="text-darkest font-bold text-5xl md:text-6xl xl:text-9xl my-1">
-                Profiley<span className="animate-ping">_</span>
+                Introge<span className="animate-ping">_</span>
               </p>
               <br />
               <p>

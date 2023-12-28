@@ -62,8 +62,8 @@ const SideBar = () => {
                 </div>
             </div>
             <Link className="w-full md:hidden h-fit p-2 flex items-center gap-4 justify-center hover:bg-light cursor-pointer" href="/">
-                <Image width={50} height={50} src="/profiley.png" alt="Profiley" className="" />
-                <span className="text-darkest font-bold text-2xl">Profiley</span>
+                <Image width={50} height={50} src="/introge.png" alt="introge" className="" />
+                <span className="text-darkest font-bold text-2xl">introge</span>
             </Link>
         </div>
     );

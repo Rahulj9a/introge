@@ -91,7 +91,7 @@ const ContentAdvSec = () => {
                                 <button onClick={sendEmail} className="bg-[#E9ECF4] hover:bg-white cursor-pointer gap-2 rounded-lg  p-2 py-4 text-xl flex items-center justify-center flex-1">
                                     Email your idea <Mail className=" w-6" />
                                 </button>
-                                <Link href="https://github.com/Rahulj9a/profiley" target="_blank" className="bg-[#E9ECF4] hover:bg-white cursor-pointer gap-2 py-4 p-2 rounded-lg h-28 text-xl flex items-center justify-center flex-1">
+                                <Link href="https://github.com/Rahulj9a/introge" target="_blank" className="bg-[#E9ECF4] hover:bg-white cursor-pointer gap-2 py-4 p-2 rounded-lg h-28 text-xl flex items-center justify-center flex-1">
                                     Open-source <Github className="w-6" />
                                 </Link>
                             </div>

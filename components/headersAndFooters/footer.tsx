@@ -23,26 +23,26 @@ const Footer = async () => {
             alt="Profiley"
             className=""
           />
-          <span className="font-bold text-xl">Profiley</span>
+          <span className="font-bold text-xl">Introge</span>
         </Link>
         <div className="flex gap-8">
           <Link
           target="_blank"
-            href="https://twitter.com/profiley_hq"
+            href="https://twitter.com/introge_hq"
             className="text-xl border-transparent hover:border-white border-2 p-2 rounded-full"
           >
             <FaXTwitter />
           </Link>
           <Link
           target="_blank"
-            href="https://github.com/Rahulj9a/profiley"
+            href="https://github.com/Rahulj9a/intorge"
             className="text-xl border-transparent hover:border-white border-2 p-2 rounded-full"
           >
             <Github />
           </Link>
           <Link
           target="_blank"
-            href="https://instagram.com/profiley_hq"
+            href="https://instagram.com/introge_hq"
             className="text-xl border-transparent hover:border-white border-2 p-2 rounded-full"
           >
             <Instagram />
