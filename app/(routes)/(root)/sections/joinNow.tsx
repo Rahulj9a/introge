@@ -9,7 +9,7 @@ const JoinNow = () => {
     const loginModal = useLoginModal()
   return (
     <div className='h-fit p-6 w-full'>
-        <Button className='bg-mid h-40 w-full text-3xl text-dark hover:bg-brand' onClick={loginModal.onOpen}>
+        <Button className='bg-mid h-28 w-full text-3xl text-dark hover:bg-brand' onClick={loginModal.onOpen}>
             Join Now <ArrowRightSquare className='mx-4 animate-bounce' width={30} height={30}/>
         </Button>
     </div>

@@ -2,7 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 
 
 export async function GET(req: NextRequest) {
-    const namequery = req.nextUrl.searchParams.get("username")||""
+    const namequery = req.nextUrl.searchParams.get("username")
+    if(namequery)
      try {
 
         const user = await prisma?.user.findMany({

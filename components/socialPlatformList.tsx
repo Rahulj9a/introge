@@ -2,9 +2,12 @@
 import { Facebook, Github, Instagram, Linkedin, Twitter, Youtube } from "lucide-react";
  import { AiOutlineReddit, AiOutlineWhatsApp } from "react-icons/ai"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
-import { BsMedium } from "react-icons/bs"
+import { BsMedium} from "react-icons/bs"
 import {GrSnapchat} from "react-icons/gr"
 import {FaXTwitter} from "react-icons/fa6"
+import { SiBuymeacoffee } from "react-icons/si";
+import { SlSocialSpotify } from "react-icons/sl";
+import { FiGitlab } from "react-icons/fi";
 
 export const socialPlatforms = [
     {
@@ -54,6 +57,21 @@ export const socialPlatforms = [
     {
         label: "Medium",
         icon: BsMedium,
+        color: "text-black"
+    },
+    {
+        label: "Buy Me A Coffee",
+        icon: SiBuymeacoffee,
+        color: "text-black"
+    },
+    {
+        label: "Spotify",
+        icon: SlSocialSpotify,
+        color: "text-black"
+    },
+    {
+        label: "Spotify",
+        icon: FiGitlab,
         color: "text-black"
     },
 ];

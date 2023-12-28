@@ -52,7 +52,7 @@ const UserCard: React.FC<UserCardProps> = ({ data }) => {
               index < 3 && (
                 <div
                   key={label}
-                  className=" text-[10px] lg:text-sm  text-darkest"
+                  className=" text-[10px] lg:text-xs  text-darkest"
                 >
                   {label + " • "} 
                 </div>

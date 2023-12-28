@@ -87,7 +87,7 @@ const SuggestionBox: React.FC<SuggestionBoxProps> = ({ input = "" }) => {
                           index < 3 && (
                             <div
                               key={label}
-                              className=" text-[10px] lg:text-sm text-darkest"
+                              className="text-xs text-darkest"
                             >
                               {label + " • "}
                             </div>

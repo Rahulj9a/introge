@@ -30,8 +30,11 @@ const ResultList: React.FC<ResultListProps> = ({ currentUser }) => {
 
 
   if (encodedNameQuery === "" && labels.length === 0) {
-    return <div className="flex flex-col w-full h-fit px-2">
-      <FilterBar onClick={handleNewLabel} selectedLabels={labels} />
+    return <div className=" flex   flex-col w-full h-[60vh] items-center justify-center px-2">
+       <p className="text-white">Search peoples with username </p>
+       <p className="text-white">OR</p>
+
+       <p className="text-white">join and explore recommended peoples</p>
     </div>
   }
 

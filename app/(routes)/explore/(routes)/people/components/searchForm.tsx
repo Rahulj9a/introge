@@ -15,7 +15,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ }) => {
     const onSubmit = (event: React.FormEvent) => {
         event.preventDefault();
         const encodedSearchUserNameQuery = encodeURI(input);
-        router.push(`/explore/users?username=${encodedSearchUserNameQuery}`)
+        router.push(`/explore/people?username=${encodedSearchUserNameQuery}`)
 
 
     }
