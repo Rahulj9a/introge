@@ -6,6 +6,7 @@ export async function GET(req: NextRequest) {
     if(!namequery){
         return NextResponse.json([])
     }
+    
     if(namequery)
      try {
 
