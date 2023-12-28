@@ -11,13 +11,10 @@ interface SectionLayoutProps {
   params: {
     sectionname: string;
   };
-  children: React.ReactNode;
+ 
 }
 
-const SectionLayout: React.FC<SectionLayoutProps> = async ({
-  params,
-  children,
-}) => {
+const SectionLayout: React.FC<SectionLayoutProps> = async ({params}) => {
   const { currentUser } = await serverAuth();
   if (!currentUser) {
     redirect("/");

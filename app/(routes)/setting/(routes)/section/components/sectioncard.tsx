@@ -75,9 +75,9 @@ const Sectioncard: React.FC<SectioncardProps> = ({ data, user }) => {
         <div className="w-full h-28 rounded-lg my-5 bg-mid">
  
                 <Modal title="Share" description="Share section" isOpen={isShareOpen} onClose={() => setIsShareOpen(false)}>
-                    <ShareModal link={`${baseURL}/${user?.username}/${data.name}`}>
+                    <ShareModal link={`${baseURL}/${user?.username}/${data.name}`}/>
 
-                    </ShareModal>
+                    
                 </Modal>
  
             <div className="w-full h-32 px-5 py-1 rounded-lg bg-mid flex items-center justify-center">
