@@ -25,11 +25,7 @@ const ResultList: React.FC<ResultListProps> = ({ currentUser }) => {
       setLabels([...labels, input])
     }
   }
-   
-  const { data: Users, isLoading, error } = UseUser({ encodedNameQuery })
-
-
-  if (encodedNameQuery === "" && labels.length === 0) {
+  if (encodedNameQuery === "") {
     return <div className=" flex   flex-col w-full h-[60vh] items-center justify-center px-2">
        <p className="text-white">Search peoples with username </p>
        <p className="text-white">OR</p>
@@ -37,6 +33,15 @@ const ResultList: React.FC<ResultListProps> = ({ currentUser }) => {
        <p className="text-white">join and explore recommended peoples</p>
     </div>
   }
+  const { data: Users, isLoading, error } = UseUser({ encodedNameQuery })
+
+  if(error){
+    return <div className=" flex   flex-col w-full h-[60vh] items-center justify-center px-2">
+       <p className="text-white">Something went wrong</p>
+       
+    </div>
+  }
+  
 
   if (isLoading) {
     return <div className="text-light w-full h-fit px-2 flex items-center justify-center">
