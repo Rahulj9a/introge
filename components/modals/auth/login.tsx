@@ -40,13 +40,13 @@ const LoginModal: React.FC<LoginModalProps> = ({ refetch }) => {
        const user = await signIn("google");
     
 
-
+       toast.success("Successfully registered, visit edit profile to choose custom username")
 
     } catch (error: any) {
 
       toast.error(error.message);
     } finally {
-      toast.success("Successfully registered, visit edit profile to choose custom username")
+
      }
   };
   return (
