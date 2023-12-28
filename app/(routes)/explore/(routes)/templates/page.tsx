@@ -16,7 +16,7 @@ const Page = () => {
     id: "abc",
     userid: "abc",
     sectionid: "123",
-    otherURLs: '[{"title":"Extra 1", "url":"/explore/templates"}]',
+    otherURLs: JSON.stringify([{"title":"Extra 1", "url":"/explore/templates"}]),
     imageURL: null,
     videoURL: null,
     name: "Title",

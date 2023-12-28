@@ -1,9 +1,9 @@
 "use client"
-import { cn } from '@/lib/utils';
-import { Home, LayoutList, Rocket } from 'lucide-react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import React from 'react'
+import { cn } from "@/lib/utils";
+import { Home, LayoutList, Rocket } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import React from "react"
 import { MdPersonSearch } from "react-icons/md";
 
 
@@ -31,7 +31,7 @@ const SubNav = () => {
     ]
     const pathname = usePathname();
     return (
-        <div className='flex flex-col gap-4 '>
+        <div className="flex flex-col gap-4 ">
             <div className="px-3 py-1 flex-1">
 
                 <div className=" items-center justify-center flex-col md:flex-row gap-2 flex flex-1">

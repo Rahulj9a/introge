@@ -65,7 +65,7 @@ const Project1Form: React.FC<Project1FormProps> = ({
     const [linkName, setLinkName] = useState("")
     const [link, setLink] = useState("")
 
-    const [otherURLs, setOtherURLs] = useState(initialData ? initialData?.otherURLs : '[]')
+    const [otherURLs, setOtherURLs] = useState(initialData ? initialData?.otherURLs : "[]")
      const form = useForm<Project1FormValues>({
         resolver: zodResolver(formSchema),
 

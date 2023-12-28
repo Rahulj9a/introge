@@ -1,8 +1,8 @@
 "use client"
 import { Facebook, Github, Instagram, Linkedin, Twitter, Youtube } from "lucide-react";
  import { AiOutlineReddit, AiOutlineWhatsApp } from "react-icons/ai"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
-import { BsMedium } from 'react-icons/bs'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import { BsMedium } from "react-icons/bs"
 import {GrSnapchat} from "react-icons/gr"
 import {FaXTwitter} from "react-icons/fa6"
 

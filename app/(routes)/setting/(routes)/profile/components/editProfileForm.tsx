@@ -34,7 +34,7 @@ import {
 
 const formSchema = z.object({
     username:z.string().min(4,{
-        message:"Username can't be less than 4 letters"
+        message:"Username can nott be less than 4 letters"
     }).regex(/^[a-zA-Z0-9\-._&!+()]+$/, {
         message: "Only letters, numbers and `-` `.` `_` `&` `!` `+` `(` `)` are allowed"
     }),

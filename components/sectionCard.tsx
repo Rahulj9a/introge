@@ -1,9 +1,9 @@
 "use client"
-import { Section, User } from '@prisma/client'
-import React, { useEffect, useState } from 'react'
+import { Section, User } from "@prisma/client"
+import React, { useEffect, useState } from "react"
 import prisma from "@/lib/prismadb";
 
-import UserAvatar from './userAvatar'
+import UserAvatar from "./userAvatar"
 
 
 interface SectionCardProps {

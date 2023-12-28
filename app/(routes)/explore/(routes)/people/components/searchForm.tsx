@@ -1,11 +1,9 @@
 "use client"
-import { Button } from '@/components/ui/button';
-import { Filter, Search } from 'lucide-react';
-import React, { useState } from 'react'
-import { useRouter } from 'next/navigation';
-import SuggestionBox from './suggestionBox';
-import FilterBar from './filterBar';
-
+import { Button } from "@/components/ui/button";
+import { Filter, Search } from "lucide-react";
+import React, { useState } from "react"
+import { useRouter } from "next/navigation";
+import SuggestionBox from "./suggestionBox";
 interface SearchFormProps {
 
 
@@ -23,7 +21,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ }) => {
     }
 
     return (
-        <div className='flex-1 relative'>
+        <div className="flex-1 relative">
             <form className="flex gap-2 relative items-center w-full" onSubmit={onSubmit}>
                 <input onChange={(e) => { e.preventDefault(); setInput(e.target.value) }} value={input} className="flex-1 px-1 h-10 rounded-md bg-light text-dark text-lg"></input>
                 <Button className="w-10 h-10 rounded-md bg-light hover:bg-mid" size="icon" onSubmit={onSubmit}>
@@ -31,7 +29,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ }) => {
                 </Button>
 
             </form>
-            <div className='absolute w-full top-14 z-10'>
+            <div className="absolute w-full top-14 z-10">
                 {input.length > 2 && <SuggestionBox input={input} />}
             </div>
         </div>

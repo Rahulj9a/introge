@@ -1,11 +1,11 @@
 "use client"
-import UserCard from '@/components/userCard';
-import { UseUser } from '@/hooks/useUser';
-import { User } from '@prisma/client';
-import { useSearchParams } from 'next/navigation'
-import { encode } from 'punycode';
-import React, { useState } from 'react'
-import FilterBar from './filterBar';
+import UserCard from "@/components/userCard";
+import { UseUser } from "@/hooks/useUser";
+import { User } from "@prisma/client";
+import { useSearchParams } from "next/navigation"
+import { encode } from "punycode";
+import React, { useState } from "react"
+import FilterBar from "./filterBar";
 
 interface ResultListProps {
   currentUser?: User
@@ -30,13 +30,13 @@ const ResultList: React.FC<ResultListProps> = ({ currentUser }) => {
 
 
   if (encodedNameQuery === "" && labels.length === 0) {
-    return <div className='flex flex-col w-full h-fit px-2'>
+    return <div className="flex flex-col w-full h-fit px-2">
       <FilterBar onClick={handleNewLabel} selectedLabels={labels} />
     </div>
   }
 
   if (isLoading) {
-    return <div className='text-light w-full h-fit px-2 flex items-center justify-center'>
+    return <div className="text-light w-full h-fit px-2 flex items-center justify-center">
       Loading...
     </div>
 
@@ -45,12 +45,12 @@ const ResultList: React.FC<ResultListProps> = ({ currentUser }) => {
   const data = labels.length > 0 ? [...Users?.data].filter((user: User) => !labels.some(tag => !user.labels.includes(tag))) : [...Users?.data]
  
   return (
-    <div className='flex flex-col w-full h-fit px-2 gap-4'>
+    <div className="flex flex-col w-full h-fit px-2 gap-4">
       <FilterBar onClick={handleNewLabel} selectedLabels={labels} />
 
-      <h2 className='text-light text-xl'>Search Result:</h2>
-      <div className='flex flex-wrap gap-4'>
-        {data && data.length !== 0 ? data.map((user: User) => <UserCard key={user.id} data={user} />) : <div className='text-light'>No Result Found</div>}
+      <h2 className="text-light text-xl">Search Result:</h2>
+      <div className="flex flex-wrap gap-4">
+        {data && data.length !== 0 ? data.map((user: User) => <UserCard key={user.id} data={user} />) : <div className="text-light">No Result Found</div>}
       </div>
     </div>
   )

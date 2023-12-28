@@ -23,7 +23,7 @@ import axios from "axios"
 
 
 interface RegisterModalProps {
-  refetch?: () => void; // Assuming refetch is a function that doesn't take any arguments and returns void
+  refetch?: () => void; // Assuming refetch is a function that doesn not take any arguments and returns void
 }
 
 const formSchema = z.object({
@@ -72,7 +72,7 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ refetch }) => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       setisLoading(true);
-      await axios.post('/api/register', values)
+      await axios.post("/api/register", values)
 
       await signIn("credentials", values);
       toast.success("Register Successfull");

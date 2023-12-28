@@ -26,7 +26,7 @@ import RegisterModal from "./register";
 /* import { signIn } from "next-auth/react"; */
 
 interface LoginModalProps {
-  refetch?: () => void; // Assuming refetch is a function that doesn't take any arguments and returns void
+  refetch?: () => void; // Assuming refetch is a function that doesn"t take any arguments and returns void
 }
 
  
@@ -37,7 +37,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ refetch }) => {
 
   const onSubmit = async () => {
     try {
-       const user = await signIn('google');
+       const user = await signIn("google");
     
 
 

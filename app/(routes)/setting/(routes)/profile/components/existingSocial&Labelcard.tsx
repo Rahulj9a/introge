@@ -1,10 +1,10 @@
 "use client"
 
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
-import { Plus, Unlink, X } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import React, { useEffect, useState } from 'react'
-import Link from 'next/link'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import { Plus, Unlink, X } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import React, { useEffect, useState } from "react"
+import Link from "next/link"
 
 interface ExistingSocialscardProps {
     social: {
@@ -31,8 +31,8 @@ export const ExistingSocialscard: React.FC<ExistingSocialscardProps> = ({ social
         return null
     }
     return (
-        <div className='flex items-center justify-center px-3'>
-        <Link className="flex items-center justify-around flex-1 " href={social.url} target='_blank'>
+        <div className="flex items-center justify-center px-3">
+        <Link className="flex items-center justify-around flex-1 " href={social.url} target="_blank">
 
             {platformIcon}
 
@@ -85,13 +85,13 @@ export const ExsitingLabelscard: React.FC<ExsitingLabelscardprops> = ({ exist, v
     }
     return (
         <div className={`flex w-fit items-center px-2 py-1 rounded-full gap-2 justify-start flex-wrap ${exist ? "bg-gray-300 border-[1px] text-black" : "bg-gray-700 text-white"}`}>
-            <p className='font-mono text-sm'>
+            <p className="font-mono text-sm">
                 {value}
             </p>
-            {exist ? <Button disabled={disabled} className='w-6 h-6 rounded-full' type='button' variant="destructive" size="icon" onClick={() => { onClick(value) }}>
-                <X className='w-4 h-4' />
-            </Button> : <Button disabled={disabled} className='w-6 h-6 rounded-full' type='button' variant="secondary" size="icon" onClick={() => { onClick(value) }}>
-                <Plus className='w-4 h-4' />
+            {exist ? <Button disabled={disabled} className="w-6 h-6 rounded-full" type="button" variant="destructive" size="icon" onClick={() => { onClick(value) }}>
+                <X className="w-4 h-4" />
+            </Button> : <Button disabled={disabled} className="w-6 h-6 rounded-full" type="button" variant="secondary" size="icon" onClick={() => { onClick(value) }}>
+                <Plus className="w-4 h-4" />
             </Button>
             }
         </div>
