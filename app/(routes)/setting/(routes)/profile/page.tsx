@@ -1,12 +1,8 @@
-
-import { User } from "@prisma/client"
 import React, { useState } from "react"
-import ProfileImage from "../../../../../components/profileImage"
 import ProfileForm from "./components/editProfileForm"
 import { redirect } from "next/navigation"
 import { serverAuth } from "@/lib/serverAuth"
-import SocialForm from "./components/editSocialForm"
-
+import prisma from "@/lib/prismadb"
 interface EditProfilePageProps {
    
 }
@@ -17,7 +13,7 @@ const EditProfilePage: React.FC<EditProfilePageProps> =  async( ) => {
   if(!currentUser){
     redirect("/")
   }
-  let user = await prisma?.user.findUnique({
+  let user = await prisma.user.findUnique({
     where:{
       id:currentUser.id
     }
