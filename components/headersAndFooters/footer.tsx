@@ -1,4 +1,4 @@
-import { Github, Heart, HeartIcon, Instagram } from "lucide-react";
+import { Github, Instagram } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";

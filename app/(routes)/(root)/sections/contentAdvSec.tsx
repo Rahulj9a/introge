@@ -1,8 +1,7 @@
 //Display you content building different section and get sperate URL for seperate section
 "use client"
  import {  Github, Mail, SearchIcon } from "lucide-react";
-import JoinNow from "./joinNow";
-import Image from "next/image"
+ import Image from "next/image"
 import Link from "next/link";
 import React from "react"
 
