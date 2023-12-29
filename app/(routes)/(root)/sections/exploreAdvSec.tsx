@@ -6,9 +6,9 @@ const ExploreAdvSec = () => {
   return (
     <>
       <section className=" text-center w-full flex flex-col items-center text-darkest lg:py-6 py-4 px-3">
-        <h1 className="text-4xl w-3/4 font-semibold lg:w-1/3">
+        <h2 className="text-4xl w-3/4 font-semibold lg:w-1/3">
           Discover people with same interest and Explore their profile
-        </h1>
+        </h2>
         <p className="w-3/4 lg:w-2/3 text-lg my-2 text-dark">
           Find people with same interest in recommand section or find them with
           filter feature inside explore section.

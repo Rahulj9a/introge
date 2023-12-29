@@ -76,13 +76,13 @@ export async function PATCH(
 }
 export async function DELETE(
   req: Request,
-  { params }: { params: { username: string; sectionId: string } }
+  { params }: { params: { userid: string; sectionId: string } }
 ) {
   const { currentUser } = await serverAuth();
   if (!currentUser) {
     return new NextResponse("Unauthenticated", { status: 400 });
   }
-  if (currentUser.username !== params.username) {
+  if (currentUser.id !== params.userid) {
     return new NextResponse("Unauthenticated", { status: 400 });
   }
   const section = await prisma.section.findUnique({

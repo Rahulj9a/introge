@@ -5,12 +5,12 @@ import { useRegisterModal } from '@/hooks/useRegisterModal'
 import { ArrowRightSquare } from 'lucide-react'
 import React from 'react'
 
-const JoinNow = () => {
+const JoinNow = ({className}:{className?:string}) => {
     const loginModal = useLoginModal()
   return (
-    <div className='h-fit p-6 w-full'>
-        <Button className='bg-mid h-28 w-full text-3xl text-dark hover:bg-brand' onClick={loginModal.onOpen}>
-            Join Now <ArrowRightSquare className='mx-4 animate-bounce' width={30} height={30}/>
+    <div className={`px-4 py-2 ${className}`}>
+        <Button className='bg-mid h-full w-full text-dark hover:bg-brand' onClick={loginModal.onOpen}>
+            Join Now
         </Button>
     </div>
   )

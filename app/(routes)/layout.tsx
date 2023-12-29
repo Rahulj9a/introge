@@ -16,7 +16,6 @@ const Layout: React.FC<LayoutProps> = async ({ children }) => {
     return (
         <>
             <Navbar currentUser={currentUser ? currentUser as any : null} SubNav={SubNav} />
-            <div className="fixed md:hidden left-12 top-1 z-30"> <Sidebar/></div>
              {children} 
              <Footer />
         </>

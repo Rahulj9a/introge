@@ -16,9 +16,9 @@ const Layout: React.FC<LayoutProps> = async ({ children }) => {
     redirect("/")
   }
   return (
-    <div className={`pt-10 min-h-screen`}>
+    <div className={`pt-12 min-h-screen`}>
       {/*  <Navbar currentUser={currentUser as any}/> */}
-      <div className="hidden h-full md:flex md:w-56 md:flex-col md:fixed md:inset-y- z-30 bg-gray-900">
+      <div className="hidden h-full md:flex md:w-56 md:flex-col md:fixed z-30 bg-gray-900">
         <SideBar />
       </div>
       <div className="flex gap-2 left-3  md:pl-56 top-14 items-center py-2 z-30 w-full"> <MobileSidebar/> <h1 className="font-bold text-3xl ">Settings</h1></div>

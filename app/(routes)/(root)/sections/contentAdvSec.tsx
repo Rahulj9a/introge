@@ -53,14 +53,13 @@ const ContentAdvSec = () => {
                             <p className="lg:text-xl text-lg">Whether it is blog, project, youtube video ... bascially anything, You can list them in seperate sections with each section having its seperate URL, giving you advantage to easily share just one type of content</p>
                         </div>
                     </div>
-                    <JoinNow />
                 </div>
                 
             </section>
             <section className=" text-center w-full flex flex-col items-center text-light lg:py-6 py-4 px-3">
-                <h1 className="text-4xl lg:text-5xl w-3/4 font-semibold lg:w-2/5">
+                <h2 className="text-4xl lg:text-5xl w-3/4 font-semibold lg:w-2/5">
                     List any type of content and share with world
-                </h1>
+                </h2>
                 <p className="w-3/4 lg:w-2/3 text-lg my-2 text-mid">
                     List and showcase your skill, work, content, whether it is blog, youtube video, project, skill ... basically anything, everything on one place with dedicated section and URL for each type.
                 </p>
@@ -81,7 +80,7 @@ const ContentAdvSec = () => {
                 <div className="w-full z-10 flex-1">
                     <div className="rounded-xl h-fit my-2 px-4 md:px-6 md:py-8 py-6 bg-black bg-opacity-20">
                         <div className="text-light w-full h-full flex flex-col justify-center gap-4 items-start">
-                            <h1 className="lg:text-4xl text-3xl text-semi-bold">Featured with different templates for different type of content</h1>
+                            <h2 className="lg:text-4xl text-3xl text-semi-bold">Featured with different templates for different type of content</h2>
                             <p className="lg:text-xl text-lg">As content types are different, so the way of showcasing them. We provide pre-made templates for almost each type of content with editable background and text colors.</p>
                             <p className="lg:text-xl text-lg">Have an idea for new template? Email your idea and if you are a developer than you can contribute to our project on github</p>
                             <div className="flex gap-4 flex-col md:flex-row w-full h-fit text-black">

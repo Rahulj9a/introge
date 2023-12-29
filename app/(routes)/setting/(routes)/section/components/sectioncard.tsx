@@ -58,7 +58,7 @@ const Sectioncard: React.FC<SectioncardProps> = ({ data, user }) => {
             try {
                 setLoading(true)
 
-                await axios.delete(`/api/${user?.username}/section/${data.id}`)
+                await axios.delete(`/api/${user?.id}/section/${data.id}`)
 
                 router.refresh()
                 router.push(`/setting/section`)
@@ -72,7 +72,7 @@ const Sectioncard: React.FC<SectioncardProps> = ({ data, user }) => {
     }
     const baseURL = window.location.origin;
     return (
-        <div className="w-full h-28 rounded-lg my-5 bg-mid">
+        <div className="w-full min-h-28 h-fit py-3  rounded-lg my-5 bg-mid">
  
                 <Modal title="Share" description="Share section" isOpen={isShareOpen} onClose={() => setIsShareOpen(false)}>
                     <ShareModal link={`${baseURL}/${user?.username}/${data.name}`}/>
