@@ -36,9 +36,9 @@ const AboutAdvSec = () => {
     return (
         <>
             <section className=" text-center w-full flex flex-col items-center text-darkest lg:py-6 py-4 px-3">
-                <h1 className="text-4xl w-3/4 font-semibold lg:w-1/3">
+                <h2 className="text-4xl w-3/4 font-semibold lg:w-1/3">
                     Present a more precise profile while sharing your social media handles
-                </h1>
+                </h2>
                 <p className="w-3/4 lg:w-2/3 text-lg my-2 text-dark">
                     Impress the world with your bio and make your profile more discoverable
                     and impressive with labels. And let anyone connect with you on your choice of social media easily. Not just that on your creative side you can also change your profile background colors and text colors.

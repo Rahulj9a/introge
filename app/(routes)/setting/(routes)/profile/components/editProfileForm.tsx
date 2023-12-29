@@ -1,7 +1,7 @@
 "use client";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
-import {HexColorPicker} from "react-colorful"
+import { HexColorPicker } from "react-colorful"
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -31,10 +31,12 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from "@/components/ui/accordion";
+import Modal from "@/components/ui/modal";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
 const formSchema = z.object({
-    username:z.string().min(4,{
-        message:"Username can nott be less than 4 letters"
+    username: z.string().min(4, {
+        message: "Username can nott be less than 4 letters"
     }).regex(/^[a-zA-Z0-9\-._&!+()]+$/, {
         message: "Only letters, numbers and `-` `.` `_` `&` `!` `+` `(` `)` are allowed"
     }),
@@ -50,7 +52,7 @@ const formSchema = z.object({
         .max(300, {
             message: "Bio should not be more that 300 letters",
         }),
-  
+
     email: z.string(),
 });
 
@@ -67,8 +69,8 @@ interface ProfileFormProps {
         username: string;
         socials: any;
         labels: string[];
-        backgroundColor?:string;
-        textColor?:string
+        backgroundColor?: string;
+        textColor?: string
     };
 }
 
@@ -84,8 +86,9 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
     const [socials, setSocials] = useState(initialData?.socials || "[]");
     const [backgroundColor, setBackgroundColor] = useState(initialData.backgroundColor ? initialData.backgroundColor : "#01161E");
     const [textColor, setTextColor] = useState(initialData.textColor || "#CFE3E9")
+    const [apperanceModal, setApperanceModal] = useState(false)
     console.log(backgroundColor)
-     const form = useForm<ProfileFormValues>({
+    const form = useForm<ProfileFormValues>({
         resolver: zodResolver(formSchema),
         defaultValues: initialData || {
             email: "",
@@ -96,7 +99,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
         },
     });
     const addSocial = (data: any) => {
-        
+
         if (
             data.title.length < 2 ||
             data.url.length < 2 ||
@@ -141,7 +144,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
     return (
         <div className={cn(`w-full p-1`, className)}>
             <h1 className="text-xl font-bold">Basic Profile</h1>
-            <div className="grid md:grid-cols-3">
+            <div className="grid md:grid-cols-3 py-2 border-b-2 border-b-black">
                 <div className="col-span-1 py-2 flex  justify-center">
                     <div className=" h-full">
                         <div className="flex items-center justify-center py-2">
@@ -154,7 +157,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
                         </div>
                         <div className="flex flex-col items-center justify-center gap-y-2 py-2 font-semibold text-lg ">
                             <p className="py-2">{initialData.email}</p>
-                           
+
                         </div>
                     </div>
                 </div>
@@ -166,7 +169,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
                             className="space-y-8 w-full"
                         >
                             <div className="w-full px-2 flex flex-col gap-6 items-center ">
-                            <FormField
+                                <FormField
                                     control={form.control}
                                     name="username"
                                     render={({ field }) => (
@@ -215,7 +218,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
                                                     className="min-h-[120px] text-black"
                                                     disabled={loading}
                                                     placeholder="Tell us something about yourself"
-                                                     
+
                                                     {...field}
                                                 />
                                             </FormControl>
@@ -228,7 +231,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
                     </Form>
                 </div>
             </div>
-            <div className="w-full py-2">
+            <div className="w-full py-2 border-b-2 border-b-black">
                 <h3 className="font-semibold text-lg py-2">Edit Labels</h3>
                 {labels.length > 0 ? (
                     <div className="max-h-[100px] py-1 overflow-y-auto flex gap-2 w-full flex-wrap">
@@ -247,16 +250,19 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
                 ) : null}
 
                 <hr />
-                <div className="w-full max-h-[300px] m-2 px-1 border-[1px] overflow-y-auto">
-                {LabelList.map((labelGroup) => (
-                    <div key={labelGroup.title}>
-                        <Accordion type="single" collapsible className="w-full overflow-y-auto max-h-[200px]">
-                            <AccordionItem value="item-1">
-                                <AccordionTrigger>
-                                    <h3>{labelGroup.title} Labels</h3>
-                                </AccordionTrigger>
-                                <AccordionContent>
-                                    <div className="flex flex-wrap max-h-[200px]  gap-1 py-1">
+                <div className="w-full max-h-[300px] m-2 py-2 px-1 border-[1px] overflow-y-auto">
+                    {LabelList.map((labelGroup) => (
+                        <div key={labelGroup.title}>
+                            <Dialog>
+                                <DialogTrigger asChild>
+                                    <Button variant="outline" className="w-full my-[1px]">{labelGroup.title}</Button>
+                                </DialogTrigger>
+                                <DialogContent className="sm:max-w-[800px] h-96">
+                                    <DialogHeader>
+                                        <DialogTitle>{labelGroup.title} labels</DialogTitle>
+                                    </DialogHeader>
+
+                                    <div className="flex flex-wrap flex-1 overflow-y-auto  gap-1 py-1">
                                         {[...labelGroup.list]
                                             .filter((label) => ![...labels].includes(label))
                                             .map((label) => (
@@ -272,29 +278,38 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
                                             ))}
                                     </div>
 
-                                </AccordionContent>
-                            </AccordionItem>
-                        </Accordion>
-                    </div>
-                ))}
+
+
+
+                                </DialogContent>
+                            </Dialog>
+                        </div>
+                    ))}
                 </div>
                 <p className="p-1 bg-dark text-xs text-light rounded-sm my-1">Not found your faviorable label? Contact Developer to update list</p>
             </div>
-            <div style={{backgroundColor:backgroundColor, color:textColor}} className={`rounded-lg py-2 w-full gap-4  items-center justify-around h-fit flex flex-col md:flex-row  `}>
-                <h3 className="py-2">Apperance</h3>
-                <div className="md:w-1/3 flex flex-col items-center">
-                    <p >Set Primary background color</p>
-                    
-                <HexColorPicker className="py-2 w-full" color={backgroundColor} onChange={setBackgroundColor}/>
-                <Input className="text-black" value={backgroundColor} onChange={(e)=>{e.preventDefault(); setBackgroundColor(e.target.value)}}/>
-                </div>
-                <div className="md:w-1/3 flex flex-col items-center">
-                    <p>Set Primary text color</p>
-                    
-                <HexColorPicker className="py-2 w-full" color={textColor} onChange={setTextColor}/>
-                <Input className="text-black" value={textColor} onChange={(e)=>{e.preventDefault(); setTextColor(e.target.value)}} />
-                </div>
+           
+            <div style={{ backgroundColor: backgroundColor, color: textColor }} className={`border-b-2 border-b-black rounded-lg py-2 w-full gap-4 my-2 items-center justify-around h-fit flex flex-col md:flex-row  `}>
+                <Button style={{ backgroundColor: backgroundColor, color: textColor }} onClick={() => setApperanceModal(true)} className="py-2 w-full">Edit Apperance</Button>
+                <Modal style={{ backgroundColor: backgroundColor, color: textColor }} isOpen={apperanceModal} onClose={() => setApperanceModal(false)}>
+                    <div className="w-full gap-4 flex-1 flex flex-col md:flex-row items-center justify-around overflow-y-auto">
+                        <div className="md:w-1/3 flex flex-col items-center">
+                            <p >Set Primary background color</p>
+
+                            <HexColorPicker className="py-2 w-full" color={backgroundColor} onChange={setBackgroundColor} />
+                            <Input className="text-black" value={backgroundColor} onChange={(e) => { e.preventDefault(); setBackgroundColor(e.target.value) }} />
+                        </div>
+                        <div className="md:w-1/3 flex flex-col items-center">
+                            <p>Set Primary text color</p>
+
+                            <HexColorPicker className="py-2 w-full" color={textColor} onChange={setTextColor} />
+                            <Input className="text-black" value={textColor} onChange={(e) => { e.preventDefault(); setTextColor(e.target.value) }} />
+                        </div>
+                    </div>
+                </Modal>
+
             </div>
+            <hr/>
             <SocialForm
                 initialData={[...JSON.parse(String(socials))]}
                 removeSocial={removeSocial}
@@ -303,7 +318,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
             <Button
                 onClick={form.handleSubmit(onSubmit)}
                 disabled={loading}
-                className="w-full mt-5 ml-auto"
+                className="w-full mt-5 h-14 ml-auto"
             >
                 Save Profile Changes
             </Button>

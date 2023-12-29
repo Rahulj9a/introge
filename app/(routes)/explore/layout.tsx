@@ -9,7 +9,7 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = async ({ children }) => {
 
     return (
-        <div className="pt-10 bg-darkest">
+        <div className="pt-12 bg-darkest">
             <div className="hidden h-full md:flex md:w-56 md:flex-col md:fixed md:inset-y- z-[30] bg-gray-900">
                 <SideBar />
             </div>
