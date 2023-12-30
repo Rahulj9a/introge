@@ -14,17 +14,18 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useRouter } from "next/navigation";
+ 
 import { cn } from "@/lib/utils";
 
 import {
     Select,
     SelectContent,
+    SelectGroup,
     SelectItem,
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
- import { ExistingSocialscard } from "./existingSocial&Labelcard";
+import { ExistingSocialscard } from "./existingSocial&Labelcard";
 
 import PlatformFinder, { socialPlatforms } from "@/components/socialPlatformList";
 
@@ -70,8 +71,8 @@ const SocialForm: React.FC<ProfileFormProps> = ({
         },
     });
 
-    const handleSubmit  = async(data:ProfileFormValues) => {
-         
+    const handleSubmit = async (data: ProfileFormValues) => {
+
         addSocial(data)
         form.reset()
     }
@@ -82,16 +83,7 @@ const SocialForm: React.FC<ProfileFormProps> = ({
         <div className={cn("w-full p-1", className)}>
             <h1 className="font-bold text-xl py-2">Socials</h1>
 
-            {initialData && initialData?.length > 0 ? (
-                <div className=" py-4 grid grid-cols-1 md:grid-cols-2 gap-2 lg:gird-cols-3 xl:grid-cols-4">
 
-                    {initialData.map((social, index: number) => (
-                        <div className="rounded-full border-[1px] grid " key={social.url}>
-                            <ExistingSocialscard onDelete={() => removeSocial(index)} social={social} platformIcon={PlatformFinder({ social } as any)} />
-                        </div>
-                    ))}
-                </div>
-            ) : null}
 
             <Form  {...form}>
                 <form
@@ -103,15 +95,15 @@ const SocialForm: React.FC<ProfileFormProps> = ({
                             control={form.control}
                             name="title"
                             render={({ field }) => (
-                                <FormItem className="w-full text-black">
-                                    <Select
-                                        disabled={loading}
-                                        onValueChange={field.onChange}
-                                        value={field.value}
-                                        defaultValue={field.value}
-                                        
-                                    >
-                                        <FormControl>
+                                <FormItem className="w-full text-black  ">
+                                    <FormControl >
+                                        <Select
+                                            disabled={loading}
+                                            onValueChange={field.onChange}
+                                            value={field.value}
+                                            defaultValue={field.value}
+                                        >
+
                                             <SelectTrigger>
                                                 <SelectValue
                                                     defaultValue={field.value}
@@ -119,24 +111,27 @@ const SocialForm: React.FC<ProfileFormProps> = ({
                                                     className="text-black"
                                                 />
                                             </SelectTrigger>
-                                        </FormControl>
-                                        <SelectContent style={{}} className="max-h-[250px] overflow-y-scroll">
-                                            {socialPlatforms.map((platform) => (
-                                                <SelectItem
-                                                    key={platform.label}
-                                                    className="w-full h-10 cursor-pointer my-1"
-                                                    value={platform.label}
-                                                >
-                                                    <p className="flex items-center gap-4">
-                                                        <platform.icon
-                                                            className={cn("h-5 w-5 ", platform.color)}
-                                                        />
-                                                        <span>{platform.label}</span>
-                                                    </p>
-                                                </SelectItem>
-                                            ))}
-                                        </SelectContent>
-                                    </Select>
+
+                                            <SelectContent className="max-h-[250px] z-50 overflow-y-scroll">
+                                                <SelectGroup>
+                                                    {socialPlatforms.map((platform) => (
+                                                        <SelectItem
+                                                            key={platform.label}
+                                                            className="w-full h-10 cursor-pointer my-1"
+                                                            value={platform.label}
+                                                        >
+                                                            <p className="flex items-center gap-4">
+                                                                <platform.icon
+                                                                    className={cn("h-5 w-5 ", platform.color)}
+                                                                />
+                                                                <span>{platform.label}</span>
+                                                            </p>
+                                                        </SelectItem>
+                                                    ))}
+                                                </SelectGroup>
+                                            </SelectContent>
+                                        </Select>
+                                    </FormControl>
                                     <FormMessage />
                                 </FormItem>
                             )}
@@ -182,6 +177,16 @@ const SocialForm: React.FC<ProfileFormProps> = ({
 
                 </form>
             </Form>
+            {initialData && initialData?.length > 0 ? (
+                <div className=" py-4 grid grid-cols-1 md:grid-cols-2 gap-2 lg:gird-cols-3 xl:grid-cols-4">
+
+                    {initialData.map((social, index: number) => (
+                        <div className="rounded-full border-[1px] grid " key={social.url}>
+                            <ExistingSocialscard onDelete={() => removeSocial(index)} social={social} platformIcon={PlatformFinder({ social } as any)} />
+                        </div>
+                    ))}
+                </div>
+            ) : null}
         </div>
     );
 };

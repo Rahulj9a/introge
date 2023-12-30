@@ -38,8 +38,8 @@ const Navbar: React.FC<NavbarProps> = ({ currentUser, SubNav }) => {
 
     return (
         <div className="h-12 fixed z-30 bg-mid bg-opacity-90 w-[100vw] flex px-2  items-center lg:px-6 border-b justify-between">
-            <div className="cursor-pointer hover:scale-105 flex gap-4 items-center" onClick={()=>router.push("/")}>
-                <Image width={100} height={100} className="w-8 h-8" src="/introge.png" alt="introge" />
+            <div className="cursor-pointer hover:scale-105 flex gap-4 items-center" >
+                <span onClick={()=>router.push("/")}><Image  width={100} height={100} className="w-8 h-8" src="/introge.png" alt="introge" /></span>
                 <div className="md:hidden z-30 flex items-center"> <Sidebar/></div>
             </div>
             <div className="hidden md:block">

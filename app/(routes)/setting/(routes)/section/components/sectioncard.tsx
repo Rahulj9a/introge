@@ -100,11 +100,11 @@ const Sectioncard: React.FC<SectioncardProps> = ({ data, user }) => {
                 <div className="h-full w-9  flex flex-col items-center justify-around">
                     <TooltipProvider>
                         <Tooltip>
-                            <TooltipTrigger>
-                                <Button variant="outline" disabled={loading} onClick={() => router.push(`/setting/section/${data.name}`)} className=" rounded-sm flex items-center justify-center p-1 w-fit h-fit bg-light">
+                            <TooltipTrigger  disabled={loading} onClick={() => router.push(`/setting/section/${data.name}`)}>
+                                <div  className=" rounded-sm flex items-center justify-center p-1 w-fit h-fit bg-light">
                                     <Edit className="h-6 w-6 text-dark " />
 
-                                </Button>
+                                </div>
                             </TooltipTrigger>
                             <TooltipContent >
                                 <span className="text-xs" >Edit</span>
@@ -113,11 +113,11 @@ const Sectioncard: React.FC<SectioncardProps> = ({ data, user }) => {
                     </TooltipProvider >
                     <TooltipProvider>
                         <Tooltip>
-                            <TooltipTrigger>
-                                <Button variant="outline" disabled={loading} onClick={onDelete} className="rounded-sm flex items-center bg-light justify-center p-1 w-fit h-fit">
+                            <TooltipTrigger disabled={loading} onClick={onDelete} >
+                                <div  className="rounded-sm flex items-center bg-light justify-center p-1 w-fit h-fit">
                                     <Trash className="text-red-700 w-5 h-5 " />
 
-                                </Button>
+                                </div>
                             </TooltipTrigger>
                             <TooltipContent >
                                 <span className="text-xs" >Delete</span>
@@ -126,11 +126,11 @@ const Sectioncard: React.FC<SectioncardProps> = ({ data, user }) => {
                     </TooltipProvider >
                     <TooltipProvider>
                         <Tooltip>
-                            <TooltipTrigger>
-                                <Button onClick={()=>setIsShareOpen(true)} variant="outline" size="icon" className="rounded-sm bg-light flex items-center justify-center p-1 w-fit h-fit">
+                            <TooltipTrigger disabled={loading} onClick={()=>setIsShareOpen(true)}>
+                                <div   className="rounded-sm bg-light flex items-center justify-center p-1 w-fit h-fit">
                                     <Share className="w-5 h-5 text-dark" />
 
-                                </Button>
+                                </div>
                             </TooltipTrigger>
                             <TooltipContent >
                                 <span className="text-xs" >Share</span>

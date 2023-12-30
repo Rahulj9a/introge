@@ -57,7 +57,7 @@ const Project1Template: React.FC<Project1TemplateProps> = ({
         return null
     }
     return (
-        <div style={{ backgroundColor: backgroundColor, color: textColor }} className="w-[290px] shadow-gray-500 h-fit flex flex-col rounded-md relative shadow-[rgba(17,_17,_26,_0.1)_0px_0px_20px] " >
+        <div style={{ backgroundColor: backgroundColor, color: textColor }} className="w-fit shadow-gray-500 h-fit flex flex-col rounded-md relative shadow-[rgba(17,_17,_26,_0.1)_0px_0px_20px] " >
             {onDelete ? (
                 <div className="rounded-md flex gap-1 absolute z-20 -top-2 -right-2">
                     <TooltipProvider>
@@ -88,14 +88,14 @@ const Project1Template: React.FC<Project1TemplateProps> = ({
                 </div>
             ) : null}
 
-            <div className="w-full h-[400px] p-2 flex flex-col gap-2">
+            <div className="w-[290px] p-2 flex flex-col h-[400px] gap-2">
                 <Link href={data.url as string} className="flex-1 flex flex-col" target="_blank">
                     {/* Priority for showing Image--> ImageURL -> URL fetched image -> Text */}
                     <div className="w-full aspect-[16/9] rounded-lg">
                         {data.imageURL ? (
-                            <img src={data.imageURL} className="rounded-lg  w-full h-full object-contain " />
+                            <img src={data.imageURL} className="rounded-lg h-full w-auto object-contain " />
                         ) : previewdata && previewdata.image ? (
-                            <img src={previewdata?.image} className="rounded-lg  w-full h-full object-contain" />
+                            <img src={previewdata?.image} className="rounded-lg  h-full w-auto object-contain" />
                         ) : (
                             <div className="w-full h-full bg-black text-white text-center flex items-center justify-center rounded-lg">
                                 {data.name}
@@ -109,7 +109,7 @@ const Project1Template: React.FC<Project1TemplateProps> = ({
                             {data.labels
                                 ?.split(/\s*,\s*/)
                                 .map((e, index) =>
-                                    index > 0 && index < 5 ? (
+                                     index < 5 && index>0 && e.trim() !== '' ? (
                                         <div key={index} className="py-1 px-2 rounded-md bg-black text-white">
                                             {e}
                                         </div>

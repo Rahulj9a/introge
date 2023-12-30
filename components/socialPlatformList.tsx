@@ -16,6 +16,11 @@ export const socialPlatforms = [
         color: "text-black"
     },
     {
+        label: "Gitlab",
+        icon: FiGitlab,
+        color: "text-black"
+    },
+    {
         label: "Instagram",
         icon: Instagram,
         color: "text-pink-800",
@@ -69,11 +74,7 @@ export const socialPlatforms = [
         icon: SlSocialSpotify,
         color: "text-black"
     },
-    {
-        label: "Spotify",
-        icon: FiGitlab,
-        color: "text-black"
-    },
+    
 ];
 
 const PlatformFinder = ({ social }: { social: { title: string, username:string } }) => {    

@@ -288,7 +288,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
                 </div>
                 <p className="p-1 bg-dark text-xs text-light rounded-sm my-1">Not found your faviorable label? Contact Developer to update list</p>
             </div>
-           
+
             <div style={{ backgroundColor: backgroundColor, color: textColor }} className={`border-b-2 border-b-black rounded-lg py-2 w-full gap-4 my-2 items-center justify-around h-fit flex flex-col md:flex-row  `}>
                 <Button style={{ backgroundColor: backgroundColor, color: textColor }} onClick={() => setApperanceModal(true)} className="py-2 w-full">Edit Apperance</Button>
                 <Modal style={{ backgroundColor: backgroundColor, color: textColor }} isOpen={apperanceModal} onClose={() => setApperanceModal(false)}>
@@ -309,7 +309,8 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
                 </Modal>
 
             </div>
-            <hr/>
+            <hr />
+            
             <SocialForm
                 initialData={[...JSON.parse(String(socials))]}
                 removeSocial={removeSocial}

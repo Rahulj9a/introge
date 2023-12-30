@@ -25,7 +25,7 @@ const ResultList: React.FC<ResultListProps> = ({ currentUser }) => {
     }
   }
   if (encodedNameQuery === "") {
-    return <div className=" flex   flex-col w-full h-[60vh] items-center justify-center px-2">
+    return <div className=" flex  text-xs flex-col w-full h-fit items-center justify-center p-2">
       <p className="text-white">Search peoples with username </p>
       <p className="text-white">OR</p>
 
@@ -64,7 +64,7 @@ const ResultList: React.FC<ResultListProps> = ({ currentUser }) => {
       <FilterBar onClick={handleNewLabel} selectedLabels={labels} />
 
       <h2 className="text-light text-xl">Search Result:</h2>
-      <div className="flex flex-wrap gap-4">
+      <div className="flex flex-wrap justify-center gap-4">
         {data && data.length !== 0 ? data.map((user: User) => <UserCard key={user.id} data={user} />) : <div className="text-light">No Result Found</div>}
       </div>
     </div>

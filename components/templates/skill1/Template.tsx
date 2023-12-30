@@ -54,14 +54,14 @@ const Skill1Template: React.FC<Skill1TemplateProps> = ({
         return null
     }
     return (
-        <div style={{backgroundColor:backgroundColor, color:textColor}} className="w-[100px] shadow-gray-500 md:w-[170px] min-h-fit max-h-full flex flex-col items-center rounded-md sh relative shadow-[rgba(17,_17,_26,_0.1)_0px_0px_20px] ">
+        <div style={{backgroundColor:backgroundColor, color:textColor}} className="w-fit snap-end shadow-gray-500   flex flex-col items-center rounded-md relative shadow-[rgba(17,_17,_26,_0.1)_0px_0px_20px] ">
             {onDelete ? (
-                <div className="rounded-md z-20 absolute flex gap-1 -top-2 -right-2">
+                <div className="rounded-md z-20 absolute flex gap-1 -top-3 -right-2">
                     <TooltipProvider>
                         <Tooltip>
                             <TooltipTrigger>
                                 <Button onClick={onDelete} variant="destructive" size="icon">
-                                    <Trash className="w-6 h-6" />
+                                    <Trash className="w-4 h-4" />
                                 </Button>
                             </TooltipTrigger>
                             <TooltipContent>
@@ -73,7 +73,7 @@ const Skill1Template: React.FC<Skill1TemplateProps> = ({
                         <Tooltip>
                             <TooltipTrigger>
                                 <Button onClick={onEdit} variant="secondary" size="icon">
-                                    <Pencil className="w-6 h-6" />
+                                    <Pencil className="w-4 h-4" />
                                 </Button>
                             </TooltipTrigger>
                             <TooltipContent>
@@ -85,7 +85,7 @@ const Skill1Template: React.FC<Skill1TemplateProps> = ({
                 </div>
             ) : null}
             <Link href={data.url as string} target="_blank"  >
-                <div className="w-full p-2 items-center justify-center flex flex-col gap-2">
+                <div className="w-28 md:w-[170px] p-2 items-center h-full justify-center flex flex-col gap-2">
                     {/* Priority for showing Image--> ImageURL -> URL fetched image -> Text */}
                     <div className="w-10 h-10 md:w-20 md:h-20 rounded-full">
                         {data.imageURL ? (
