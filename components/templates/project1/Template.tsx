@@ -93,9 +93,9 @@ const Project1Template: React.FC<Project1TemplateProps> = ({
                     {/* Priority for showing Image--> ImageURL -> URL fetched image -> Text */}
                     <div className="w-full aspect-[16/9] rounded-lg">
                         {data.imageURL ? (
-                            <img src={data.imageURL} className="rounded-lg h-full w-auto object-contain " />
+                            <img src={data.imageURL} className="rounded-lg aspect-[16/9] h-full w-auto object-contain " />
                         ) : previewdata && previewdata.image ? (
-                            <img src={previewdata?.image} className="rounded-lg  h-full w-auto object-contain" />
+                            <img src={previewdata?.image} className="rounded-lg aspect-[16/9] h-full w-auto object-contain" />
                         ) : (
                             <div className="w-full h-full bg-black text-white text-center flex items-center justify-center rounded-lg">
                                 {data.name}
