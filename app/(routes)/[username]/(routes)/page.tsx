@@ -48,7 +48,7 @@ const ProfilePage: React.FC<ProfilePageProps> = async ({ params }) => {
           >
             <p className="text-sm my-1 ">Hey I am</p>
 
-            <p className="text-6xl my-5">
+            <p className="text-3xl lg:text-6xl my-5">
               {user?.name}{" "}
               <Link
                 href={`/${user.username}`}
