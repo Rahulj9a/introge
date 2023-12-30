@@ -54,7 +54,7 @@ const BlogTemplate: React.FC<BlogTemplateProps> = ({
         return null
     }
     return (
-        <div style={{backgroundColor:backgroundColor, color:textColor}} className="w-[270px]  rounded-md sh relative shadow-[rgba(17,_17,_26,_0.1)_0px_0px_20px] shadow-gray-500">
+        <div style={{backgroundColor:backgroundColor, color:textColor}} className="w-fit rounded-md relative shadow-[rgba(17,_17,_26,_0.1)_0px_0px_20px] shadow-gray-500">
             {onDelete ? (
                 <div className="rounded-md z-20 absolute flex gap-1 -top-2 -right-2">
                     <TooltipProvider>
@@ -85,7 +85,7 @@ const BlogTemplate: React.FC<BlogTemplateProps> = ({
                 </div>
             ) : null}
             <Link href={data.url as string} target="_blank"  >
-                <div className="w-full p-2 h-[330px]  flex flex-col gap-2">
+                <div className="w-full w-[270px] p-2 h-[330px]  flex flex-col gap-2">
                     {/* Priority for showing Image--> ImageURL -> URL fetched image -> Text */}
                     <div className="w-full h-2/5 rounded-lg">
                         {data.imageURL ? (
@@ -105,7 +105,7 @@ const BlogTemplate: React.FC<BlogTemplateProps> = ({
                             {data.labels
                                 ?.split(/\s*,\s*/)
                                 .map((e, index) =>
-                                    index < 3 ? (
+                                    index < 3 && e.trim() !== ''? (
                                         <div key={index} className="py-1 px-2 rounded-md bg-black text-white">
                                             {e}
                                         </div>

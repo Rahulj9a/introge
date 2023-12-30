@@ -20,7 +20,7 @@ const UserCard: React.FC<UserCardProps> = ({ data }) => {
   }
   return (
     <div onClick={() => router.push(`/${data.username}`)}
-      className="cursor-pointer p-2 w-[160px] lg:w-[250px] hover:scale-105 h-[220px] rounded-md bg-dark shadow-[rgba(17,_17,_26,_0.1)_0px_0px_10px] shadow-black">
+      className="cursor-pointer p-2 w-[160px] lg:w-[250px] hover:scale-105 h-[250px] rounded-md bg-dark shadow-[rgba(17,_17,_26,_0.1)_0px_0px_10px] shadow-black">
       <div
         className=" w-full flex flex-col items-center gap-2  h-5/6"
       >
@@ -30,22 +30,22 @@ const UserCard: React.FC<UserCardProps> = ({ data }) => {
             height={100}
             src={data.profilepic as string}
             alt={data.username}
-            className="rounded-full w-16 h-16 object-contain"
-          /> : <UserIcon className="w-16 h-16 rounded-full" />
+            className="rounded-full w-12 h-12 object-contain"
+          /> : <UserIcon className="w-12 h-12 rounded-full" />
           }
-          <p className="text-light flex-1 text-center lg:text-lg max-w-full">
+          <p className="text-light flex-1 text-sm text-center max-w-full">
             {data.name}
             <br/>
             <span className="text-light text-xs truncate">@{data.username}</span>
           </p>
         
         </div>
-        <div className=" flex-1 px-1 py-1  flex flex-col justify-around text-light">
+        <div className=" flex-1 px-1 py-1 overflow-y-hidden  flex flex-col justify-around text-light">
 
           <p className="text-xs text-ellipsis">{data.bio}</p>
         </div>
       </div>
-      <div className="flex flex-wrap bg-light rounded-sm px-2 py-1 gap-[2px] h-auto ">
+      <div className="flex flex-wrap bg-light rounded-sm px-2 py-1 gap-[2px] h-fit ">
         {data.labels &&
           data.labels.map(
             (label: string, index: number) =>

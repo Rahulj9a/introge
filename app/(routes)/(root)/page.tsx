@@ -1,7 +1,5 @@
-import { Button } from "@/components/ui/button";
-import { serverAuth } from "@/lib/serverAuth";
-import Image from "next/image";
-import Link from "next/link";
+ import { serverAuth } from "@/lib/serverAuth";
+ import Link from "next/link";
 import React from "react";
 import AboutAdvSec from "./sections/aboutAdvSec";
 import ContentAdvSec from "./sections/contentAdvSec";
