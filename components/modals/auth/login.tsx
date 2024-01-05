@@ -56,7 +56,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ refetch }) => {
       isOpen={loginModal.isOpen}
       onClose={loginModal.onClose}
     >
-      <div>
+      <div className="w-52">
         <Button className="w-full" onClick={onSubmit}>Google</Button>
       </div>
     </Modal>

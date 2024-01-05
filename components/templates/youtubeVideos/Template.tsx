@@ -85,7 +85,7 @@ const YoutubeTemplate: React.FC<BlogTemplateProps> = ({
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowFullScreen
           loading="lazy"
-          className="rounded-md w-[330px] h-[185px] md:w-[550px] md:h-[310px]"
+          className="rounded-md w-[330px] h-[185px] snap-center md:w-[550px] md:h-[310px]"
         ></iframe>
       )}
     </div>

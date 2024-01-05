@@ -88,7 +88,7 @@ const Project1Template: React.FC<Project1TemplateProps> = ({
                 </div>
             ) : null}
 
-            <div className="w-[290px] p-2 flex flex-col h-[400px] gap-2">
+            <div className="w-[290px] snap-center p-2 flex flex-col min-h-[400px] max-h-fit gap-2">
                 <Link href={data.url as string} className="flex-1 flex flex-col" target="_blank">
                     {/* Priority for showing Image--> ImageURL -> URL fetched image -> Text */}
                     <div className="w-full aspect-[16/9] rounded-lg">
@@ -103,8 +103,8 @@ const Project1Template: React.FC<Project1TemplateProps> = ({
                         )}
                     </div>
 
-                    <div className="flex flex-col justify-around flex-1">
-                        <h1 className="text-base font-semibold flex items-center justify-between">{data.name} <span className="text-xs text-dark w-fit">{data.labels?.split(",")[0]}</span></h1>
+                    <div className="flex flex-col justify-around gap-2 flex-1">
+                        <h1 className="text-base font-semibold flex items-center justify-between"><span >{data.name}</span> <span className="text-xs text-dark w-fit">{data.labels?.split(",")[0]}</span></h1>
                         <div className="flex text-xs gap-1 flex-wrap">
                             {data.labels
                                 ?.split(/\s*,\s*/)

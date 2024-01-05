@@ -6,6 +6,7 @@ import { FaXTwitter } from "react-icons/fa6";
 import { BsHeartFill } from "react-icons/bs";
 import { serverAuth } from "@/lib/serverAuth";
 import { Button } from "../ui/button";
+import JoinNow from "../joinNow";
 
 const Footer = async () => {
   const { currentUser } = await serverAuth();
@@ -24,7 +25,7 @@ const Footer = async () => {
             />
             <span className="font-bold text-xl">Introge</span>
           </Link>
-          {currentUser?null: <Button className="w-full my-1 bg-white text-darkest hover:bg-light">Join</Button>}
+          {currentUser?null: <JoinNow className="w-full my-2"/>}
         </div>
         <div className="flex gap-8">
           <Link

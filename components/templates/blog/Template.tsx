@@ -85,7 +85,7 @@ const BlogTemplate: React.FC<BlogTemplateProps> = ({
                 </div>
             ) : null}
             <Link href={data.url as string} target="_blank"  >
-                <div className="w-full w-[270px] p-2 h-[330px]  flex flex-col gap-2">
+                <div className="snap-center w-[270px] p-2 min-h-[330px] max-h-fit  flex flex-col gap-2">
                     {/* Priority for showing Image--> ImageURL -> URL fetched image -> Text */}
                     <div className="w-full h-2/5 rounded-lg">
                         {data.imageURL ? (
@@ -98,7 +98,7 @@ const BlogTemplate: React.FC<BlogTemplateProps> = ({
                             </div>
                         )}
                     </div>
-                    <div className="flex flex-col justify-around flex-1">
+                    <div className="flex flex-col gap-2 justify-around flex-1">
                         <h1 className="text-lg font-semibold">{data.name}</h1>
                         <p className="text-xs ">{data.about}</p>
                         <div className="flex text-xs gap-1 flex-wrap">
