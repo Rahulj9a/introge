@@ -26,7 +26,7 @@ const Modal: React.FC<ModalProps>=({
     }
     return(
         <Dialog  open={isOpen} onOpenChange={onChange}>
-            <DialogContent style={style} className="max-h-[90vh] scroll-smooth max-w-[90vw]">
+            <DialogContent style={style} className="max-h-[90vh] w-auto scroll-smooth max-w-[90vw]">
                 <DialogHeader>
                     <DialogTitle>
                         {title}

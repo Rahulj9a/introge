@@ -85,22 +85,20 @@ const Skill1Template: React.FC<Skill1TemplateProps> = ({
                 </div>
             ) : null}
             <Link href={data.url as string} target="_blank"  >
-                <div className="w-28 md:w-[170px] p-2 items-center h-full justify-center flex flex-col gap-2">
+                <div className="w-28 snap-center md:w-[170px] p-2 items-center min-h-[100px] max-h-fit justify-center flex flex-col gap-2">
                     {/* Priority for showing Image--> ImageURL -> URL fetched image -> Text */}
-                    <div className="w-10 h-10 md:w-20 md:h-20 rounded-full">
+                    <div className="w-fit h-fit">
                         {data.imageURL ? (
-                            <img src={data.imageURL} className="rounded-lg" />
+                            <img src={data.imageURL} className="rounded-full w-10 h-10 object-contain md:w-20 md:h-20 " />
                         ) : previewdata && previewdata.image ? (
-                            <img src={previewdata?.image} className="rounded-lg" />
+                            <img src={previewdata?.image} className="rounded-full w-10 h-10 object-contain md:w-20 md:h-20 " />
                         ) : (
-                            <div className="w-full h-full bg-black text-[8px] md:text-xs text-white text-center flex items-center justify-center rounded-full">
-                                {data.name}
-                            </div>
+                            null
                         )}
                     </div>
                     <div className="flex flex-col gap-2 items-center justify-around flex-1">
                         <h1 className="md:text-lg  font-semibold">{data.name}</h1>
-                        <p className="text-[8px] md:text-xs ">{data.about}</p>
+                        {data?.about?.length ? <p className="text-[8px] md:text-xs text-center">{data.about}</p>:null}
                      </div>
                 </div>
             </Link>

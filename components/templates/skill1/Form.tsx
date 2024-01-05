@@ -37,10 +37,7 @@ const formSchema = z.object({
     }),
   about: z
     .string()
-    .min(5, {
-      message: "About section should not be less than 5 letters",
-    })
-    .max(150, {
+    .max(120, {
       message: "About section should not be more than 150 letters",
     }),
   url: z.string(),
