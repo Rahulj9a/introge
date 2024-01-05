@@ -14,11 +14,6 @@ Welcome to **Introge**, a unique web application designed to help users build an
   - [Getting Started](#getting-started)
     - [Prerequisites](#prerequisites)
     - [Installation](#installation)
-  - [Usage](#usage)
-  - [Configuration](#configuration)
-  - [Contributing](#contributing)
-  - [License](#license)
-  - [Acknowledgements](#acknowledgements)
 
 ## Features
 - **Unified Social Media Presence:** Users can log in and list their social media handles in one place, providing a convenient way for others to connect with them on various platforms.
