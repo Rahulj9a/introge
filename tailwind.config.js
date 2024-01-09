@@ -6,7 +6,7 @@ module.exports = {
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
-	],
+  ],
   theme: {
     container: {
       center: true,
@@ -17,11 +17,12 @@ module.exports = {
     },
     extend: {
       colors: {
-        brand:"#6C9DAF",
-        darkest:"#01161E",
-        dark:"#0F3E50",
-        mid:"#93AFB8",
-        light:"#CFE3E9",
+        brand: "#DDBEA8",
+        darkest: "#160F29" ,
+        dark: "#41375D",
+        mid: "#65A6A3",
+        light: "#DFEAEA",
+        lightest: "#FFFFFF",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -79,3 +80,19 @@ module.exports = {
   },
   plugins: [require("tailwindcss-animate")],
 }
+
+/*
+brand: "#DDBEA8"
+darkest: "#160F29" 
+dark: "#41375D"
+mid: "#65A6A3"
+light: "#DFEAEA"
+lightest: "#FFFFFF"
+
+
+ brand:"#6C9DAF",
+        darkest:"#01161E",
+        dark:"#0F3E50",
+        mid:"#93AFB8",
+        light:"#CFE3E9",
+ */

@@ -1,6 +1,6 @@
 "use client"
 import { cn } from "@/lib/utils";
-import { Home, LayoutList, Rocket } from "lucide-react";
+import { Compass, Home, LayoutList, Rocket } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react"
@@ -21,12 +21,12 @@ const SubNav = () => {
             href: "/explore/sections",
             color: "text-sky-500",
         }, */
-       /*  {
-            label: "Get started",
-            icon: Rocket,
+        {
+            label: "Guide",
+            icon: Compass,
             href: "/getStarted",
-            color: "text-sky-500",
-        }, */
+            color: "text-darkest",
+        },
          
     ]
     const pathname = usePathname();
@@ -34,15 +34,15 @@ const SubNav = () => {
         <div className="flex flex-col gap-4 ">
             <div className="px-3 py-1 flex-1">
 
-                <div className=" items-center justify-center flex-col md:flex-row gap-2 flex flex-1">
+                <div className=" items-center px-3 py-1 justify-center flex-col md:bg-white md:rounded-md md:flex-row gap-4 md:gap-2 flex flex-1">
                     {routes.map((route) => (
                         <Link
                             href={route.href}
                             key={route.href}
-                            className={`group flex p-3 w-full md:w-fit justify-start font-medium cursor-pointer hover:bg-light ${pathname === route.href
-                                ? " text-darkest  bg-light/50 md:bg-transparent "
-                                : "text-dark "
-                                } rounded-lg transition border-b-[1px]`}
+                            className={`group flex py-1 px-2 w-full md:w-fit hover:border-b-mid justify-start font-medium cursor-pointer  ${pathname === route.href
+                                ? " text-darkest "
+                                : "bg:text-mid text-dark"
+                                } transition border-b-[2px] border-b-transparent`}
                         >
                             <div className="flex justify-center items-center text-lg  md:text-sm">
                                 <route.icon className={cn("h-6 w-6 mr-3 md:hidden", route.color)} />
