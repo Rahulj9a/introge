@@ -15,7 +15,7 @@ const Page = async () => {
           <h1 className="text-6xl lg:text-8xl text-lightest">Introge</h1>
           <p className="text-light">
             a unique application designed to help you to build and showcase your
-            online presence seamlessly. Join Introge and get a unique link to share with world to share easily
+            online presence seamlessly. Join Introge - list your handles and content/work - get a unique link of your profile - share easily with world
           </p>
         </div>
         <div className="flex w-full items-center justify-center gap-1 my-6 lg:gap-2">
