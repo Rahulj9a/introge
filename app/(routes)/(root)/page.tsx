@@ -132,7 +132,7 @@ const Page = async () => {
             Choose your choice of color theme
           </h3>
           <p className="text-dark lg:text-lg">
-            You can choose your choice of color to set your own theme, from primary background to your content"s template text color. Make your profile page attractive and more personalized showing off your personality
+            You can choose your choice of color to set your own theme, from primary background to your content template text color. Make your profile page attractive and more personalized showing off your personality
           </p>
         </div>
 
