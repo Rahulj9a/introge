@@ -37,7 +37,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentUser, SubNav }) => {
 
 
     return (
-        <div className="h-12 fixed z-30 bg-mid bg-opacity-90 w-[100vw] flex px-2  items-center lg:px-6 border-b justify-between">
+        <div className="h-12 fixed z-30 bg-darkest bg-opacity-80 w-[100vw] flex px-2  items-center lg:px-6 border-b justify-between">
             <div className="cursor-pointer hover:scale-105 flex gap-4 items-center" >
                 <span onClick={()=>router.push("/")}><Image  width={100} height={100} className="w-8 h-8" src="/introge.png" alt="introge" /></span>
                 <div className="md:hidden z-30 flex items-center"> <Sidebar/></div>
@@ -56,7 +56,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentUser, SubNav }) => {
                     :
                     <div className="flex space-x-4">
 {/*                         <Button variant="outline" onClick={() => loginModal.onOpen()}>Login</Button>
- */}                        <Button className="h-6" variant="outline" onClick={() => loginModal.onOpen()}>Join</Button>
+ */}                        <Button className="h-full py-2 px-3 text-sm" variant="outline" onClick={() => loginModal.onOpen()}>Join</Button>
                     </div>}
 
             </div>

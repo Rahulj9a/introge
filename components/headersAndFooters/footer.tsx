@@ -12,7 +12,7 @@ const Footer = async () => {
   const { currentUser } = await serverAuth();
 
   return (
-    <footer className="w-full h-fit bg-darkest relative m-0 z-30 px-4 py-2 lg:px-8 border-t-2  text-light">
+    <footer className="w-full h-fit bg-darkest relative m-0 z-30 px-4 py-2 lg:px-8   text-light">
       <div className="w-full flex items-center lg:flex-row flex-col py-2 justify-between">
         <div className="w-fit h-fit p-2">
           <Link href="/" className="flex items-center gap-4 justify-center cursor-pointer">

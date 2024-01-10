@@ -31,8 +31,8 @@ export const ExistingSocialscard: React.FC<ExistingSocialscardProps> = ({ social
         return null
     }
     return (
-        <div className="flex items-center justify-center px-3">
-        <Link className="flex items-center justify-around flex-1 " href={social.url} target="_blank">
+        <div className="flex items-center justify-center px-3 w-fit gap-2">
+        <Link className="flex items-center justify-around flex-1 gap-2" href={social.url} target="_blank">
 
             {platformIcon}
 
