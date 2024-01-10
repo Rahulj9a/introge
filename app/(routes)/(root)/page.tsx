@@ -24,42 +24,42 @@ const Page = async () => {
             width={300}
             height={300}
             alt="demo1"
-            src="/AdvPics/intro/projects.png"
+            src="/AdvPics/intro/sample4.jpg"
           />
           <Image
             className="h-auto w-[110px]  lg:w-[170px] ] hidden lg:block object-contain"
             width={400}
             height={400}
             alt="demo1"
-            src="/AdvPics/intro/projects.png"
+            src="/AdvPics/intro/sample2.jpg"
           />
           <Image
             className="h-auto w-[120px] lg:w-[200px] object-contain"
             width={500}
             height={500}
             alt="demo1"
-            src="/AdvPics/intro/projects.png"
+            src="/AdvPics/intro/sample1.jpg"
           />
           <Image
             className="h-auto w-[110px]  lg:w-[170px] object-contain"
             width={400}
             height={400}
             alt="demo1"
-            src="/AdvPics/intro/projects.png"
+            src="/AdvPics/intro/sample3.jpg"
           />
           <Image
             className="h-auto w-[100px] lg:w-[140px] object-contain"
             width={300}
             height={300}
             alt="demo1"
-            src="/AdvPics/intro/projects.png"
+            src="/AdvPics/intro/sample5.jpg"
           />
         </div>
       </section>
       <div className="flex items-center justify-center w-full">
-      {currentUser ? <Link className='bg-mid h-20 w-1/3 text-xl flex items-center justify-center text-darkest rounded-md p-6 hover:bg-brand' href={`/${currentUser.username}`}>
+      {currentUser ? <Link className="bg-mid h-20 w-1/3 text-xl flex items-center justify-center text-darkest rounded-md p-6 hover:bg-brand" href={`/${currentUser.username}`}>
         Go to your profile
-      </Link> : <JoinNow className="h-20 w-1/3 text-2xl" />}
+      </Link> : <JoinNow className= "h-20 w-1/3 text-2xl"/>}
       </div>
       <section className=" w-full h-auto flex flex-col  items-center justify-center py-12 bg-light">
         <div className="flex flex-col p-1 pb-4 w-3/4 lg:w-[600px] items-center justify-center border-r-[1px] border-r-black gap-6 text-center">
@@ -91,7 +91,7 @@ const Page = async () => {
         </div>
       </section>
       <div className="flex items-center justify-center w-full">
-      {currentUser ? <Link className='bg-mid h-20 w-1/3 text-xl flex items-center justify-center text-darkest rounded-md p-6 hover:bg-brand' href={`/${currentUser.username}`}>
+      {currentUser ? <Link className="bg-mid h-20 w-1/3 text-xl flex items-center justify-center text-darkest rounded-md p-6 hover:bg-brand" href={`/${currentUser.username}`}>
         Go to your profile
       </Link> : <JoinNow className="h-20 w-1/3 text-2xl" />}
       </div>
@@ -110,7 +110,7 @@ const Page = async () => {
           </p>
         </div>
         <div className="relative w-full h-fit flex items-center justify-center ">
-          <div className="box-decoration-clone bg-gradient-to-b from-light to-transparent absolute m-0  top-0 w-full h-1/3">
+          <div className="box-decoration-clone bg-gradient-to-b from-light to-transparent absolute m-0  top-0 w-full h-1/4">
 
           </div>
           <Image
@@ -120,7 +120,7 @@ const Page = async () => {
             className="w-3/4 lg:w-1/2 h-auto"
             src="/AdvPics/intro/Frame2.png"
           />
-          <div className="box-decoration-clone bg-gradient-to-t from-light to-transparent absolute m-0 bottom-0 w-full h-1/3 ">
+          <div className="box-decoration-clone bg-gradient-to-t from-light to-transparent absolute m-0 bottom-0 w-full h-1/4 ">
 
           </div>
         </div>
@@ -132,20 +132,20 @@ const Page = async () => {
             Choose your choice of color theme
           </h3>
           <p className="text-dark lg:text-lg">
-            You can choose your choice of color to set your own theme, from primary background to your content's template text color. Make your profile page attractive and more personalized showing off your personality
+            You can choose your choice of color to set your own theme, from primary background to your content"s template text color. Make your profile page attractive and more personalized showing off your personality
           </p>
         </div>
 
       </section>
       <div className="flex items-center justify-center w-full">
-      {currentUser ? <Link className='bg-mid h-20 w-1/3 text-xl flex items-center justify-center text-darkest rounded-md p-6 hover:bg-brand' href={`/${currentUser.username}`}>
+      {currentUser ? <Link className="bg-mid h-20 w-1/3 text-xl flex items-center justify-center text-darkest rounded-md p-6 hover:bg-brand" href={`/${currentUser.username}`}>
         Go to your profile
       </Link> : <JoinNow className="h-20 w-1/3 text-2xl" />}
       </div>
       <section className="box-decoration-clone bg-gradient-to-t flex items-center flex-col justify-center from-darkest to-light w-full">
         <div className="flex flex-col w-2/3 p-1 h-auto pb-4  items-center justify-center gap-6 text-center">
           <p className="text-dark lg:text-lg">
-            Want some inspiration?
+            Need some inspiration?
           </p>
           <h3 className=" text-3xl lg:text-4xl text-darkest">
             Explore peoples with usernames or discover recommanded list of peoples

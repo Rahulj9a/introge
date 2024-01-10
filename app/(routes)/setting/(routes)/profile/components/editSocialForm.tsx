@@ -178,7 +178,7 @@ const SocialForm: React.FC<ProfileFormProps> = ({
                 </form>
             </Form>
             {initialData && initialData?.length > 0 ? (
-                <div className=" py-4 grid grid-cols-1 md:grid-cols-2 gap-2 lg:gird-cols-3 xl:grid-cols-4">
+                <div className=" py-4 flex flex-wrap">
 
                     {initialData.map((social, index: number) => (
                         <div className="rounded-full border-[1px] grid " key={social.url}>

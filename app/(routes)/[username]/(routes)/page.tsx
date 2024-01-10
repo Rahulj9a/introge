@@ -33,9 +33,9 @@ const ProfilePage: React.FC<ProfilePageProps> = async ({ params }) => {
             <div className="flex items-center mt-5 md:mt-0 justify-center col-span-1">
               <Image
                 src={user?.profilepic as string}
-                width={100}
-                height={100}
-                className=" shadow-[rgba(17,_17,_26,_0.1)_0px_0px_30px]  inset-0 spread-x-4 shadow-black rounded-full lg:w-80 lg:h-80 md:w-60 md:h-60 w-48 h-48  fill"
+                width={500}
+                height={500}
+                className=" shadow-[rgba(17,_17,_26,_0.1)_0px_0px_30px] object-cover inset-0 spread-x-4 shadow-black rounded-full lg:w-80 lg:h-80 md:w-60 md:h-60 w-48 h-48  fill"
                 alt={user?.name as string}
               />
             </div>
@@ -85,7 +85,7 @@ const ProfilePage: React.FC<ProfilePageProps> = async ({ params }) => {
                       href={social.url}
                       target="_blank"
                       style={{backgroundColor:user.textColor || "#CFE3E9", color:user.backgroundColor || "#01161E"}}
-                      className="p-2 hover:scale-10 hover:border-white border-2 px-4 justify-between rounded-full border-gray-600  w-64 h-14 flex items-center "
+                      className="p-2 hover:scale-10 hover:border-white border-2 px-4 justify-between rounded-full border-gray-600  min-w-64 max-w-fit h-14 flex gap-3 items-center "
                       key={social.url}
                     >
                       <PlatformFinder social={social as any} />
